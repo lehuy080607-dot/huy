@@ -1,0 +1,2368 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ăn gì đây ta? – Ăn Gì Hôm Nay? (Quận 10)</title>
+  <style>
+    /* ================= 1. DESIGN TOKENS & RESET ================= */
+    :root {
+      --primary: #ff6b35;
+      --primary-dark: #e5531f;
+      --primary-soft: #fff3ee;
+      --green: #16a34a;
+      --green-dark: #15803d;
+      --green-soft: #dcfce7;
+      --blue: #2563eb;
+      --blue-dark: #1d4ed8;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 16px;
+      --shadow: 0 8px 28px rgba(15, 23, 42, 0.06);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      padding-bottom: 56px;
+    }
+
+    .hidden { display: none !important; }
+
+    /* ================= 2. TOP NAVIGATION BAR ================= */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .navbar-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 20px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .brand-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--primary-soft);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .nav-tabs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      height: 100%;
+    }
+    .nav-tab {
+      position: relative;
+      height: 100%;
+      border: none;
+      background: transparent;
+      padding: 0 16px;
+      font-size: 0.94rem;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.18s;
+      white-space: nowrap;
+    }
+    .nav-tab:hover { color: var(--text); }
+    .nav-tab.active { color: var(--primary); }
+    .nav-tab.active::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 0;
+      height: 3px;
+      border-radius: 3px 3px 0 0;
+      background: var(--primary);
+    }
+
+    .mode-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f1f5f9;
+      padding: 4px 6px 4px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .mode-btn {
+      border: none;
+      background: transparent;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--muted);
+      cursor: pointer;
+      transition: 0.18s;
+    }
+    .mode-btn.active {
+      background: var(--text);
+      color: #fff;
+    }
+
+    /* ================= 3. MAIN CONTAINER ================= */
+    .container {
+      max-width: 1140px;
+      margin: 22px auto 0;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    /* ================= 4. V1 ROUGH PROTOTYPE ================= */
+    .v1-wrapper {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .v1-timer-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #1e293b;
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+    }
+    .v1-box {
+      background: #fff;
+      border: 2px dashed #94a3b8;
+      padding: 24px;
+      font-family: "Times New Roman", Times, serif;
+    }
+    .v1-box h2 { margin-bottom: 10px; font-size: 1.45rem; }
+    .v1-note {
+      background: #fef9c3;
+      border: 1px solid #eab308;
+      padding: 10px 14px;
+      font-family: sans-serif;
+      font-size: 0.86rem;
+      margin-bottom: 18px;
+      border-radius: 6px;
+    }
+    .v1-field { margin-bottom: 14px; }
+    .v1-field label { display: block; font-weight: bold; margin-bottom: 6px; }
+    .v1-field select {
+      width: 100%;
+      padding: 9px;
+      font-size: 1rem;
+      border: 1px solid #64748b;
+    }
+    .v1-btn {
+      padding: 8px 16px;
+      font-size: 1rem;
+      cursor: pointer;
+      background: #e2e8f0;
+      border: 1px solid #475569;
+      margin-right: 8px;
+    }
+    .v1-result {
+      margin-top: 16px;
+      padding: 14px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      min-height: 54px;
+    }
+
+    /* ================= 5. STEP 1: SMART FILTER (LAPTOP 2-COL) ================= */
+    .broke-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: linear-gradient(95deg, #f97316 0%, #ff5c28 100%);
+      color: #fff;
+      padding: 16px 24px;
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+      box-shadow: 0 10px 24px rgba(255, 107, 53, 0.25);
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .broke-banner:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(255, 107, 53, 0.32);
+    }
+    .broke-banner.active {
+      background: linear-gradient(95deg, #dc2626 0%, #ea580c 100%);
+    }
+    .broke-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .broke-fire {
+      font-size: 1.9rem;
+      line-height: 1;
+    }
+    .broke-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+    .broke-sub {
+      font-size: 0.86rem;
+      opacity: 0.92;
+    }
+    .broke-toggle-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+    .toggle-track {
+      width: 48px;
+      height: 26px;
+      background: rgba(255, 255, 255, 0.35);
+      border-radius: 999px;
+      position: relative;
+      transition: 0.2s;
+    }
+    .toggle-knob {
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      transition: 0.2s;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .broke-banner.active .toggle-track { background: #16a34a; }
+    .broke-banner.active .toggle-knob { left: 25px; }
+
+    .step1-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 68%) minmax(280px, 32%);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .section-sub {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .filter-group { margin-bottom: 18px; }
+    .filter-group:last-child { margin-bottom: 0; }
+    .filter-label {
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+    .chip {
+      border: 1.5px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      padding: 8px 15px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      user-select: none;
+    }
+    .chip:hover {
+      border-color: var(--primary);
+      background: #fff9f6;
+    }
+    .chip.selected {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 4px 10px rgba(255, 107, 53, 0.24);
+    }
+    .chip.exclude.selected {
+      background: #ef4444;
+      border-color: #ef4444;
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(239, 68, 68, 0.22);
+    }
+
+    /* Sticky Summary Sidebar */
+    .summary-card {
+      position: sticky;
+      top: 84px;
+    }
+    .summary-box-title {
+      font-size: 1.12rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+    .summary-row-title {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .summary-pills {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .summary-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .green-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green-soft);
+      border: 1px solid #bbf7d0;
+      color: var(--green-dark);
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-size: 0.83rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .match-counter {
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    .match-counter span {
+      color: var(--primary-dark);
+      font-size: 1.05rem;
+    }
+    .cta-btn {
+      width: 100%;
+      border: none;
+      background: linear-gradient(95deg, #ff6b35, #f95322);
+      color: #fff;
+      padding: 14px 18px;
+      border-radius: 12px;
+      font-size: 0.98rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 8px 18px rgba(255, 107, 53, 0.3);
+    }
+    .cta-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(255, 107, 53, 0.38);
+    }
+    .cta-tip {
+      margin-top: 12px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ================= 6. STEP 2: 3x2 DISH GRID ================= */
+    .sub-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+    }
+    .sub-bar-left {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+    .back-btn {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      padding: 7px 14px;
+      border-radius: 10px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+    .back-btn:hover { background: #f1f5f9; }
+    .active-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 5px 11px;
+      border-radius: 8px;
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+    }
+    .active-tag.green {
+      background: var(--green-soft);
+      color: var(--green-dark);
+    }
+    .sub-bar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.86rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .grid-3x2 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .dish-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow);
+      transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
+    }
+    .dish-card:hover {
+      transform: translateY(-3px);
+      border-color: #fdba74;
+      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.09);
+    }
+    .dish-card.highlight-spin {
+      border: 2.5px solid var(--primary);
+      box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.22);
+      transform: scale(1.02);
+    }
+
+    .dish-thumb-wrap {
+      position: relative;
+      height: 158px;
+      background: linear-gradient(135deg, #fff1ec, #fde68a);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .dish-thumb-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .dish-thumb-fallback {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.4rem;
+      background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
+    }
+    .thumb-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(15, 23, 42, 0.78);
+      color: #fff;
+      font-size: 0.73rem;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 999px;
+      backdrop-filter: blur(4px);
+    }
+    .thumb-badge.veg {
+      background: rgba(22, 163, 74, 0.92);
+    }
+
+    .dish-body {
+      padding: 15px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .dish-name {
+      font-size: 1.02rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 3px;
+      line-height: 1.3;
+    }
+    .dish-submeta {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .dish-submeta span {
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .dish-bullets {
+      list-style: none;
+      margin-bottom: 14px;
+      flex: 1;
+    }
+    .dish-bullets li {
+      font-size: 0.82rem;
+      color: #475569;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .dish-bullets li::before {
+      content: "✓";
+      color: var(--green);
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .dish-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding-top: 8px;
+      border-top: 1px solid #f1f5f9;
+    }
+    .walk-chip {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      background: var(--green-soft);
+      padding: 4px 8px;
+      border-radius: 8px;
+    }
+    .pick-card-btn {
+      border: none;
+      background: var(--primary);
+      color: #fff;
+      padding: 7px 14px;
+      border-radius: 9px;
+      font-size: 0.83rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+    .pick-card-btn:hover { background: var(--primary-dark); }
+
+    /* 6th Slot: Random Card */
+    .random-card {
+      background: linear-gradient(180deg, #fffbeb 0%, #fff7ed 100%);
+      border: 2px dashed #fdba74;
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 310px;
+    }
+    .random-icon {
+      font-size: 3.1rem;
+      margin-bottom: 10px;
+    }
+    .random-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #9a3412;
+      margin-bottom: 6px;
+    }
+    .random-desc {
+      font-size: 0.86rem;
+      color: #7c2d12;
+      margin-bottom: 18px;
+      max-width: 240px;
+    }
+    .random-btn {
+      border: none;
+      background: linear-gradient(95deg, #ff6b35, #ea580c);
+      color: #fff;
+      padding: 11px 22px;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(234, 88, 12, 0.28);
+      transition: 0.15s;
+    }
+    .random-btn:hover { transform: translateY(-1px); }
+
+    /* ================= 7. STEP 3: DETAIL & MAP (45% / 55%) ================= */
+    .timer-pill {
+      background: #0f172a;
+      color: #fff;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .timer-pill strong { color: #fde047; }
+
+    .step3-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 45%) minmax(0, 55%);
+      gap: 20px;
+      align-items: stretch;
+    }
+    .panel-heading {
+      font-size: 1.08rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+    .selected-mini-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+      margin-bottom: 16px;
+    }
+    .selected-mini-thumb {
+      width: 72px;
+      height: 72px;
+      border-radius: 12px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #ffedd5;
+    }
+    .selected-mini-fallback {
+      width: 72px;
+      height: 72px;
+      border-radius: 12px;
+      background: #ffedd5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+    .selected-dish-title {
+      font-size: 1.04rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+    .selected-dish-meta {
+      font-size: 0.83rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .selected-dish-meta .green-txt {
+      color: var(--green-dark);
+      font-weight: 700;
+    }
+
+    .info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 18px;
+      font-size: 0.9rem;
+    }
+    .info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      color: #334155;
+    }
+    .info-row strong { color: var(--text); }
+
+    .action-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .btn-full {
+      width: 100%;
+      border: none;
+      padding: 13px 16px;
+      border-radius: 12px;
+      font-size: 0.94rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: 0.15s;
+    }
+    .btn-maps {
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 6px 14px rgba(37, 99, 235, 0.25);
+    }
+    .btn-maps:hover { background: var(--blue-dark); }
+    .btn-confirm {
+      background: var(--green);
+      color: #fff;
+      box-shadow: 0 6px 14px rgba(22, 163, 74, 0.25);
+    }
+    .btn-confirm:hover { background: var(--green-dark); }
+
+    .nearby-box {
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+    .nearby-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .nearby-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.86rem;
+      transition: background 0.15s;
+    }
+    .nearby-item:hover { background: #f1f5f9; }
+    .nearby-item strong { color: var(--text); }
+    .nearby-price {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      white-space: nowrap;
+    }
+
+    /* Map Panel */
+    .map-card {
+      display: flex;
+      flex-direction: column;
+    }
+    .map-frame-wrap {
+      flex: 1;
+      min-height: 390px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #e2e8f0;
+    }
+    .map-frame-wrap iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 390px;
+      border: 0;
+      display: block;
+    }
+    .map-caption {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.83rem;
+      color: var(--muted);
+    }
+    .map-caption a {
+      color: var(--blue);
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .map-caption a:hover { text-decoration: underline; }
+
+    /* ================= 8. GROUP MODE ================= */
+    .group-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 58%) minmax(0, 42%);
+      gap: 20px;
+      align-items: start;
+    }
+    .member-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 13px 14px;
+      margin-bottom: 10px;
+    }
+    .member-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-weight: 800;
+      font-size: 0.92rem;
+    }
+    .member-head select {
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
+    .member-checks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .mini-check {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.82rem;
+      background: #fff;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .btn-outline-sm {
+      border: 1px solid var(--border);
+      background: #fff;
+      padding: 6px 12px;
+      border-radius: 9px;
+      font-size: 0.83rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-outline-sm:hover { background: #f1f5f9; }
+
+    /* ================= 9. SPENDING & GREEN STATS ================= */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .stat-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 14px;
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 4px;
+    }
+    .stat-box.green .stat-num { color: var(--green); }
+    .stat-lbl {
+      font-size: 0.83rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .progress-bar {
+      height: 14px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 10px 0 8px;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--green);
+      transition: width 0.3s ease;
+    }
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .history-item:last-child { border-bottom: none; }
+
+    /* ================= 10. EMPTY STATE & TOAST ================= */
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(90px);
+      background: #0f172a;
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      opacity: 0;
+      transition: 0.25s;
+      z-index: 120;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.28);
+      max-width: 92vw;
+      text-align: center;
+    }
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* ================= 11. RESPONSIVE ================= */
+    @media (max-width: 960px) {
+      .step1-grid, .step3-grid, .group-layout {
+        grid-template-columns: 1fr;
+      }
+      .summary-card { position: static; }
+      .grid-3x2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 640px) {
+      .navbar-inner {
+        height: auto;
+        padding: 10px 14px;
+        flex-wrap: wrap;
+      }
+      .nav-tabs {
+        order: 3;
+        width: 100%;
+        justify-content: space-around;
+        border-top: 1px solid var(--border);
+        padding-top: 6px;
+        height: 44px;
+      }
+      .nav-tab { padding: 0 8px; font-size: 0.84rem; }
+      .grid-3x2, .stat-grid { grid-template-columns: 1fr; }
+      .broke-banner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="navbar">
+    <div class="navbar-inner">
+      <div class="brand" onclick="goHome()">
+        <span class="brand-icon">🍜</span>
+        <span>Ăn gì đây ta?</span>
+      </div>
+
+      <nav class="nav-tabs" id="v2-nav-tabs">
+        <button class="nav-tab active" id="tab-pick" onclick="switchTab('pick')">🎯 Tìm món</button>
+        <button class="nav-tab" id="tab-group" onclick="switchTab('group')">👥 Chốt nhóm</button>
+        <button class="nav-tab" id="tab-stats" onclick="switchTab('stats')">📊 Chi tiêu & Xanh</button>
+      </nav>
+
+      <div class="mode-switch">
+        <span>Chế độ:</span>
+        <button class="mode-btn" id="btn-v1" onclick="switchVersion('v1')">V1</button>
+        <button class="mode-btn active" id="btn-v2" onclick="switchVersion('v2')">V2</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ================= CHẾ ĐỘ V1 (BẢN THÔ KIỂM THỬ) ================= -->
+    <section id="v1-section" class="v1-wrapper hidden">
+      <div class="v1-timer-strip">
+        <div>⏱️ Thời gian ra quyết định (V1): <strong id="v1-timer-text" style="color:#fde047;">0.0 giây</strong></div>
+        <button class="btn-outline-sm" onclick="resetTimer()">Bấm giờ lại</button>
+      </div>
+
+      <div class="v1-box">
+        <h2>Trang chọn đồ ăn sinh viên (Prototype V1 - Bản thô)</h2>
+        <div class="v1-note">
+          <strong>Ghi chú kiểm thử V1:</strong> Giao diện thô chỉ có 2 dropdown lọc Mức giá & Loại món, trả về 1 dòng chữ đơn giản, chưa có bộ lọc dị ứng, chưa có ảnh món, chưa có bản đồ chỉ đường.
+        </div>
+
+        <div class="v1-field">
+          <label for="v1-price">1. Chọn mức giá:</label>
+          <select id="v1-price" onchange="startTimerIfNeeded()">
+            <option value="all">-- Tất cả --</option>
+            <option value="u25">Dưới 25.000đ</option>
+            <option value="25_40">25.000đ - 40.000đ</option>
+            <option value="40_60">40.000đ - 60.000đ</option>
+            <option value="o60">Trên 60.000đ</option>
+          </select>
+        </div>
+
+        <div class="v1-field">
+          <label for="v1-type">2. Chọn loại món:</label>
+          <select id="v1-type" onchange="startTimerIfNeeded()">
+            <option value="all">-- Tất cả --</option>
+            <option value="soup">Món nước</option>
+            <option value="dry">Món khô</option>
+            <option value="snack">Ăn nhẹ / Ăn vặt</option>
+          </select>
+        </div>
+
+        <button class="v1-btn" onclick="pickV1()">Tìm món</button>
+        <button class="v1-btn" onclick="confirmV1()">Chốt món này</button>
+
+        <div class="v1-result" id="v1-result">
+          <em>Chưa có kết quả. Bấm "Tìm món" để hệ thống chọn ngẫu nhiên.</em>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CHẾ ĐỘ V2 (HOÀN THIỆN 3 BƯỚC) ================= -->
+    <section id="v2-section">
+
+      <!-- ===== TAB 1: TÌM MÓN (3 STEPS) ===== -->
+      <div id="panel-pick">
+
+        <!-- BƯỚC 1: BỘ LỌC THÔNG MINH -->
+        <div id="step-1">
+          <div class="broke-banner" id="broke-banner" onclick="toggleBrokeMode()">
+            <div class="broke-left">
+              <div class="broke-fire">🔥</div>
+              <div>
+                <div class="broke-title">CHẾ ĐỘ CUỐI THÁNG ≤ 30K</div>
+                <div class="broke-sub">Ngon - Rẻ - No bụng • Bật nhanh 1 chạm để lọc quán bình dân không lo rỗng ví</div>
+              </div>
+            </div>
+            <div class="broke-toggle-wrap">
+              <span id="broke-status-text">Bật ngay</span>
+              <div class="toggle-track"><div class="toggle-knob"></div></div>
+            </div>
+          </div>
+
+          <div class="step1-grid">
+            <!-- Left Column: Filter Card -->
+            <div class="card">
+              <h1 class="section-title">Hôm nay bạn muốn ăn gì?</h1>
+              <p class="section-sub">Chọn nhanh các tiêu chí bên dưới để Ăn gì đây ta? gợi ý quán chuẩn gu quanh Quận 10</p>
+
+              <div class="filter-group">
+                <span class="filter-label">1. Ngân sách hôm nay</span>
+                <div class="chip-list" id="filter-price">
+                  <button class="chip selected" data-val="all" onclick="selectSingle('price', 'all', this)">Tất cả</button>
+                  <button class="chip" data-val="u25" onclick="selectSingle('price', 'u25', this)">≤ 25k</button>
+                  <button class="chip" data-val="25_40" onclick="selectSingle('price', '25_40', this)">25k - 40k</button>
+                  <button class="chip" data-val="40_60" onclick="selectSingle('price', '40_60', this)">40k - 60k</button>
+                  <button class="chip" data-val="o60" onclick="selectSingle('price', 'o60', this)">&gt; 60k</button>
+                </div>
+              </div>
+
+              <div class="filter-group">
+                <span class="filter-label">2. Kiểu món ăn</span>
+                <div class="chip-list" id="filter-type">
+                  <button class="chip selected" data-val="all" onclick="selectSingle('type', 'all', this)">Tất cả</button>
+                  <button class="chip" data-val="soup" onclick="selectSingle('type', 'soup', this)">🍜 Món nước</button>
+                  <button class="chip" data-val="dry" onclick="selectSingle('type', 'dry', this)">🍚 Món khô</button>
+                  <button class="chip" data-val="snack" onclick="selectSingle('type', 'snack', this)">🥟 Ăn nhẹ / Ăn vặt</button>
+                </div>
+              </div>
+
+              <div class="filter-group">
+                <span class="filter-label">3. Bối cảnh & Tâm trạng</span>
+                <div class="chip-list" id="filter-context">
+                  <button class="chip selected" data-val="all" onclick="selectSingle('context', 'all', this)">Bình thường</button>
+                  <button class="chip" data-val="solo" onclick="selectSingle('context', 'solo', this)">🧍 Ăn một mình</button>
+                  <button class="chip" data-val="quick" onclick="selectSingle('context', 'quick', this)">⚡ Đang vội (&lt;15p)</button>
+                  <button class="chip" data-val="group" onclick="selectSingle('context', 'group', this)">👯 Đi ăn nhóm</button>
+                  <button class="chip" data-val="rain" onclick="selectSingle('context', 'rain', this)">🌧️ Trời mưa</button>
+                  <button class="chip" data-val="hot" onclick="selectSingle('context', 'hot', this)">☀️ Trời nóng</button>
+                </div>
+              </div>
+
+              <div class="filter-group">
+                <span class="filter-label">4. Loại trừ nhanh (Chọn nhiều)</span>
+                <div class="chip-list" id="filter-exclude">
+                  <button class="chip exclude" data-val="no_spicy" onclick="toggleExclude('no_spicy', this)">🚫 Không cay</button>
+                  <button class="chip exclude" data-val="no_seafood" onclick="toggleExclude('no_seafood', this)">🚫 Không hải sản</button>
+                  <button class="chip exclude" data-val="no_beef" onclick="toggleExclude('no_beef', this)">🚫 Không thịt bò</button>
+                  <button class="chip exclude" data-val="veg_only" onclick="toggleExclude('veg_only', this)">🥬 Chỉ ăn chay</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Sticky Summary -->
+            <aside class="card summary-card">
+              <div class="summary-box-title">Tóm tắt bộ lọc</div>
+              <div class="summary-row-title">📋 Lựa chọn của bạn</div>
+              <div class="summary-pills" id="summary-pills"></div>
+
+              <div class="green-pill">
+                <span>🌱</span>
+                <span>Ưu tiên đi bộ gần trường • 0 rác nhựa</span>
+              </div>
+
+              <div class="match-counter" id="live-match-count">
+                🎯 Tìm thấy <span>17</span> quán phù hợp quanh Quận 10
+              </div>
+
+              <button class="cta-btn" onclick="goToStep2()">🎲 TÌM MÓN NGAY →</button>
+
+              <p class="cta-tip">
+                💡 Mẹo: Bật "Chế độ cuối tháng" phía trên nếu ngân sách hôm nay dưới 30k!
+              </p>
+            </aside>
+          </div>
+        </div>
+
+        <!-- BƯỚC 2: HIỆN MÓN (LƯỚI THẺ 3x2) -->
+        <div id="step-2" class="hidden">
+          <div class="sub-bar">
+            <div class="sub-bar-left" id="step2-tags"></div>
+            <div class="sub-bar-right">
+              <span id="step2-count-label"></span>
+              <button class="btn-outline-sm" id="btn-reshuffle" onclick="reshuffleStep2()">🔄 Đổi gợi ý khác</button>
+            </div>
+          </div>
+
+          <div id="step2-content"></div>
+        </div>
+
+        <!-- BƯỚC 3: CHỐT MÓN & BẢN ĐỒ -->
+        <div id="step-3" class="hidden">
+          <div class="sub-bar">
+            <button class="back-btn" onclick="goBackToStep2()">← Quay lại danh sách</button>
+            <div class="timer-pill">⏱️ Thời gian chọn: <strong id="v2-timer-text">0.0 giây</strong></div>
+          </div>
+
+          <div class="step3-grid" id="step3-content"></div>
+        </div>
+      </div>
+
+      <!-- ===== TAB 2: CHỐT NHÓM ===== -->
+      <div id="panel-group" class="hidden">
+        <div class="group-layout">
+          <div class="card">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:16px;">
+              <div>
+                <h2 class="section-title">👥 Chốt món nhóm không cần cãi nhau</h2>
+                <p class="section-sub" style="margin-bottom:0;">Tự động lấy mức giá thấp nhất và loại mọi món có thành viên kiêng ăn.</p>
+              </div>
+              <div style="display:flex; gap:6px; flex-shrink:0;">
+                <button class="btn-outline-sm" onclick="changeMemberCount(-1)">- Bớt</button>
+                <button class="btn-outline-sm" onclick="changeMemberCount(1)">+ Thêm</button>
+              </div>
+            </div>
+
+            <div id="group-members-list"></div>
+
+            <button class="cta-btn" style="margin-top:8px;" onclick="pickGroupMeal()">🤝 Tìm giao điểm cho cả nhóm</button>
+          </div>
+
+          <div id="group-result-box">
+            <div class="card empty-state">
+              <div style="font-size:2.6rem; margin-bottom:10px;">👯</div>
+              <h3 style="margin-bottom:6px;">Sẵn sàng chốt kèo nhóm!</h3>
+              <p style="font-size:0.88rem; color:var(--muted);">Chọn ngân sách và món kiêng của từng bạn ở bên trái rồi bấm nút tìm giao điểm nhé.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== TAB 3: CHI TIÊU & SỐNG XANH ===== -->
+      <div id="panel-stats" class="hidden">
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:18px;">
+            <div>
+              <h2 class="section-title">📊 Chi tiêu tuần & Tác động Sống Xanh</h2>
+              <p class="section-sub" style="margin-bottom:0;">Theo dõi tự động từ các bữa bạn bấm "✅ Chốt đi ăn"</p>
+            </div>
+            <button class="btn-outline-sm" onclick="clearHistory()">🗑️ Xóa lịch sử</button>
+          </div>
+
+          <div class="stat-grid">
+            <div class="stat-box">
+              <div class="stat-num" id="stat-spent">0đ</div>
+              <div class="stat-lbl">Ước tính đã chi</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num" id="stat-meals">0 bữa</div>
+              <div class="stat-lbl">Số bữa đã chốt</div>
+            </div>
+            <div class="stat-box green">
+              <div class="stat-num" id="stat-plastic">0 hộp</div>
+              <div class="stat-lbl">Hộp xốp/nilon đã giảm</div>
+            </div>
+          </div>
+
+          <div style="margin-bottom:20px; background:#f8fafc; border:1px solid var(--border); border-radius:14px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; font-size:0.9rem; font-weight:800;">
+              <span>Ngân sách ăn uống tuần này</span>
+              <span id="budget-label">0đ / 500.000đ (0%)</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="budget-fill" style="width:0%"></div>
+            </div>
+            <div style="font-size:0.82rem; color:var(--green-dark); font-weight:600;">
+              🌱 Mỗi bữa đi bộ ra quán ăn tại chỗ giúp cắt giảm ~1 hộp xốp + 1 túi nilon và tiết kiệm ~15.000đ phí giao hàng.
+            </div>
+          </div>
+
+          <h3 style="font-size:1rem; font-weight:800; margin-bottom:8px;">Lịch sử các bữa đã chốt</h3>
+          <div id="history-list"></div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /* =====================================================================
+       1. DATABASE: 17 QUÁN ĂN QUẬN 10 KÈM LINK ẢNH & GOOGLE MAPS CHÍNH XÁC
+    ===================================================================== */
+    const RESTAURANTS = [
+      // --- NHÓM 1: MÓN KHÔ ---
+      {
+        id: 1,
+        dishName: "Cơm tấm sườn bì chả",
+        shopName: "Cơm Tấm 229 Vĩnh Viễn",
+        emoji: "🍛",
+        image: "https://scontent.fsgn2-8.fna.fbcdn.net/v/t1.6435-9/79085642_136163291164018_6219957614998978560_n.jpg?stp=dst-jpg_tt6&cstp=mx899x899&ctp=s899x899&_nc_cat=105&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=f727a1&_nc_ohc=E_ppukmiihMQ7kNvwGJfaov&_nc_oc=AdqaMNzwjG_mDMpWH_JCOrA-OkHPHX57MMM25zuyL-f4lBs_PWqKG96kCtYTEQvlsTc&_nc_zt=23&_nc_ht=scontent.fsgn2-8.fna&_nc_gid=LmvWRPlS_cnFoV-T5IwL-g&_nc_ss=7b3a8&oh=00_AQVr7DcpGpWXb38zhMiFwkzi66a4PoqlVLuXip7MNc1boQ&oe=6B309A02",
+        groupLabel: "Món khô",
+        type: "dry",
+        priceText: "20.000đ – 33.000đ/dĩa",
+        priceMin: 20,
+        priceMax: 33,
+        avgPrice: 27,
+        hours: "7:30 – 21:00",
+        address: "229 Vĩnh Viễn, phường Vườn Lài, TP.HCM",
+        mapsUrl: "https://maps.app.goo.gl/gnbaJiwLLcQgkGGG9",
+        note: "Quán bình dân, phục vụ nhanh, rất hợp túi tiền sinh viên.",
+        bullets: ["Giá sinh viên chỉ từ 20k – 33k", "Phục vụ nhanh, không đợi lâu", "Mở suốt ngày từ sáng đến tối"],
+        contexts: ["solo", "quick", "group", "hot", "rain"],
+        spicy: false,
+        seafood: false,
+        beef: false,
+        veg: false
+      },
+      {
+        id: 2,
+        dishName: "Cơm tấm sườn nướng",
+        shopName: "Cơm tấm Tài 476 Nguyễn Tri Phương",
+        emoji: "🍖",
+        image: "https://scontent.fsgn2-9.fna.fbcdn.net/v/t39.30808-6/744042179_1471149125040622_6404527042817427649_n.jpg?stp=dst-jpg_tt6&cstp=mx1000x1000&ctp=s1000x1000&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_ohc=ebqv9khEcl8Q7kNvwGDuhFv&_nc_oc=AdoTeD9LTXrewu-pyMJXM5mGDGZPrJ6dPtEpXHAfF726_weBlWQex8eq5nAZe_tQ25Q&_nc_zt=23&_nc_ht=scontent.fsgn2-9.fna&_nc_gid=Ko0uppXEK462vgWM4EeW3Q&_nc_ss=7b3a8&oh=00_AQX96MWb7t9EBZHE06jeXFdgfrqEcXpdEeBnd32GFOE5ZQ&oe=6B0EF082",
+        groupLabel: "Món khô",
+        type: "dry",
+        priceText: "35.000đ – 115.000đ/dĩa",
+        priceMin: 35,
+        priceMax: 115,
+        avgPrice: 50,
+        hours: "10:00 – 14:00 & 17:00 – 1:30",
+        address: "476 Nguyễn Tri Phương, phường Vườn Lài, TP.HCM",
+        mapsUrl: "https://maps.app.goo.gl/PHRr4zNUpZV3uyTy7",
+        note: "Sườn nướng đậm vị, có cả phần sườn cọng lớn, bán tới khuya.",
+        bullets: ["Sườn nướng thơm, miếng dày đậm vị", "Bán xuyên trưa và khuya đến 1:30", "Phù hợp nạp năng lượng sau ca học"],
+        contexts: ["solo", "group", "hot", "rain"],
+        spicy: false,
+        seafood: false,
+        beef: false,
+        veg: false
+      },
+      {
+        id: 3,
+        dishName: "Bún thịt nướng",
+        shopName: "Bún Thịt Nướng Quán 339",
+        emoji: "🥢",
+        image: "https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/506015440_730350276316695_8585537299619545058_n.jpg?stp=dst-jpg_tt6&cstp=mx1280x960&ctp=s1280x960&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=G-Epj3O45c0Q7kNvwGF0MIk&_nc_oc=AdpxIAcC5v2unEswSe7zqnYLudMIlXPUUijd1lVold4_92YlDA3sLADIxMXmGWpARTY&_nc_zt=23&_nc_ht=scontent.fsgn2-6.fna&_nc_gid=gy2HrHemXsxymUxCwzWjZQ&_nc_ss=7b3a8&oh=00_AQUs5ofaoHLxMGk0CaqWfUnp3pDf9Ic_NtLkqwxv34BkiA&oe=6B0F042E",
+        groupLabel: "Món khô",
+        type: "dry",
+        priceText: "22.000đ – 28.000đ/tô",
+        priceMin: 22,
+        priceMax: 28,
+        avgPrice: 25,
+        hours: "9:00 – 21:00",
+        address: "Hẻm 339/7-9 Tô Hiến Thành, phường Hòa Hưng, TP.HCM",
+        mapsUrl: "https://maps.app.goo.gl/NEgUreiUMmw5KxRj7",
+        note: "Giá siêu mềm cho sinh viên, có bán kèm cơm tấm.",
+        bullets: ["Giá siêu mềm chỉ 22k – 28k/tô", "Nhiều rau tươi mát, có kèm cơm tấm", "Cứu cánh chuẩn bài cho cuối tháng"],
+        contexts: ["solo", "quick", "group", "hot"],
+        spicy: false,
+        seafood: false,
+        beef: false,
+        veg: false
+      },
+      {
+        id: 4,
+        dishName: "Bún đậu mắm tôm",
+        shopName: "Bún đậu mắm tôm Tiến Hải",
+        emoji: "🧆",
+        image: "https://scontent.fsgn2-8.fna.fbcdn.net/v/t1.6435-9/62061970_2419771118089929_3276447833619693568_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=102&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=536f4a&_nc_ohc=S5Bb5quwkgUQ7kNvwFb_KnK&_nc_oc=AdrS2nuS1beGe0G3WWznOxJoIm26TEx1hF4tlKujmD0iAyt6f00FdHdvgsgBHgWKuvc&_nc_zt=23&_nc_ht=scontent.fsgn2-8.fna&_nc_gid=AoC5UownPLPHa5OdJZn_Tg&_nc_ss=7b3a8&oh=00_AQVUDHGWXYfUKzchmfjWi1-V8mHqRV8jEqSk0YChy1s2aw&oe=6B309DC9",
+        groupLabel: "Món khô",
+        type: "dry",
+        priceText: "20.000đ – 55.000đ/phần",
+        priceMin: 20,
+        priceMax: 55,
+        avgPrice: 35,
+        hours: "9:30 – 22:00",
+        address: "409 Nguyễn Tri Phương, phường Diên Hồng, TP.HCM",
+        mapsUrl: "https://maps.app.goo.gl/FQREJS2NVAPZ9C3h6",
+        note: "Suất phổ biến khoảng 35.000đ, mẹt đầy đặn, rất hợp đi ăn nhóm.",
+        bullets: ["Suất phổ biến ~35k đầy đặn", "Mặt tiền Nguyễn Tri Phương dễ tìm", "Cực hợp tụ tập đi ăn nhóm bạn"],
+        contexts: ["group", "solo", "hot"],
+        spicy: false,
+        seafood: true,
+        beef: false,
+        veg: false
+      },
+      {
+        id: 5,
+        dishName: "Bún chả Hà Nội",
+        shopName: "Ô Bun Cha - Quận 10",
+        emoji: "🍲",
+        image: "https://obuncha.vn/storage/product/10/Kh%C3%B4ng%20c%C3%B3%20ti%C3%AAu%20%C4%91%E1%BB%81%20(900%20x%20900%20px)%20(43)_1.png",
+        groupLabel: "Món khô",
+        type: "dry",
+        priceText: "Dưới 100.000đ/phần (~55k)",
+        priceMin: 45,
+        priceMax: 75,
+        avgPrice: 55,
+        hours: "7:15 – 21:30",
+        address: "494 Nguyễn Tri Phương, phường Vườn Lài, TP.HCM",
+        mapsUrl: "https://maps.app.goo.gl/a5C6kvgwLa8M2kHe8",
+        note: "Chuẩn vị Hà Nội, chả nướng thơm, không gian gọn sạch.",
+        bullets: ["Chả nướng thơm chuẩn vị Hà Nội", "Không gian sạch sẽ, mát mẻ", "Mở cửa từ sáng sớm đến tối"],
+        contexts: ["solo", "group", "hot"],
+        spicy: false,
+        seafood: false,
+        beef: false,
+        veg: false
+      },
+      {
+        id: 6,
+        dishName: "Bánh mì chảo",
+        shopName: "Bánh mì chảo A Bếp",
+        emoji: "🍳",
+        image: "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.6435-9/106523989_3128644527252988_2787997680167029136_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=33274f&_nc_ohc=G3g_mXl7lmUQ7kNvwHUITUN&_nc_oc=Adoj7j9rwjLtv6t0pCaCIR1prshgtLyAhMagvGFXpqzDPH7y8xBi2XI-n_89xbkTnhM&_nc_zt=23&_nc_ht=scontent.fsgn2-3.fna&_nc_gid=TiEMEMqGaY88D6-D7UGnHQ&_nc_ss=7b3a8&oh=00_AQUM6DtMOymEE_Y2iZ25vbQis2pzNT37VoxNLv-6Nu-CRQ&oe=6B30AB60",
+        groupLabel: "Món khô",
+        type: "dry",
+        priceText: "25.000đ – 60.000đ/chảo",
+        priceMin: 25,
+        priceMax: 60,
+        avgPrice: 38,
+        hours: "5:00 – 23:30",
+        address: "025 Chung cư Ngô Gia Tự, Sư Vạn Hạnh, phường Vườn Lài, TP.HCM",
+        mapsUrl: "https://maps.app.goo.gl/SMiyxeFLWxKZueBR6",
+        note: "Phổ biến 28.000đ – 47.000đ, mở từ sáng sớm đến khuya.",
+        bullets: ["Chảo nóng hổi, nhiều combo từ 28k", "Mở cực dài từ 5:00 sáng tới 23:30", "Hợp ăn sáng, trưa lẫn ăn tối muộn"],
+        contexts: ["solo", "group", "quick", "rain"],
+        spicy: false,
+        seafood: false,
+        beef: true,
+        veg: false
+      },
+
+      // --- NHÓM 2: MÓN NƯỚC ---
+      {
+        id: 7,
+        dishName: "Phở bò",
+        shopName: "Phở Quyên",
+        emoji: "🍜",
+        image: "https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/480763004_1560749641366650_3478995742844478886_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1365&ctp=s2048x1365&_nc_cat=109&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_ohc=hPj6WAcpl7EQ7kNvwHG1OEC&_nc_oc=AdrxYCfqioXR_OSsAk0cMn17nEsupue0gMH0epAL9ALFlKrhNgMZVFvYzw-vLibF9F4&_nc_zt=23&_nc_ht=scontent.fsgn2-5.fna&_nc_gid=DP3l7VgFQXX7weXJEkoVnw&_nc_ss=7b3a8&oh=00_AQUnFkwBA9VHzLUNIQpPlCwylENDP2A6l6e7zkdWOWV_BA&oe=6B0F0A78",
+        groupLabel: "Món nước",
+        type: "soup",
+        priceText: "35.000đ – 50.000đ/tô",
+        priceMin: 35,
+        priceMax: 50,
+        avgPrice: 42,
+        hours: "5:00 – 12:00 & 15:00 – 21:00",
+        address: "Hẻm 77 Hồ Thị Kỷ, phường Vườn Lài, TP.HCM",
+        mapsUrl: "https://maps.app.goo.gl/G6BttVuERXiZmPhb6",
+        note: "Bán xuyên suốt sáng và chiều tối, phục vụ nhanh, chỉ nhận tiền mặt.",
+        bullets: ["Nước dùng đậm đà, lên món rất nhanh", "Bán cả sáng lẫn chiều tối", "Lưu ý: Quán chỉ nhận tiền mặt"],
+        contexts: ["solo", "quick", "group", "rain"],
+        spicy: false,
+        seafood: false,
+        beef: true,
+        veg: false
+      },
+      {
+        id: 8,
+        dishName: "Bún riêu tôm khô",
+        shopName: "Bún riêu tôm khô (Hẻm 209)",
+        emoji: "🍲",
+        image: "https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/560559927_1241756477979889_17236181790183081_n.jpg?stp=dst-jpg_tt6&cstp=mx960x987&ctp=s960x987&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_ohc=W7_lhUShun8Q7kNvwGrtT5m&_nc_oc=Adrx8P95_p9V2LXplZSjkGgE3EfixlkOJwsJOexeiFVcK1YdLsm0gOsX62dAHwza3pM&_nc_zt=23&_nc_ht=scontent.fsgn2-6.fna&_nc_gid=k_IDHLMg1x26asfZTWvlSw&_nc_ss=7b3a8&oh=00_AQVdC12bXXKWASaLRZQAyPON4iuHjk88CgKMhyL-5JJG4w&oe=6B0F03FD",
+        groupLabel: "Món nước",
+        type: "soup",
+        priceText: "30.000đ – 45.000đ/tô",
+        priceMin: 30,
+        priceMax: 45,
+        avgPrice: 35,
+        hours: "8:00 – 15:00",
+        address: "Hẻm 209 Nguyễn Kim, phường Diên Hồng, TP.HCM",
+        mapsUrl: "https://maps.app.goo.gl/7wW6oqGVnHjEYsmS9",
+        note: "Quán hẻm đông khách quen buổi sáng – trưa, hương vị đậm đà kiểu nhà nấu.",
+        bullets: ["Hương vị đậm đà chuẩn kiểu nhà nấu", "Giá bình dân 30k – 45k/tô", "Rất hợp ăn sáng muộn hoặc bữa trưa"],
+        contexts: ["solo", "quick", "rain", "hot"],
+        spicy: false,
+        seafood: true,
+        beef: false,
+        veg: false
+      },
+      {
+        id: 9,
+        dishName: "Mì Quảng",
+        shopName: "Mì Quảng Hội An",
+        emoji: "🍜",
+        image: "https://statics.vinpearl.com/mi-quang-hoi-an-2_1631199897.jpg",
+        groupLabel: "Món nước",
+        type: "soup",
+        priceText: "35.000đ – 50.000đ/tô",
+        priceMin: 35,
+        priceMax: 50,
+        avgPrice: 42,
+        hours: "6:30 – 20:00",
+        address: "C1B đường Bửu Long, Cư xá Bắc Hải, phường Hòa Hưng, TP.HCM",
+        mapsUrl: "https://maps.app.goo.gl/LJ9Qn9xGkUF7peWB7",
+        note: "Tôm thịt tươi, nước dùng nấu thanh vừa miệng, quán chỉ nhận tiền mặt.",
+        bullets: ["Tôm thịt tươi, nước dùng thanh nhẹ", "Khu Cư xá Bắc Hải thoáng mát", "Lưu ý: Quán chỉ nhận tiền mặt"],
+        contexts: ["solo", "group", "rain", "hot"],
+        spicy: false,
+        seafood: true,
+        beef: false,
+        veg: false
+      },
+      {
+        id: 10,
+        dishName: "Bún bò Huế",
+        shopName: "Bún Bò Huế Mỡ Nổi Cô Như",
+        emoji: "🌶️",
+        image: "https://images2.thanhnien.vn/528068263637045248/2025/6/4/anh-man-hinh-2025-06-04-luc-093010-17490042995071596821662.png",
+        groupLabel: "Món nước",
+        type: "soup",
+        priceText: "Khoảng 40.000đ/tô",
+        priceMin: 40,
+        priceMax: 45,
+        avgPrice: 40,
+        hours: "11:00 – 20:00",
+        address: "274/29 Võ Văn Tần, Quận 3, TP.HCM",
+        mapsUrl: "https://maps.app.goo.gl/tjokdYNTbnakx7vW8",
+        note: "Nước dùng đậm đà đặc trưng mỡ nổi, giáp ranh Quận 10 chạy qua rất gần (chỉ nhận tiền mặt).",
+        bullets: ["Đặc sản mỡ nổi béo thơm, nước đậm vị", "Giá đồng đều khoảng 40k/tô đầy đặn", "Giáp ranh Q.10, cực hợp ngày mưa"],
+        contexts: ["solo", "group", "rain"],
+        spicy: true,
+        seafood: false,
+        beef: true,
+        veg: false
+      },
+
+      // --- NHÓM 3: MÓN CHAY ---
+      {
+        id: 11,
+        dishName: "Cơm chay & Món chay",
+        shopName: "Cơm chay Thanh Lương",
+        emoji: "🥬",
+        image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/e5/8d/87/un-formidable-restaurant.jpg?w=1400&h=-1&s=1",
+        groupLabel: "Món chay",
+        type: "dry",
+        priceText: "20.000đ – 40.000đ/phần",
+        priceMin: 20,
+        priceMax: 40,
+        avgPrice: 30,
+        hours: "6:30 – 21:00",
+        address: "545A Đường 3 Tháng 2, phường Diên Hồng, TP.HCM",
+        mapsUrl: "https://maps.app.goo.gl/X65aHP9GWsC2AYGy9",
+        note: "Hơn 1.100 đánh giá, thực đơn phong phú từ cơm phần, bánh xèo chay đến lẩu chay (chỉ nhận tiền mặt).",
+        bullets: ["Hơn 1.100 đánh giá uy tín khu Q.10", "Đa dạng cơm phần, bánh xèo, lẩu chay", "Giá mềm từ 20k (chỉ nhận tiền mặt)"],
+        contexts: ["solo", "quick", "group", "hot", "rain"],
+        spicy: false,
+        seafood: false,
+        beef: false,
+        veg: true
+      },
+      {
+        id: 12,
+        dishName: "Cơm chay & Mì Quảng chay",
+        shopName: "Chay Bình An",
+        emoji: "🥗",
+        image: "https://down-vn.img.susercontent.com/vn-11134513-7r98o-lstqh5ymw24k75@resize_ss576x330",
+        groupLabel: "Món chay",
+        type: "dry",
+        priceText: "~35.000đ/phần (Buffet 49k)",
+        priceMin: 35,
+        priceMax: 49,
+        avgPrice: 35,
+        hours: "8:00 – 21:00",
+        address: "49 Ngô Quyền, phường Diên Hồng, TP.HCM",
+        mapsUrl: "https://maps.app.goo.gl/gdVPeAgPdCHNoX3s8",
+        note: "Có máy lạnh mát mẻ, bếp sạch, miễn phí trà đá và có thêm mì Quảng chay (chỉ nhận tiền mặt).",
+        bullets: ["Phòng máy lạnh mát, miễn phí trà đá", "Có cơm phần 35k & buffet 49k", "Bếp sạch sẽ (chỉ nhận tiền mặt)"],
+        contexts: ["solo", "group", "hot"],
+        spicy: false,
+        seafood: false,
+        beef: false,
+        veg: true
+      },
+      {
+        id: 13,
+        dishName: "Cơm tấm chay & Bánh xèo chay",
+        shopName: "Quán chay Thôi Kệ",
+        emoji: "🌱",
+        image: "https://assets.grab.com/wp-content/uploads/sites/11/2020/10/12181933/10.jpg",
+        groupLabel: "Món chay",
+        type: "dry",
+        priceText: "25.000đ – 40.000đ/phần",
+        priceMin: 25,
+        priceMax: 40,
+        avgPrice: 30,
+        hours: "6:30 – 19:30",
+        address: "727 Lê Hồng Phong, phường Hòa Hưng, TP.HCM",
+        mapsUrl: "https://maps.app.goo.gl/XRnPk2UXWStVV1Uh7",
+        note: "Rất đông sinh viên (đặc biệt mùng 1 và rằm), nổi bật với cơm tấm chay, bánh xèo chay và sữa bí đỏ.",
+        bullets: ["Quán ruột đông sinh viên khu Q.10", "Nổi tiếng cơm tấm chay & sữa bí đỏ", "Giá bình dân 25k – 40k/phần"],
+        contexts: ["solo", "quick", "group", "hot", "rain"],
+        spicy: false,
+        seafood: false,
+        beef: false,
+        veg: true
+      },
+
+      // --- NHÓM 4: ĂN NHẸ & ĂN VẶT ---
+      {
+        id: 14,
+        dishName: "Bánh mì que",
+        shopName: "Bánh mì que Chip",
+        emoji: "🥖",
+        image: "https://down-bs-vn.img.susercontent.com/vn-11134513-7r98o-lsu82dgghdxg7b@resize_ss640x400!@crop_w640_h400_cT",
+        groupLabel: "Ăn nhẹ / Vặt",
+        type: "snack",
+        priceText: "Dưới 25.000đ",
+        priceMin: 15,
+        priceMax: 25,
+        avgPrice: 20,
+        hours: "7:00 – 21:00",
+        address: "351/5 Lý Thái Tổ, phường Vườn Lài, TP.HCM",
+        mapsUrl: "https://maps.app.goo.gl/fn5Fwei94S9nEYNV8",
+        note: "Đánh giá 4.9★, nhỏ gọn dễ ăn lót dạ giữa các tiết học.",
+        bullets: ["Đánh giá cực cao 4.9★", "Giá siêu mềm dưới 25k", "Gọn nhẹ, ăn nhanh giữa các ca học"],
+        contexts: ["solo", "quick", "hot", "rain"],
+        spicy: false,
+        seafood: false,
+        beef: false,
+        veg: false
+      },
+      {
+        id: 15,
+        dishName: "Bánh tráng trộn / cuốn",
+        shopName: "Bánh tráng phương kiều",
+        emoji: "🌮",
+        image: "https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/615695726_3220135454859632_2695679295285642508_n.jpg?stp=dst-jpg_tt6&cstp=mx1206x1608&ctp=s1206x1608&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_ohc=jrcl2KUBBWYQ7kNvwFBk-C4&_nc_oc=AdrVLu8vjIRz6XQas-_RjlHBHGnusmJIIiGvaYhmh5xiZE7i1l6lNJ18fgjg5CEtdaQ&_nc_zt=23&_nc_ht=scontent.fsgn2-5.fna&_nc_gid=yWBNybUglm93mZ_6pHwMqA&_nc_ss=7b3a8&oh=00_AQWHfMHcHch0fYh2gib-I60aEXwn42HZhm4TJq5_c59vSg&oe=6B0F1358",
+        groupLabel: "Ăn nhẹ / Vặt",
+        type: "snack",
+        priceText: "20.000đ – 30.000đ/phần",
+        priceMin: 20,
+        priceMax: 30,
+        avgPrice: 25,
+        hours: "13:00 – 20:00",
+        address: "193/12 Nguyễn Tiểu La, phường Diên Hồng, TP.HCM",
+        mapsUrl: "https://maps.app.goo.gl/ZfAKSyDv1SBtcpqQ6",
+        note: "Quán ăn vặt buổi chiều được khen ngon ngay khu vực Nguyễn Tiểu La.",
+        bullets: ["Món ăn vặt chân ái buổi chiều", "Giá bình dân 20k – 30k/phần", "Gần khu Nguyễn Tiểu La dễ ghé"],
+        contexts: ["solo", "quick", "group", "hot"],
+        spicy: true,
+        seafood: true,
+        beef: false,
+        veg: false
+      },
+      {
+        id: 16,
+        dishName: "Há cảo & xíu mại",
+        shopName: "Quán Há cảo Ngọc Lan",
+        emoji: "🥟",
+        image: "https://assets.grab.com/wp-content/uploads/sites/11/2019/10/01144312/foodcollectionsmy_65010566_440544860074322_1869004403072184206_n.jpg",
+        groupLabel: "Ăn nhẹ / Vặt",
+        type: "snack",
+        priceText: "20.000đ – 50.000đ/phần",
+        priceMin: 20,
+        priceMax: 50,
+        avgPrice: 30,
+        hours: "9:00 – 22:00",
+        address: "500 Vĩnh Viễn, phường Diên Hồng, TP.HCM",
+        mapsUrl: "https://maps.app.goo.gl/hatyC6BGCRfYfn7u8",
+        note: "Há cảo xíu mại nóng hổi, ăn xế chiều hoặc ăn tối nhẹ đều hợp.",
+        bullets: ["Há cảo xíu mại hấp nóng hổi", "Linh hoạt phần nhỏ từ 20k đến 50k", "Mở tới 22:00 tiện ăn xế & tối nhẹ"],
+        contexts: ["solo", "quick", "group", "rain"],
+        spicy: false,
+        seafood: true,
+        beef: false,
+        veg: false
+      },
+      {
+        id: 17,
+        dishName: "Chè mâm truyền thống",
+        shopName: "Chè mâm KHÁNH VY",
+        emoji: "🍧",
+        image: "https://down-vn.img.susercontent.com/vn-11134513-7r98o-lstpz19k16s920@resize_ss576x330",
+        groupLabel: "Ăn nhẹ / Vặt",
+        type: "snack",
+        priceText: "~7.000đ/chén (Mâm 16 chén ~158k)",
+        priceMin: 7,
+        priceMax: 40,
+        avgPrice: 25,
+        hours: "15:00 – 22:30",
+        address: "032 Lô H, Chung cư Ngô Gia Tự, phường Vườn Lài, TP.HCM",
+        mapsUrl: "https://maps.app.goo.gl/BvYHTEb4qc28wTji8",
+        note: "Đi nhóm 4–5 người gọi nguyên mâm 16 chén chia tiền rất rẻ.",
+        bullets: ["Chè lẻ chỉ ~7k/chén, mâm 16 chén 158k", "Đi nhóm 4–5 người chia siêu rẻ", "Mát lạnh, giải nhiệt buổi chiều tối"],
+        contexts: ["group", "solo", "hot"],
+        spicy: false,
+        seafood: false,
+        beef: false,
+        veg: true
+      }
+    ];
+
+    /* =====================================================================
+       2. APP STATE & LABELS
+    ===================================================================== */
+    const LABELS = {
+      price: { all: "Tất cả", u25: "≤ 25k", "25_40": "25k - 40k", "40_60": "40k - 60k", o60: "> 60k" },
+      type: { all: "Tất cả", soup: "🍜 Món nước", dry: "🍚 Món khô", snack: "🥟 Ăn nhẹ / Vặt" },
+      context: { all: "Bình thường", solo: "🧍 Ăn một mình", quick: "⚡ Đang vội", group: "👯 Đi ăn nhóm", rain: "🌧️ Trời mưa", hot: "☀️ Trời nóng" },
+      exclude: { no_spicy: "Không cay", no_seafood: "Không hải sản", no_beef: "Không thịt bò", veg_only: "Chỉ ăn chay" }
+    };
+
+    const state = {
+      version: "v2",
+      activeTab: "pick",
+      step: 1,
+      brokeMode: false,
+      price: "all",
+      type: "all",
+      context: "all",
+      excludes: new Set(),
+      filteredAll: [],
+      displayedFive: [],
+      selectedDish: null,
+      v1Current: null,
+      groupMembers: [
+        { name: "Bạn 1", maxPrice: 40, no_spicy: false, no_seafood: false, no_beef: false, veg_only: false },
+        { name: "Bạn 2", maxPrice: 35, no_spicy: true, no_seafood: false, no_beef: false, veg_only: false },
+        { name: "Bạn 3", maxPrice: 45, no_spicy: false, no_seafood: false, no_beef: false, veg_only: false }
+      ],
+      groupMatches: [],
+      groupIndex: 0
+    };
+
+    /* =====================================================================
+       3. LIVE DECISION TIMER
+    ===================================================================== */
+    let timerInterval = null;
+    let timerStart = null;
+    let timerRunning = false;
+    let lastRecordedSeconds = "0.0";
+
+    function startTimerIfNeeded() {
+      if (timerRunning) return;
+      timerStart = Date.now();
+      timerRunning = true;
+      timerInterval = setInterval(() => {
+        lastRecordedSeconds = ((Date.now() - timerStart) / 1000).toFixed(1);
+        updateTimerDisplays(`${lastRecordedSeconds} giây`);
+      }, 100);
+    }
+
+    function stopTimer() {
+      if (!timerRunning) return lastRecordedSeconds;
+      clearInterval(timerInterval);
+      timerRunning = false;
+      lastRecordedSeconds = ((Date.now() - timerStart) / 1000).toFixed(1);
+      updateTimerDisplays(`${lastRecordedSeconds} giây (Đã chốt!)`);
+      return lastRecordedSeconds;
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      timerStart = null;
+      lastRecordedSeconds = "0.0";
+      updateTimerDisplays("0.0 giây");
+    }
+
+    function updateTimerDisplays(text) {
+      const v1El = document.getElementById("v1-timer-text");
+      const v2El = document.getElementById("v2-timer-text");
+      if (v1El) v1El.textContent = text;
+      if (v2El) v2El.textContent = text;
+    }
+
+    /* =====================================================================
+       4. NAVIGATION (VERSION / TABS / STEPS)
+    ===================================================================== */
+    function switchVersion(ver) {
+      state.version = ver;
+      document.getElementById("btn-v1").classList.toggle("active", ver === "v1");
+      document.getElementById("btn-v2").classList.toggle("active", ver === "v2");
+      document.getElementById("v1-section").classList.toggle("hidden", ver !== "v1");
+      document.getElementById("v2-section").classList.toggle("hidden", ver !== "v2");
+      document.getElementById("v2-nav-tabs").style.visibility = ver === "v2" ? "visible" : "hidden";
+      resetTimer();
+    }
+
+    function switchTab(tab) {
+      state.activeTab = tab;
+      ["pick", "group", "stats"].forEach(t => {
+        document.getElementById(`tab-${t}`).classList.toggle("active", t === tab);
+        document.getElementById(`panel-${t}`).classList.toggle("hidden", t !== tab);
+      });
+      if (tab === "group") renderGroupMembers();
+      if (tab === "stats") renderStats();
+    }
+
+    function goHome() {
+      if (state.version !== "v2") switchVersion("v2");
+      switchTab("pick");
+      setStep(1);
+    }
+
+    function setStep(stepNum) {
+      state.step = stepNum;
+      document.getElementById("step-1").classList.toggle("hidden", stepNum !== 1);
+      document.getElementById("step-2").classList.toggle("hidden", stepNum !== 2);
+      document.getElementById("step-3").classList.toggle("hidden", stepNum !== 3);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    /* =====================================================================
+       5. FILTER ENGINE
+    ===================================================================== */
+    function matchPriceBucket(item, bucket) {
+      if (bucket === "all") return true;
+      if (bucket === "u25") return item.priceMin <= 25;
+      if (bucket === "25_40") return item.priceMin <= 40 && item.priceMax >= 25;
+      if (bucket === "40_60") return item.priceMin <= 60 && item.priceMax >= 40;
+      if (bucket === "o60") return item.priceMax >= 60;
+      return true;
+    }
+
+    function getFilteredRestaurants() {
+      return RESTAURANTS.filter(item => {
+        if (state.brokeMode && item.priceMin > 30) return false;
+        if (!state.brokeMode && !matchPriceBucket(item, state.price)) return false;
+        if (state.type !== "all" && item.type !== state.type) return false;
+        if (state.context !== "all" && !item.contexts.includes(state.context)) return false;
+        if (state.excludes.has("no_spicy") && item.spicy) return false;
+        if (state.excludes.has("no_seafood") && item.seafood) return false;
+        if (state.excludes.has("no_beef") && item.beef) return false;
+        if (state.excludes.has("veg_only") && !item.veg) return false;
+        return true;
+      });
+    }
+
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    /* =====================================================================
+       6. STEP 1 INTERACTIONS
+    ===================================================================== */
+    function selectSingle(group, val, btnEl) {
+      startTimerIfNeeded();
+      if (group === "price" && state.brokeMode) {
+        state.brokeMode = false;
+        updateBrokeBannerUI();
+      }
+      state[group] = val;
+      document.querySelectorAll(`#filter-${group} .chip`).forEach(c => c.classList.remove("selected"));
+      btnEl.classList.add("selected");
+      updateStep1Summary();
+    }
+
+    function toggleExclude(val, btnEl) {
+      startTimerIfNeeded();
+      if (state.excludes.has(val)) {
+        state.excludes.delete(val);
+        btnEl.classList.remove("selected");
+      } else {
+        state.excludes.add(val);
+        btnEl.classList.add("selected");
+      }
+      updateStep1Summary();
+    }
+
+    function toggleBrokeMode() {
+      startTimerIfNeeded();
+      state.brokeMode = !state.brokeMode;
+      updateBrokeBannerUI();
+      updateStep1Summary();
+    }
+
+    function updateBrokeBannerUI() {
+      const banner = document.getElementById("broke-banner");
+      const text = document.getElementById("broke-status-text");
+      banner.classList.toggle("active", state.brokeMode);
+      text.textContent = state.brokeMode ? "Đang bật (≤ 30k)" : "Bật ngay";
+    }
+
+    function updateStep1Summary() {
+      const matches = getFilteredRestaurants();
+      const pillsEl = document.getElementById("summary-pills");
+      const priceDisplay = state.brokeMode ? "🔥 Cuối tháng (≤ 30k)" : `💵 Ngân sách: ${LABELS.price[state.price]}`;
+      const excludeList = [...state.excludes].map(k => LABELS.exclude[k]);
+
+      let html = `
+        <div class="summary-pill">${priceDisplay}</div>
+        <div class="summary-pill">🍽️ Kiểu món: ${LABELS.type[state.type]}</div>
+        <div class="summary-pill">✨ Bối cảnh: ${LABELS.context[state.context]}</div>
+      `;
+      if (excludeList.length) {
+        html += `<div class="summary-pill" style="border-color:#fecaca; background:#fef2f2; color:#b91c1c;">🚫 Loại trừ: ${excludeList.join(", ")}</div>`;
+      }
+      pillsEl.innerHTML = html;
+
+      document.getElementById("live-match-count").innerHTML =
+        `🎯 Tìm thấy <span>${matches.length}</span> quán phù hợp quanh Quận 10`;
+    }
+
+    function resetAllFilters() {
+      state.brokeMode = false;
+      state.price = "all";
+      state.type = "all";
+      state.context = "all";
+      state.excludes.clear();
+      updateBrokeBannerUI();
+      ["price", "type", "context"].forEach(g => {
+        document.querySelectorAll(`#filter-${g} .chip`).forEach((c, idx) => {
+          c.classList.toggle("selected", idx === 0);
+        });
+      });
+      document.querySelectorAll("#filter-exclude .chip").forEach(c => c.classList.remove("selected"));
+      updateStep1Summary();
+      if (state.step === 2) goToStep2();
+    }
+
+    /* =====================================================================
+       7. STEP 2: 3x2 GRID RENDERING & RANDOMIZER
+    ===================================================================== */
+    function goToStep2() {
+      startTimerIfNeeded();
+      state.filteredAll = getFilteredRestaurants();
+      state.displayedFive = shuffleArray(state.filteredAll).slice(0, 5);
+      renderStep2();
+      setStep(2);
+    }
+
+    function reshuffleStep2() {
+      if (state.filteredAll.length <= 1) return;
+      state.displayedFive = shuffleArray(state.filteredAll).slice(0, 5);
+      renderStep2();
+      showToast("Đã làm mới 5 gợi ý quán phù hợp!");
+    }
+
+    function renderStep2() {
+      const tags = [];
+      tags.push(`<button class="back-btn" onclick="setStep(1)">← Quay lại bộ lọc</button>`);
+      tags.push(`<span class="active-tag">${state.brokeMode ? "🔥 Cuối tháng ≤ 30k" : LABELS.price[state.price]}</span>`);
+      if (state.type !== "all") tags.push(`<span class="active-tag">${LABELS.type[state.type]}</span>`);
+      if (state.context !== "all") tags.push(`<span class="active-tag">${LABELS.context[state.context]}</span>`);
+      state.excludes.forEach(ex => tags.push(`<span class="active-tag">🚫 ${LABELS.exclude[ex]}</span>`));
+      tags.push(`<span class="active-tag green">🌱 Ăn tại quán • 0 rác nhựa</span>`);
+      document.getElementById("step2-tags").innerHTML = tags.join("");
+
+      const total = state.filteredAll.length;
+      const shown = state.displayedFive.length;
+      document.getElementById("step2-count-label").textContent =
+        total ? `Hiển thị ${shown}/${total} quán + 1 ô Quay Random` : "0 kết quả";
+      document.getElementById("btn-reshuffle").classList.toggle("hidden", total <= 5);
+
+      const contentEl = document.getElementById("step2-content");
+      if (!total) {
+        contentEl.innerHTML = `
+          <div class="card empty-state">
+            <div style="font-size:2.8rem; margin-bottom:10px;">😅</div>
+            <h3 style="margin-bottom:6px;">Hơi khắt khe rồi! Không có quán nào khớp 100% tiêu chí này</h3>
+            <p style="color:var(--muted); font-size:0.9rem; margin-bottom:18px;">
+              Thử nới lỏng mức giá hoặc bỏ bớt 1 bộ lọc bối cảnh/loại trừ xem sao nhé.
+            </p>
+            <button class="cta-btn" style="max-width:240px;" onclick="resetAllFilters()">Đặt lại bộ lọc</button>
+          </div>`;
+        return;
+      }
+
+      const cardsHtml = state.displayedFive.map(item => `
+        <article class="dish-card" id="dish-card-${item.id}">
+          <div class="dish-thumb-wrap">
+            <img
+              class="dish-thumb-img"
+              src="${item.image}"
+              alt="${item.dishName}"
+              loading="lazy"
+              onerror="this.outerHTML='<div class=\\'dish-thumb-fallback\\'>${item.emoji}</div>'"
+            />
+            <span class="thumb-badge ${item.veg ? "veg" : ""}">${item.veg ? "🥬 Chay" : item.groupLabel}</span>
+          </div>
+          <div class="dish-body">
+            <div class="dish-name">${item.dishName}</div>
+            <div class="dish-submeta">${item.shopName}<br><span>💵 ${item.priceText} • ⏰ ${item.hours}</span></div>
+            <ul class="dish-bullets">
+              ${item.bullets.map(b => `<li>${b}</li>`).join("")}
+            </ul>
+            <div class="dish-footer">
+              <span class="walk-chip">🌱 Ăn tại quán</span>
+              <button class="pick-card-btn" onclick="openStep3(${item.id})">Chọn món →</button>
+            </div>
+          </div>
+        </article>
+      `).join("");
+
+      const randomCardHtml = `
+        <div class="random-card">
+          <div class="random-icon">🎲</div>
+          <div class="random-title">VẪN PHÂN VÂN?</div>
+          <p class="random-desc">Để máy tự quay ngẫu nhiên 1 món chân ái trong ${total} quán phù hợp ngay lập tức!</p>
+          <button class="random-btn" id="btn-spin-random" onclick="spinAndPickRandom()">🎲 Quay Random →</button>
+        </div>
+      `;
+
+      contentEl.innerHTML = `<div class="grid-3x2">${cardsHtml}${randomCardHtml}</div>`;
+    }
+
+    function spinAndPickRandom() {
+      if (!state.filteredAll.length) return;
+      const btn = document.getElementById("btn-spin-random");
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = "⏳ Đang quay món...";
+      }
+
+      const visibleIds = state.displayedFive.map(d => d.id);
+      let ticks = 0;
+      const spinInterval = setInterval(() => {
+        visibleIds.forEach(id => {
+          const el = document.getElementById(`dish-card-${id}`);
+          if (el) el.classList.remove("highlight-spin");
+        });
+        const randVisId = visibleIds[ticks % visibleIds.length];
+        const activeEl = document.getElementById(`dish-card-${randVisId}`);
+        if (activeEl) activeEl.classList.add("highlight-spin");
+        ticks++;
+        if (ticks >= 7) {
+          clearInterval(spinInterval);
+          const winner = state.filteredAll[Math.floor(Math.random() * state.filteredAll.length)];
+          showToast(`🎯 Trúng ngay: ${winner.dishName} – ${winner.shopName}!`);
+          openStep3(winner.id);
+        }
+      }, 95);
+    }
+
+    /* =====================================================================
+       8. STEP 3: DETAIL, GOOGLE MAPS EMBED & CONFIRM
+    ===================================================================== */
+    function openStep3(id) {
+      const dish = RESTAURANTS.find(r => r.id === id);
+      if (!dish) return;
+      state.selectedDish = dish;
+      renderStep3();
+      setStep(3);
+    }
+
+    function goBackToStep2() {
+      setStep(2);
+    }
+
+    function renderStep3() {
+      const d = state.selectedDish;
+      const embedQuery = encodeURIComponent(`${d.shopName}, ${d.address}`);
+      const embedUrl = `https://maps.google.com/maps?q=${embedQuery}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
+
+      const nearbySameGroup = RESTAURANTS
+        .filter(r => r.id !== d.id && (d.veg ? r.veg : r.type === d.type))
+        .slice(0, 2);
+
+      const nearbyHtml = nearbySameGroup.length ? `
+        <div class="nearby-box">
+          <div class="nearby-title">💡 Gợi ý thêm cùng nhóm món gần đây</div>
+          ${nearbySameGroup.map(n => `
+            <div class="nearby-item" onclick="openStep3(${n.id})">
+              <div><strong>${n.emoji} ${n.shopName}</strong><br><span style="font-size:0.78rem; color:var(--muted);">${n.dishName}</span></div>
+              <span class="nearby-price">${n.priceText}</span>
+            </div>
+          `).join("")}
+        </div>` : "";
+
+      document.getElementById("step3-content").innerHTML = `
+        <div class="card">
+          <div class="panel-heading">Món ăn & Chỉ đường</div>
+
+          <div class="selected-mini-card">
+            <img
+              class="selected-mini-thumb"
+              src="${d.image}"
+              alt="${d.dishName}"
+              onerror="this.outerHTML='<div class=\\'selected-mini-fallback\\'>${d.emoji}</div>'"
+            />
+            <div>
+              <div class="selected-dish-title">${d.dishName} – ${d.shopName}</div>
+              <div class="selected-dish-meta">
+                💵 ${d.priceText} • <span class="green-txt">🌱 Ăn tại quán • 0 rác nhựa</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-list">
+            <div class="info-row"><span>📍</span><div><strong>Địa chỉ:</strong> ${d.address}</div></div>
+            <div class="info-row"><span>⏰</span><div><strong>Giờ mở cửa:</strong> ${d.hours}</div></div>
+            <div class="info-row"><span>✓</span><div><strong>Điểm nổi bật:</strong> ${d.note}</div></div>
+          </div>
+
+          <div class="action-stack">
+            <a class="btn-full btn-maps" href="${d.mapsUrl}" target="_blank" rel="noopener noreferrer">
+              📍 Mở Google Maps chỉ đường
+            </a>
+            <button class="btn-full btn-confirm" onclick="confirmMeal(${d.id})">
+              ✅ Chốt đi ăn (Lưu chi tiêu & Xanh)
+            </button>
+          </div>
+
+          ${nearbyHtml}
+        </div>
+
+        <div class="card map-card">
+          <div class="panel-heading">Bản đồ đường đi</div>
+          <div class="map-frame-wrap">
+            <iframe
+              title="Bản đồ ${d.shopName}"
+              src="${embedUrl}"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="map-caption">
+            <span>📌 ${d.address}</span>
+            <a href="${d.mapsUrl}" target="_blank" rel="noopener noreferrer">Mở toàn màn hình ↗</a>
+          </div>
+        </div>
+      `;
+    }
+
+    /* =====================================================================
+       9. MODE V1 LOGIC (FOR COMPARISON DEMO)
+    ===================================================================== */
+    function pickV1() {
+      startTimerIfNeeded();
+      const priceVal = document.getElementById("v1-price").value;
+      const typeVal = document.getElementById("v1-type").value;
+      const matches = RESTAURANTS.filter(item =>
+        matchPriceBucket(item, priceVal) &&
+        (typeVal === "all" || item.type === typeVal)
+      );
+      const box = document.getElementById("v1-result");
+      if (!matches.length) {
+        box.innerHTML = "Không tìm thấy món phù hợp với lựa chọn hiện tại.";
+        state.v1Current = null;
+        return;
+      }
+      const picked = matches[Math.floor(Math.random() * matches.length)];
+      state.v1Current = picked;
+      box.innerHTML = `<strong>Gợi ý:</strong> ${picked.dishName} – ${picked.shopName} (${picked.priceText})`;
+    }
+
+    function confirmV1() {
+      if (!state.v1Current) {
+        showToast("Hãy bấm 'Tìm món' trước nhé!");
+        return;
+      }
+      const sec = stopTimer();
+      showToast(`V1 chốt "${state.v1Current.dishName}" mất ${sec} giây!`);
+    }
+
+    /* =====================================================================
+       10. GROUP MODE LOGIC
+    ===================================================================== */
+    function changeMemberCount(delta) {
+      const next = state.groupMembers.length + delta;
+      if (next < 2 || next > 5) return;
+      if (delta > 0) {
+        state.groupMembers.push({
+          name: `Bạn ${next}`,
+          maxPrice: 40,
+          no_spicy: false,
+          no_seafood: false,
+          no_beef: false,
+          veg_only: false
+        });
+      } else {
+        state.groupMembers.pop();
+      }
+      renderGroupMembers();
+    }
+
+    function updateMember(index, key, val) {
+      state.groupMembers[index][key] = val;
+    }
+
+    function renderGroupMembers() {
+      const list = document.getElementById("group-members-list");
+      list.innerHTML = state.groupMembers.map((m, i) => `
+        <div class="member-card">
+          <div class="member-head">
+            <span>👤 ${m.name}</span>
+            <select onchange="updateMember(${i}, 'maxPrice', Number(this.value))">
+              <option value="25" ${m.maxPrice === 25 ? "selected" : ""}>Tối đa 25k</option>
+              <option value="30" ${m.maxPrice === 30 ? "selected" : ""}>Tối đa 30k</option>
+              <option value="35" ${m.maxPrice === 35 ? "selected" : ""}>Tối đa 35k</option>
+              <option value="40" ${m.maxPrice === 40 ? "selected" : ""}>Tối đa 40k</option>
+              <option value="55" ${m.maxPrice === 55 ? "selected" : ""}>Tối đa 55k</option>
+              <option value="100" ${m.maxPrice === 100 ? "selected" : ""}>Thoải mái</option>
+            </select>
+          </div>
+          <div class="member-checks">
+            <label class="mini-check"><input type="checkbox" ${m.no_spicy ? "checked" : ""} onchange="updateMember(${i}, 'no_spicy', this.checked)"> Không cay</label>
+            <label class="mini-check"><input type="checkbox" ${m.no_seafood ? "checked" : ""} onchange="updateMember(${i}, 'no_seafood', this.checked)"> Không hải sản</label>
+            <label class="mini-check"><input type="checkbox" ${m.no_beef ? "checked" : ""} onchange="updateMember(${i}, 'no_beef', this.checked)"> Không bò</label>
+            <label class="mini-check"><input type="checkbox" ${m.veg_only ? "checked" : ""} onchange="updateMember(${i}, 'veg_only', this.checked)"> Ăn chay</label>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function pickGroupMeal() {
+      startTimerIfNeeded();
+      const minBudget = Math.min(...state.groupMembers.map(m => m.maxPrice));
+      const noSpicy = state.groupMembers.some(m => m.no_spicy);
+      const noSeafood = state.groupMembers.some(m => m.no_seafood);
+      const noBeef = state.groupMembers.some(m => m.no_beef);
+      const vegOnly = state.groupMembers.some(m => m.veg_only);
+
+      state.groupMatches = shuffleArray(RESTAURANTS.filter(item => {
+        if (item.priceMin > minBudget) return false;
+        if (noSpicy && item.spicy) return false;
+        if (noSeafood && item.seafood) return false;
+        if (noBeef && item.beef) return false;
+        if (vegOnly && !item.veg) return false;
+        return true;
+      }));
+      state.groupIndex = 0;
+      renderGroupResult(minBudget);
+    }
+
+    function nextGroupMeal(minBudget) {
+      if (!state.groupMatches.length) return;
+      state.groupIndex = (state.groupIndex + 1) % state.groupMatches.length;
+      renderGroupResult(minBudget);
+    }
+
+    function renderGroupResult(minBudget) {
+      const box = document.getElementById("group-result-box");
+      if (!state.groupMatches.length) {
+        box.innerHTML = `
+          <div class="card empty-state">
+            <div style="font-size:2.4rem; margin-bottom:8px;">😅</div>
+            <h3 style="margin-bottom:6px;">Khẩu vị cả nhóm hơi "chọi" nhau rồi!</h3>
+            <p style="font-size:0.88rem; color:var(--muted);">
+              Thử nới mức giá tối đa lên thêm 5k–10k hoặc ghé <strong>Cơm chay Thanh Lương</strong> / <strong>Cơm Tấm 229</strong> để ai thích món nào tự chọn nhé!
+            </p>
+          </div>`;
+        return;
+      }
+
+      const d = state.groupMatches[state.groupIndex];
+      box.innerHTML = `
+        <div class="card">
+          <div style="font-size:0.82rem; font-weight:800; color:var(--green-dark); background:var(--green-soft); padding:6px 12px; border-radius:9px; display:inline-block; margin-bottom:14px;">
+            🤝 Giao điểm ${state.groupMembers.length} người (Ngân sách chung ≤ ${minBudget}k • ${state.groupMatches.length} quán hợp)
+          </div>
+
+          <div class="selected-mini-card">
+            <img
+              class="selected-mini-thumb"
+              src="${d.image}"
+              alt="${d.dishName}"
+              onerror="this.outerHTML='<div class=\\'selected-mini-fallback\\'>${d.emoji}</div>'"
+            />
+            <div>
+              <div class="selected-dish-title">${d.dishName} – ${d.shopName}</div>
+              <div class="selected-dish-meta">💵 ${d.priceText}</div>
+            </div>
+          </div>
+
+          <div class="info-list">
+            <div class="info-row"><span>📍</span><div><strong>Địa chỉ:</strong> ${d.address}</div></div>
+            <div class="info-row"><span>⏰</span><div><strong>Giờ mở cửa:</strong> ${d.hours}</div></div>
+            <div class="info-row"><span>✓</span><div><strong>Điểm nổi bật:</strong> ${d.note}</div></div>
+          </div>
+
+          <div class="action-stack" style="margin-bottom:0;">
+            <a class="btn-full btn-maps" href="${d.mapsUrl}" target="_blank" rel="noopener noreferrer">
+              📍 Mở Google Maps cho cả nhóm
+            </a>
+            <button class="btn-full btn-confirm" onclick="confirmMeal(${d.id})">
+              ✅ Chốt kèo nhóm (Lưu chi tiêu)
+            </button>
+            <button class="back-btn" style="width:100%; padding:10px;" onclick="nextGroupMeal(${minBudget})">
+              🔄 Đổi quán khác (${state.groupIndex + 1}/${state.groupMatches.length})
+            </button>
+          </div>
+        </div>`;
+    }
+
+    /* =====================================================================
+       11. STATS & LOCALSTORAGE
+    ===================================================================== */
+    const STORAGE_KEY = "chotmon_q10_history_v1";
+    const WEEKLY_BUDGET = 500; // 500k VND
+
+    function loadHistory() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      } catch {
+        return [];
+      }
+    }
+
+    function saveHistory(list) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+      } catch {}
+    }
+
+    function confirmMeal(dishId) {
+      const d = RESTAURANTS.find(r => r.id === dishId);
+      if (!d) return;
+      const sec = stopTimer();
+      const history = loadHistory();
+      const now = new Date();
+      const timeStr = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")} - ${now.getDate()}/${now.getMonth() + 1}`;
+      history.unshift({
+        dishName: d.dishName,
+        shopName: d.shopName,
+        emoji: d.emoji,
+        avgPrice: d.avgPrice,
+        time: timeStr
+      });
+      saveHistory(history);
+      showToast(`🎉 Đã chốt "${d.shopName}" trong ${sec}s & cộng +1 điểm Sống Xanh!`);
+    }
+
+    function clearHistory() {
+      saveHistory([]);
+      renderStats();
+      showToast("Đã xóa toàn bộ lịch sử chi tiêu!");
+    }
+
+    function renderStats() {
+      const history = loadHistory();
+      const totalSpent = history.reduce((sum, item) => sum + item.avgPrice, 0);
+      const pct = Math.min(100, Math.round((totalSpent / WEEKLY_BUDGET) * 100));
+
+      document.getElementById("stat-spent").textContent = `${totalSpent.toLocaleString("vi-VN")}.000đ`;
+      document.getElementById("stat-meals").textContent = `${history.length} bữa`;
+      document.getElementById("stat-plastic").textContent = `${history.length} hộp`;
+      document.getElementById("budget-label").textContent = `${totalSpent}.000đ / ${WEEKLY_BUDGET}.000đ (${pct}%)`;
+
+      const fill = document.getElementById("budget-fill");
+      fill.style.width = `${pct}%`;
+      fill.style.background = pct >= 90 ? "#ef4444" : pct >= 70 ? "#f59e0b" : "#16a34a";
+
+      const listEl = document.getElementById("history-list");
+      if (!history.length) {
+        listEl.innerHTML = `<p style="color:var(--muted); font-size:0.9rem;">Chưa có bữa nào được chốt. Hãy chọn món và bấm "✅ Chốt đi ăn" nhé!</p>`;
+        return;
+      }
+
+      listEl.innerHTML = history.map(item => `
+        <div class="history-item">
+          <div>
+            <strong>${item.emoji} ${item.dishName}</strong> – ${item.shopName}
+            <div style="font-size:0.78rem; color:var(--muted);">Chốt lúc ${item.time} • 🌱 -1 hộp xốp/nilon</div>
+          </div>
+          <div style="font-weight:800; color:var(--primary-dark); white-space:nowrap;">~${item.avgPrice}.000đ</div>
+        </div>
+      `).join("");
+    }
+
+    /* =====================================================================
+       12. TOAST NOTIFICATION & INIT
+    ===================================================================== */
+    let toastTimer = null;
+    function showToast(msg) {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove("show"), 2800);
+    }
+
+    // Khởi tạo dữ liệu lần đầu
+    updateStep1Summary();
+    renderGroupMembers();
+  </script>
+</body>
+</html>
