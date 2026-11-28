@@ -69,7 +69,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 14px;
     }
     .brand {
       font-style: italic;
@@ -86,7 +86,7 @@
     .nav-tabs {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       height: 100%;
     }
     .nav-tab {
@@ -94,8 +94,8 @@
       height: 100%;
       border: none;
       background: transparent;
-      padding: 0 16px;
-      font-size: 0.9rem;
+      padding: 0 14px;
+      font-size: 0.89rem;
       font-weight: 500;
       color: var(--muted);
       cursor: pointer;
@@ -109,39 +109,49 @@
     .nav-tab.active::after {
       content: "";
       position: absolute;
-      left: 16px;
-      right: 16px;
+      left: 14px;
+      right: 14px;
       bottom: 0;
       height: 2px;
       border-radius: 2px 2px 0 0;
       background: var(--rose-dark);
     }
 
-    .mode-switch {
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .mode-switch,
+    .lang-switch {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
       background: var(--cream-soft);
-      padding: 4px 5px 4px 12px;
+      padding: 4px;
       border-radius: 999px;
       border: 1px solid var(--border);
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--muted);
       font-weight: 500;
       white-space: nowrap;
     }
-    .mode-btn {
+    .mode-switch { padding-left: 11px; }
+    .mode-btn,
+    .lang-btn {
       border: none;
       background: transparent;
-      padding: 4px 11px;
+      padding: 4px 10px;
       border-radius: 999px;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 600;
       color: var(--muted);
       cursor: pointer;
       transition: 0.2s;
     }
     .mode-btn.active { background: var(--ink); color: var(--ivory); }
+    .lang-btn.active { background: var(--rose-dark); color: var(--ivory); }
 
     /* ================= 3. MAIN CONTAINER & CARD ================= */
     .container {
@@ -851,10 +861,10 @@
       .summary-card { position: static; }
       .grid-3x2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
-    @media (max-width: 640px) {
+    @media (max-width: 720px) {
       .container { padding: 0 16px; }
       .card { padding: 20px; }
-      .navbar-inner { height: auto; padding: 12px 16px; flex-wrap: wrap; }
+      .navbar-inner { height: auto; padding: 12px 16px; flex-wrap: wrap; row-gap: 8px; }
       .nav-tabs {
         order: 3;
         width: 100%;
@@ -864,6 +874,8 @@
         height: 44px;
       }
       .nav-tab { padding: 0 8px; font-size: 0.83rem; }
+      .mode-switch span { display: none; }
+      .mode-switch { padding-left: 4px; }
       .grid-3x2, .stat-grid { grid-template-columns: 1fr; }
       .broke-banner { flex-direction: column; align-items: flex-start; }
     }
@@ -877,15 +889,22 @@
       <div class="brand" onclick="goHome()">Ăn gì đây ta?</div>
 
       <nav class="nav-tabs" id="v2-nav-tabs">
-        <button class="nav-tab active" id="tab-pick" onclick="switchTab('pick')">Find Food</button>
-        <button class="nav-tab" id="tab-group" onclick="switchTab('group')">Group Pick</button>
-        <button class="nav-tab" id="tab-stats" onclick="switchTab('stats')">Budget &amp; Green</button>
+        <button class="nav-tab active" id="tab-pick" onclick="switchTab('pick')" data-i18n="navPick">Find Food</button>
+        <button class="nav-tab" id="tab-group" onclick="switchTab('group')" data-i18n="navGroup">Group Pick</button>
+        <button class="nav-tab" id="tab-stats" onclick="switchTab('stats')" data-i18n="navStats">Budget &amp; Green</button>
       </nav>
 
-      <div class="mode-switch">
-        <span>Mode:</span>
-        <button class="mode-btn" id="btn-v1" onclick="switchVersion('v1')">V1</button>
-        <button class="mode-btn active" id="btn-v2" onclick="switchVersion('v2')">V2</button>
+      <div class="nav-controls">
+        <div class="lang-switch" aria-label="Language">
+          <button class="lang-btn" id="btn-lang-vi" onclick="switchLang('vi')">VI</button>
+          <button class="lang-btn active" id="btn-lang-en" onclick="switchLang('en')">EN</button>
+        </div>
+
+        <div class="mode-switch">
+          <span data-i18n="modeLabel">Mode:</span>
+          <button class="mode-btn" id="btn-v1" onclick="switchVersion('v1')">V1</button>
+          <button class="mode-btn active" id="btn-v2" onclick="switchVersion('v2')">V2</button>
+        </div>
       </div>
     </div>
   </header>
@@ -895,43 +914,39 @@
     <!-- ================= V1 MODE (ROUGH PROTOTYPE) ================= -->
     <section id="v1-section" class="v1-wrapper hidden">
       <div class="v1-timer-strip">
-        <div>Decision time (V1): <strong id="v1-timer-text">0.0s</strong></div>
-        <button class="btn-outline-sm" onclick="resetTimer()">Reset Timer</button>
+        <div><span data-i18n="v1TimerLabel">Decision time (V1):</span> <strong id="v1-timer-text">0.0s</strong></div>
+        <button class="btn-outline-sm" onclick="resetTimer()" data-i18n="v1ResetTimer">Reset Timer</button>
       </div>
 
       <div class="v1-box">
-        <h2>Student Meal Selector (Prototype V1 — Rough Draft)</h2>
-        <div class="v1-note">
-          <strong>V1 Testing Note:</strong> Basic interface with only 2 dropdown filters (Budget &amp; Dish Type), returning a single plain-text result with no dietary exclusions, no food photos, and no map navigation.
-        </div>
+        <h2 data-i18n="v1Title">Student Meal Selector (Prototype V1 — Rough Draft)</h2>
+        <div class="v1-note" id="v1-note"></div>
 
         <div class="v1-field">
-          <label for="v1-price">1. Select budget:</label>
+          <label for="v1-price" data-i18n="v1PriceLabel">1. Select budget:</label>
           <select id="v1-price" onchange="startTimerIfNeeded()">
-            <option value="all">-- All --</option>
-            <option value="u25">Under 25,000 VND</option>
-            <option value="25_40">25,000 – 40,000 VND</option>
-            <option value="40_60">40,000 – 60,000 VND</option>
-            <option value="o60">Over 60,000 VND</option>
+            <option value="all" data-i18n="v1All">-- All --</option>
+            <option value="u25" data-i18n="v1U25">Under 25,000 VND</option>
+            <option value="25_40" data-i18n="v1_25_40">25,000 – 40,000 VND</option>
+            <option value="40_60" data-i18n="v1_40_60">40,000 – 60,000 VND</option>
+            <option value="o60" data-i18n="v1O60">Over 60,000 VND</option>
           </select>
         </div>
 
         <div class="v1-field">
-          <label for="v1-type">2. Select dish type:</label>
+          <label for="v1-type" data-i18n="v1TypeLabel">2. Select dish type:</label>
           <select id="v1-type" onchange="startTimerIfNeeded()">
-            <option value="all">-- All --</option>
-            <option value="soup">Noodle / Soup</option>
-            <option value="dry">Rice / Dry Dishes</option>
-            <option value="snack">Light Bites &amp; Snacks</option>
+            <option value="all" data-i18n="v1All">-- All --</option>
+            <option value="soup" data-i18n="typeSoup">Noodle &amp; Soup</option>
+            <option value="dry" data-i18n="typeDry">Rice &amp; Dry</option>
+            <option value="snack" data-i18n="typeSnack">Light Bites &amp; Snacks</option>
           </select>
         </div>
 
-        <button class="v1-btn" onclick="pickV1()">Find Dish</button>
-        <button class="v1-btn" onclick="confirmV1()">Confirm Dish</button>
+        <button class="v1-btn" onclick="pickV1()" data-i18n="v1FindBtn">Find Dish</button>
+        <button class="v1-btn" onclick="confirmV1()" data-i18n="v1ConfirmBtn">Confirm Dish</button>
 
-        <div class="v1-result" id="v1-result">
-          <em>No result yet. Click "Find Dish" for a random suggestion.</em>
-        </div>
+        <div class="v1-result" id="v1-result"></div>
       </div>
     </section>
 
@@ -945,8 +960,8 @@
         <div id="step-1">
           <div class="broke-banner" id="broke-banner" onclick="toggleBrokeMode()">
             <div>
-              <div class="broke-title">End-of-Month Mode ≤ 30k</div>
-              <div class="broke-sub">Tasty, filling, and student-friendly • One tap to filter affordable local spots near campus</div>
+              <div class="broke-title" data-i18n="brokeTitle">End-of-Month Mode ≤ 30k</div>
+              <div class="broke-sub" data-i18n="brokeSub">Tasty, filling, and student-friendly • One tap to filter affordable local spots near campus</div>
             </div>
             <div class="broke-toggle-wrap">
               <span id="broke-status-text">Turn on</span>
@@ -957,13 +972,13 @@
           <div class="step1-grid">
             <!-- Left Column: Filter Card -->
             <div class="card">
-              <h1 class="section-title">What are you craving today?</h1>
-              <p class="section-sub">Pick a few quick preferences below and let Ăn gì đây ta? curate verified eateries around District 10.</p>
+              <h1 class="section-title" data-i18n="step1Title">What are you craving today?</h1>
+              <p class="section-sub" data-i18n="step1Sub">Pick a few quick preferences below and let Ăn gì đây ta? curate verified eateries around District 10.</p>
 
               <div class="filter-group">
-                <span class="filter-label">1. Today's Budget</span>
+                <span class="filter-label" data-i18n="fPriceLabel">1. Today's Budget</span>
                 <div class="chip-list" id="filter-price">
-                  <button class="chip selected" data-val="all" onclick="selectSingle('price', 'all', this)">All</button>
+                  <button class="chip selected" data-val="all" onclick="selectSingle('price', 'all', this)" data-i18n="optAll">All</button>
                   <button class="chip" data-val="u25" onclick="selectSingle('price', 'u25', this)">≤ 25k</button>
                   <button class="chip" data-val="25_40" onclick="selectSingle('price', '25_40', this)">25k – 40k</button>
                   <button class="chip" data-val="40_60" onclick="selectSingle('price', '40_60', this)">40k – 60k</button>
@@ -972,55 +987,53 @@
               </div>
 
               <div class="filter-group">
-                <span class="filter-label">2. Dish Style</span>
+                <span class="filter-label" data-i18n="fTypeLabel">2. Dish Style</span>
                 <div class="chip-list" id="filter-type">
-                  <button class="chip selected" data-val="all" onclick="selectSingle('type', 'all', this)">All</button>
-                  <button class="chip" data-val="soup" onclick="selectSingle('type', 'soup', this)">Noodle &amp; Soup</button>
-                  <button class="chip" data-val="dry" onclick="selectSingle('type', 'dry', this)">Rice &amp; Dry</button>
-                  <button class="chip" data-val="snack" onclick="selectSingle('type', 'snack', this)">Light Bites &amp; Snacks</button>
+                  <button class="chip selected" data-val="all" onclick="selectSingle('type', 'all', this)" data-i18n="optAll">All</button>
+                  <button class="chip" data-val="soup" onclick="selectSingle('type', 'soup', this)" data-i18n="typeSoup">Noodle &amp; Soup</button>
+                  <button class="chip" data-val="dry" onclick="selectSingle('type', 'dry', this)" data-i18n="typeDry">Rice &amp; Dry</button>
+                  <button class="chip" data-val="snack" onclick="selectSingle('type', 'snack', this)" data-i18n="typeSnack">Light Bites &amp; Snacks</button>
                 </div>
               </div>
 
               <div class="filter-group">
-                <span class="filter-label">3. Context &amp; Mood</span>
+                <span class="filter-label" data-i18n="fContextLabel">3. Context &amp; Mood</span>
                 <div class="chip-list" id="filter-context">
-                  <button class="chip selected" data-val="all" onclick="selectSingle('context', 'all', this)">Casual</button>
-                  <button class="chip" data-val="solo" onclick="selectSingle('context', 'solo', this)">Solo Dining</button>
-                  <button class="chip" data-val="quick" onclick="selectSingle('context', 'quick', this)">In a Rush (&lt;15m)</button>
-                  <button class="chip" data-val="group" onclick="selectSingle('context', 'group', this)">With Friends</button>
-                  <button class="chip" data-val="rain" onclick="selectSingle('context', 'rain', this)">Rainy Day</button>
-                  <button class="chip" data-val="hot" onclick="selectSingle('context', 'hot', this)">Hot Weather</button>
+                  <button class="chip selected" data-val="all" onclick="selectSingle('context', 'all', this)" data-i18n="ctxAll">Casual</button>
+                  <button class="chip" data-val="solo" onclick="selectSingle('context', 'solo', this)" data-i18n="ctxSolo">Solo Dining</button>
+                  <button class="chip" data-val="quick" onclick="selectSingle('context', 'quick', this)" data-i18n="ctxQuick">In a Rush (&lt;15m)</button>
+                  <button class="chip" data-val="group" onclick="selectSingle('context', 'group', this)" data-i18n="ctxGroup">With Friends</button>
+                  <button class="chip" data-val="rain" onclick="selectSingle('context', 'rain', this)" data-i18n="ctxRain">Rainy Day</button>
+                  <button class="chip" data-val="hot" onclick="selectSingle('context', 'hot', this)" data-i18n="ctxHot">Hot Weather</button>
                 </div>
               </div>
 
               <div class="filter-group">
-                <span class="filter-label">4. Quick Exclusions (Multi-select)</span>
+                <span class="filter-label" data-i18n="fExcludeLabel">4. Quick Exclusions (Multi-select)</span>
                 <div class="chip-list" id="filter-exclude">
-                  <button class="chip exclude" data-val="no_spicy" onclick="toggleExclude('no_spicy', this)">No Spicy</button>
-                  <button class="chip exclude" data-val="no_seafood" onclick="toggleExclude('no_seafood', this)">No Seafood</button>
-                  <button class="chip exclude" data-val="no_beef" onclick="toggleExclude('no_beef', this)">No Beef</button>
-                  <button class="chip exclude" data-val="veg_only" onclick="toggleExclude('veg_only', this)">Vegetarian Only</button>
+                  <button class="chip exclude" data-val="no_spicy" onclick="toggleExclude('no_spicy', this)" data-i18n="exSpicy">No Spicy</button>
+                  <button class="chip exclude" data-val="no_seafood" onclick="toggleExclude('no_seafood', this)" data-i18n="exSeafood">No Seafood</button>
+                  <button class="chip exclude" data-val="no_beef" onclick="toggleExclude('no_beef', this)" data-i18n="exBeef">No Beef</button>
+                  <button class="chip exclude" data-val="veg_only" onclick="toggleExclude('veg_only', this)" data-i18n="exVeg">Vegetarian Only</button>
                 </div>
               </div>
             </div>
 
             <!-- Right Column: Sticky Summary -->
             <aside class="card summary-card">
-              <div class="summary-box-title">Filter Summary</div>
-              <div class="summary-row-title">Your current selections</div>
+              <div class="summary-box-title" data-i18n="sumTitle">Filter Summary</div>
+              <div class="summary-row-title" data-i18n="sumSub">Your current selections</div>
               <div class="summary-pills" id="summary-pills"></div>
 
-              <div class="green-pill">
+              <div class="green-pill" data-i18n="greenPill">
                 Walkable spots near campus • Dine-in for zero plastic waste
               </div>
 
-              <div class="match-counter" id="live-match-count">
-                Found <span>17</span> matching eateries around District 10
-              </div>
+              <div class="match-counter" id="live-match-count"></div>
 
-              <button class="cta-btn" onclick="goToStep2()">Find Food Now →</button>
+              <button class="cta-btn" onclick="goToStep2()" data-i18n="findNowBtn">Find Food Now →</button>
 
-              <p class="cta-tip">
+              <p class="cta-tip" data-i18n="ctaTip">
                 Tip: Toggle "End-of-Month Mode ≤ 30k" above whenever you want quick budget-friendly picks.
               </p>
             </aside>
@@ -1033,7 +1046,7 @@
             <div class="sub-bar-left" id="step2-tags"></div>
             <div class="sub-bar-right">
               <span id="step2-count-label"></span>
-              <button class="btn-outline-sm" id="btn-reshuffle" onclick="reshuffleStep2()">Shuffle Picks</button>
+              <button class="btn-outline-sm" id="btn-reshuffle" onclick="reshuffleStep2()" data-i18n="shuffleBtn">Shuffle Picks</button>
             </div>
           </div>
 
@@ -1043,8 +1056,8 @@
         <!-- STEP 3: DETAIL & MAP -->
         <div id="step-3" class="hidden">
           <div class="sub-bar">
-            <button class="back-btn" onclick="goBackToStep2()">← Back to Suggestions</button>
-            <div class="timer-pill">Decision time: <strong id="v2-timer-text">0.0s</strong></div>
+            <button class="back-btn" onclick="goBackToStep2()" data-i18n="backListBtn">← Back to Suggestions</button>
+            <div class="timer-pill"><span data-i18n="timerLabel">Decision time:</span> <strong id="v2-timer-text">0.0s</strong></div>
           </div>
 
           <div class="step3-grid" id="step3-content"></div>
@@ -1057,26 +1070,21 @@
           <div class="card">
             <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:18px;">
               <div>
-                <h2 class="section-title">Group Dining Without the Debate</h2>
-                <p class="section-sub" style="margin-bottom:0;">Automatically matches the lowest budget and respects every member's dietary restrictions.</p>
+                <h2 class="section-title" data-i18n="groupTitle">Group Dining Without the Debate</h2>
+                <p class="section-sub" style="margin-bottom:0;" data-i18n="groupSub">Automatically matches the lowest budget and respects every member's dietary restrictions.</p>
               </div>
               <div style="display:flex; gap:6px; flex-shrink:0;">
-                <button class="btn-outline-sm" onclick="changeMemberCount(-1)">- Remove</button>
-                <button class="btn-outline-sm" onclick="changeMemberCount(1)">+ Add</button>
+                <button class="btn-outline-sm" onclick="changeMemberCount(-1)" data-i18n="btnRemove">- Remove</button>
+                <button class="btn-outline-sm" onclick="changeMemberCount(1)" data-i18n="btnAdd">+ Add</button>
               </div>
             </div>
 
             <div id="group-members-list"></div>
 
-            <button class="cta-btn" style="margin-top:10px;" onclick="pickGroupMeal()">Find Group Match →</button>
+            <button class="cta-btn" style="margin-top:10px;" onclick="pickGroupMeal()" data-i18n="groupFindBtn">Find Group Match →</button>
           </div>
 
-          <div id="group-result-box">
-            <div class="card empty-state">
-              <h3>Ready to settle the group vote</h3>
-              <p style="font-size:0.85rem; color:var(--muted);">Set each friend's max budget and dietary restrictions on the left, then click Find Group Match.</p>
-            </div>
-          </div>
+          <div id="group-result-box"></div>
         </div>
       </div>
 
@@ -1085,41 +1093,41 @@
         <div class="card">
           <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:20px; flex-wrap:wrap;">
             <div>
-              <h2 class="section-title">Weekly Budget &amp; Green Impact</h2>
-              <p class="section-sub" style="margin-bottom:0;">Saved locally on your browser whenever you click "Confirm Meal".</p>
+              <h2 class="section-title" data-i18n="statsTitle">Weekly Budget &amp; Green Impact</h2>
+              <p class="section-sub" style="margin-bottom:0;" data-i18n="statsSub">Saved locally on your browser whenever you click "Confirm Meal".</p>
             </div>
-            <button class="btn-outline-sm" onclick="clearHistory()">Clear History</button>
+            <button class="btn-outline-sm" onclick="clearHistory()" data-i18n="clearHistoryBtn">Clear History</button>
           </div>
 
           <div class="stat-grid">
             <div class="stat-box">
               <div class="stat-num" id="stat-spent">0 VND</div>
-              <div class="stat-lbl">Estimated Spent</div>
+              <div class="stat-lbl" data-i18n="statSpentLbl">Estimated Spent</div>
             </div>
             <div class="stat-box">
               <div class="stat-num" id="stat-meals">0 meals</div>
-              <div class="stat-lbl">Confirmed Meals</div>
+              <div class="stat-lbl" data-i18n="statMealsLbl">Confirmed Meals</div>
             </div>
             <div class="stat-box green">
               <div class="stat-num" id="stat-plastic">0 sets</div>
-              <div class="stat-lbl">Plastic Sets Saved</div>
+              <div class="stat-lbl" data-i18n="statPlasticLbl">Plastic Sets Saved</div>
             </div>
           </div>
 
           <div style="margin-bottom:22px; background:var(--cream-soft); border:1px solid var(--border); border-radius:14px; padding:18px;">
             <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:600; gap:12px;">
-              <span>Weekly Food Budget</span>
+              <span data-i18n="weeklyBudgetTitle">Weekly Food Budget</span>
               <span id="budget-label">0k / 500k VND (0%)</span>
             </div>
             <div class="progress-bar">
               <div class="progress-fill" id="budget-fill" style="width:0%"></div>
             </div>
-            <div style="font-size:0.79rem; color:var(--sage-dark); font-weight:500;">
+            <div style="font-size:0.79rem; color:var(--sage-dark); font-weight:500;" data-i18n="greenFootnote">
               Every dine-in meal avoids roughly 1 foam box plus 1 plastic bag and saves around 15,000 VND in delivery fees.
             </div>
           </div>
 
-          <h3 style="font-size:1.05rem; font-weight:700; margin-bottom:8px;">Confirmed Meal History</h3>
+          <h3 style="font-size:1.05rem; font-weight:700; margin-bottom:8px;" data-i18n="historyTitle">Confirmed Meal History</h3>
           <div id="history-list"></div>
         </div>
       </div>
@@ -1131,403 +1139,654 @@
 
   <script>
     /* =====================================================================
-       1. DATABASE: 17 VERIFIED EATERIES AROUND DISTRICT 10
+       1. I18N DICTIONARY (ENGLISH & VIETNAMESE)
+    ===================================================================== */
+    const I18N = {
+      en: {
+        pageTitle: "Ăn gì đây ta? — District 10 Student Dining Guide",
+        navPick: "Find Food",
+        navGroup: "Group Pick",
+        navStats: "Budget & Green",
+        modeLabel: "Mode:",
+        v1TimerLabel: "Decision time (V1):",
+        v1ResetTimer: "Reset Timer",
+        v1Title: "Student Meal Selector (Prototype V1 — Rough Draft)",
+        v1NoteHtml: "<strong>V1 Testing Note:</strong> Basic interface with only 2 dropdown filters (Budget &amp; Dish Type), returning a single plain-text result with no dietary exclusions, no food photos, and no map navigation.",
+        v1PriceLabel: "1. Select budget:",
+        v1TypeLabel: "2. Select dish type:",
+        v1All: "-- All --",
+        v1U25: "Under 25,000 VND",
+        v1_25_40: "25,000 – 40,000 VND",
+        v1_40_60: "40,000 – 60,000 VND",
+        v1O60: "Over 60,000 VND",
+        v1FindBtn: "Find Dish",
+        v1ConfirmBtn: "Confirm Dish",
+        v1Empty: "No result yet. Click \"Find Dish\" for a random suggestion.",
+        v1NoMatch: "No matching dish found for the current selection.",
+        v1Suggestion: "Suggestion:",
+        v1NeedFind: "Please click 'Find Dish' first.",
+        v1ConfirmedToast: (name, sec) => `V1 confirmed "${name}" in ${sec}s.`,
+
+        brokeTitle: "End-of-Month Mode ≤ 30k",
+        brokeSub: "Tasty, filling, and student-friendly • One tap to filter affordable local spots near campus",
+        brokeOn: "Active (≤ 30k)",
+        brokeOff: "Turn on",
+        brokeShort: "End-of-Month ≤ 30k",
+        brokeSummaryVal: "End-of-Month (≤ 30k)",
+
+        step1Title: "What are you craving today?",
+        step1Sub: "Pick a few quick preferences below and let Ăn gì đây ta? curate verified eateries around District 10.",
+        fPriceLabel: "1. Today's Budget",
+        fTypeLabel: "2. Dish Style",
+        fContextLabel: "3. Context & Mood",
+        fExcludeLabel: "4. Quick Exclusions (Multi-select)",
+        optAll: "All",
+        typeSoup: "Noodle & Soup",
+        typeDry: "Rice & Dry",
+        typeSnack: "Light Bites & Snacks",
+        typeSnackShort: "Light Bites",
+        ctxAll: "Casual",
+        ctxSolo: "Solo Dining",
+        ctxQuick: "In a Rush (<15m)",
+        ctxQuickShort: "In a Rush",
+        ctxGroup: "With Friends",
+        ctxRain: "Rainy Day",
+        ctxHot: "Hot Weather",
+        exSpicy: "No Spicy",
+        exSeafood: "No Seafood",
+        exBeef: "No Beef",
+        exVeg: "Vegetarian Only",
+
+        sumTitle: "Filter Summary",
+        sumSub: "Your current selections",
+        sumBudget: "Budget",
+        sumStyle: "Dish Style",
+        sumContext: "Context",
+        sumExclude: "Exclusions",
+        greenPill: "Walkable spots near campus • Dine-in for zero plastic waste",
+        matchCounter: n => `Found <span>${n}</span> matching ${n === 1 ? "eatery" : "eateries"} around District 10`,
+        findNowBtn: "Find Food Now →",
+        ctaTip: "Tip: Toggle \"End-of-Month Mode ≤ 30k\" above whenever you want quick budget-friendly picks.",
+
+        backFiltersBtn: "← Back to Filters",
+        shuffleBtn: "Shuffle Picks",
+        shuffleToast: "Refreshed 5 matching picks.",
+        dineInGreenTag: "Dine-in • Zero Plastic",
+        step2Count: (shown, total) => total ? `Showing ${shown}/${total} eateries + 1 random picker` : "0 results",
+        emptyTitle: "No eatery matches all selected criteria",
+        emptyDesc: "Try widening your budget range or removing one of the exclusions.",
+        resetFiltersBtn: "Reset Filters",
+        vegBadge: "Vegetarian",
+        dineInChip: "Dine-in",
+        chooseBtn: "Choose →",
+        randomKicker: "Random Picker",
+        randomTitle: "Still undecided?",
+        randomDesc: total => `Let us pick one spot instantly from ${total} matching eateries around District 10.`,
+        randomBtn: "Pick Randomly →",
+        randomSpinning: "Picking...",
+        randomToast: (dish, shop) => `Selected for you: ${dish} — ${shop}`,
+
+        backListBtn: "← Back to Suggestions",
+        timerLabel: "Decision time:",
+        timerUnit: "s",
+        timerConfirmed: "Confirmed",
+        step3Heading: "Dish & Directions",
+        addressLbl: "Address:",
+        hoursLbl: "Opening Hours:",
+        highlightsLbl: "Highlights:",
+        openMapsBtn: "Open in Google Maps ↗",
+        confirmMealBtn: "Confirm Meal (Log Budget & Green)",
+        nearbyTitle: "Similar spots nearby",
+        routeMapHeading: "Route Map",
+        openFullMap: "Open full map ↗",
+
+        groupTitle: "Group Dining Without the Debate",
+        groupSub: "Automatically matches the lowest budget and respects every member's dietary restrictions.",
+        btnRemove: "- Remove",
+        btnAdd: "+ Add",
+        friendName: i => `Friend ${i}`,
+        maxPriceOpt: p => `Max ${p}k`,
+        flexibleOpt: "Flexible",
+        chkNoBeef: "No Beef",
+        chkVeg: "Vegetarian",
+        groupFindBtn: "Find Group Match →",
+        groupReadyTitle: "Ready to settle the group vote",
+        groupReadyDesc: "Set each friend's max budget and dietary restrictions on the left, then click Find Group Match.",
+        groupNoMatchTitle: "Your group's preferences are a bit tight",
+        groupNoMatchDesc: "Try raising the max budget by 5k – 10k, or visit <strong>Cơm chay Thanh Lương</strong> or <strong>Cơm Tấm 229</strong> where everyone can order individually.",
+        groupBadge: (count, budget, spots) => `Matched for ${count} friends • Budget ≤ ${budget}k • ${spots} spots`,
+        groupMapsBtn: "Open Google Maps for Group ↗",
+        groupConfirmBtn: "Confirm Group Meal (Log Budget)",
+        groupNextBtn: (cur, total) => `Try Another Spot (${cur}/${total})`,
+
+        statsTitle: "Weekly Budget & Green Impact",
+        statsSub: "Saved locally on your browser whenever you click \"Confirm Meal\".",
+        clearHistoryBtn: "Clear History",
+        statSpentLbl: "Estimated Spent",
+        statMealsLbl: "Confirmed Meals",
+        statPlasticLbl: "Plastic Sets Saved",
+        weeklyBudgetTitle: "Weekly Food Budget",
+        greenFootnote: "Every dine-in meal avoids roughly 1 foam box plus 1 plastic bag and saves around 15,000 VND in delivery fees.",
+        historyTitle: "Confirmed Meal History",
+        historyEmpty: "No meals confirmed yet. Pick a spot and click \"Confirm Meal\" to start tracking.",
+        historySub: time => `Logged at ${time} • Saved 1 foam box & plastic bag`,
+        fmtSpent: n => `${n.toLocaleString("en-US")},000 VND`,
+        fmtMeals: n => `${n} ${n === 1 ? "meal" : "meals"}`,
+        fmtPlastic: n => `${n} ${n === 1 ? "set" : "sets"}`,
+        fmtBudgetLabel: (spent, budget, pct) => `${spent}k / ${budget}k VND (${pct}%)`,
+        fmtItemPrice: n => `~${n}k VND`,
+        confirmToast: (shop, sec) => `Confirmed "${shop}" in ${sec}s and saved +1 plastic set.`,
+        clearToast: "Cleared all meal history."
+      },
+      vi: {
+        pageTitle: "Ăn gì đây ta? — Gợi ý quán ngon Quận 10",
+        navPick: "Tìm món",
+        navGroup: "Chốt nhóm",
+        navStats: "Chi tiêu & Xanh",
+        modeLabel: "Chế độ:",
+        v1TimerLabel: "Thời gian ra quyết định (V1):",
+        v1ResetTimer: "Bấm giờ lại",
+        v1Title: "Trang chọn đồ ăn sinh viên (Prototype V1 — Bản thô)",
+        v1NoteHtml: "<strong>Ghi chú kiểm thử V1:</strong> Giao diện thô chỉ có 2 ô chọn Mức giá và Loại món, trả về 1 dòng chữ đơn giản, chưa có bộ lọc món kiêng, chưa có hình ảnh và chưa có bản đồ chỉ đường.",
+        v1PriceLabel: "1. Chọn mức giá:",
+        v1TypeLabel: "2. Chọn loại món:",
+        v1All: "-- Tất cả --",
+        v1U25: "Dưới 25.000đ",
+        v1_25_40: "25.000đ – 40.000đ",
+        v1_40_60: "40.000đ – 60.000đ",
+        v1O60: "Trên 60.000đ",
+        v1FindBtn: "Tìm món",
+        v1ConfirmBtn: "Chốt món này",
+        v1Empty: "Chưa có kết quả. Bấm \"Tìm món\" để hệ thống chọn ngẫu nhiên.",
+        v1NoMatch: "Không tìm thấy món phù hợp với lựa chọn hiện tại.",
+        v1Suggestion: "Gợi ý:",
+        v1NeedFind: "Hãy bấm 'Tìm món' trước nhé.",
+        v1ConfirmedToast: (name, sec) => `V1 chốt "${name}" mất ${sec} giây.`,
+
+        brokeTitle: "Chế độ cuối tháng ≤ 30k",
+        brokeSub: "Ngon, no bụng và nhẹ ví • Bật nhanh một chạm để lọc các quán bình dân quanh trường",
+        brokeOn: "Đang bật (≤ 30k)",
+        brokeOff: "Bật ngay",
+        brokeShort: "Cuối tháng ≤ 30k",
+        brokeSummaryVal: "Cuối tháng (≤ 30k)",
+
+        step1Title: "Hôm nay bạn muốn ăn gì?",
+        step1Sub: "Chọn nhanh các tiêu chí bên dưới để Ăn gì đây ta? gợi ý những quán hợp gu quanh Quận 10.",
+        fPriceLabel: "1. Ngân sách hôm nay",
+        fTypeLabel: "2. Kiểu món ăn",
+        fContextLabel: "3. Bối cảnh & Tâm trạng",
+        fExcludeLabel: "4. Loại trừ nhanh (Chọn nhiều)",
+        optAll: "Tất cả",
+        typeSoup: "Món nước",
+        typeDry: "Món khô",
+        typeSnack: "Ăn nhẹ / Ăn vặt",
+        typeSnackShort: "Ăn nhẹ / Vặt",
+        ctxAll: "Bình thường",
+        ctxSolo: "Ăn một mình",
+        ctxQuick: "Đang vội (<15p)",
+        ctxQuickShort: "Đang vội",
+        ctxGroup: "Đi ăn nhóm",
+        ctxRain: "Trời mưa",
+        ctxHot: "Trời nóng",
+        exSpicy: "Không cay",
+        exSeafood: "Không hải sản",
+        exBeef: "Không thịt bò",
+        exVeg: "Chỉ ăn chay",
+
+        sumTitle: "Tóm tắt bộ lọc",
+        sumSub: "Lựa chọn hiện tại của bạn",
+        sumBudget: "Ngân sách",
+        sumStyle: "Kiểu món",
+        sumContext: "Bối cảnh",
+        sumExclude: "Loại trừ",
+        greenPill: "Ưu tiên đi bộ gần trường • Ăn tại quán giảm rác nhựa",
+        matchCounter: n => `Tìm thấy <span>${n}</span> quán phù hợp quanh Quận 10`,
+        findNowBtn: "Tìm món ngay →",
+        ctaTip: "Mẹo nhỏ: Bật \"Chế độ cuối tháng ≤ 30k\" phía trên nếu bạn muốn thu gọn danh sách theo mức giá sinh viên.",
+
+        backFiltersBtn: "← Quay lại bộ lọc",
+        shuffleBtn: "Đổi gợi ý khác",
+        shuffleToast: "Đã làm mới 5 gợi ý quán phù hợp.",
+        dineInGreenTag: "Ăn tại quán • 0 rác nhựa",
+        step2Count: (shown, total) => total ? `Hiển thị ${shown}/${total} quán + 1 ô chọn ngẫu nhiên` : "0 kết quả",
+        emptyTitle: "Chưa có quán nào khớp hoàn toàn tiêu chí này",
+        emptyDesc: "Thử nới lỏng mức ngân sách hoặc bỏ bớt một điều kiện loại trừ xem sao nhé.",
+        resetFiltersBtn: "Đặt lại bộ lọc",
+        vegBadge: "Món chay",
+        dineInChip: "Ăn tại quán",
+        chooseBtn: "Chọn món →",
+        randomKicker: "Gợi ý ngẫu nhiên",
+        randomTitle: "Vẫn phân vân?",
+        randomDesc: total => `Để hệ thống chọn giúp một món phù hợp nhất trong ${total} quán quanh Quận 10.`,
+        randomBtn: "Chọn ngẫu nhiên →",
+        randomSpinning: "Đang chọn món...",
+        randomToast: (dish, shop) => `Gợi ý cho bạn: ${dish} — ${shop}`,
+
+        backListBtn: "← Quay lại danh sách",
+        timerLabel: "Thời gian chọn:",
+        timerUnit: " giây",
+        timerConfirmed: "Đã chốt",
+        step3Heading: "Món ăn & Chỉ đường",
+        addressLbl: "Địa chỉ:",
+        hoursLbl: "Giờ mở cửa:",
+        highlightsLbl: "Điểm nổi bật:",
+        openMapsBtn: "Mở Google Maps chỉ đường ↗",
+        confirmMealBtn: "Chốt đi ăn (Lưu chi tiêu & Xanh)",
+        nearbyTitle: "Gợi ý thêm cùng nhóm món gần đây",
+        routeMapHeading: "Bản đồ đường đi",
+        openFullMap: "Mở toàn màn hình ↗",
+
+        groupTitle: "Chốt món nhóm không cần tranh cãi",
+        groupSub: "Tự động lấy mức ngân sách thấp nhất và loại mọi món có thành viên kiêng ăn.",
+        btnRemove: "- Bớt",
+        btnAdd: "+ Thêm",
+        friendName: i => `Bạn ${i}`,
+        maxPriceOpt: p => `Tối đa ${p}k`,
+        flexibleOpt: "Thoải mái",
+        chkNoBeef: "Không bò",
+        chkVeg: "Ăn chay",
+        groupFindBtn: "Tìm giao điểm cho cả nhóm →",
+        groupReadyTitle: "Sẵn sàng chốt kèo cùng nhóm",
+        groupReadyDesc: "Chọn ngân sách và món kiêng của từng bạn ở bên trái rồi bấm nút tìm giao điểm.",
+        groupNoMatchTitle: "Khẩu vị cả nhóm đang hơi khác nhau",
+        groupNoMatchDesc: "Thử nới mức giá tối đa lên thêm 5k – 10k hoặc ghé <strong>Cơm chay Thanh Lương</strong> hay <strong>Cơm Tấm 229</strong> để mọi người tự chọn món theo ý thích.",
+        groupBadge: (count, budget, spots) => `Giao điểm ${count} người • Ngân sách ≤ ${budget}k • ${spots} quán phù hợp`,
+        groupMapsBtn: "Mở Google Maps cho cả nhóm ↗",
+        groupConfirmBtn: "Chốt kèo nhóm (Lưu chi tiêu)",
+        groupNextBtn: (cur, total) => `Đổi quán khác (${cur}/${total})`,
+
+        statsTitle: "Chi tiêu tuần & Tác động Sống Xanh",
+        statsSub: "Ghi nhận tự động trên trình duyệt mỗi khi bạn bấm \"Chốt đi ăn\".",
+        clearHistoryBtn: "Xóa lịch sử",
+        statSpentLbl: "Ước tính đã chi",
+        statMealsLbl: "Số bữa đã chốt",
+        statPlasticLbl: "Hộp xốp / nilon đã giảm",
+        weeklyBudgetTitle: "Ngân sách ăn uống tuần này",
+        greenFootnote: "Mỗi bữa đi bộ ra quán ăn tại chỗ giúp cắt giảm khoảng 1 hộp xốp cùng 1 túi nilon và tiết kiệm trung bình 15.000đ phí giao hàng.",
+        historyTitle: "Lịch sử các bữa đã chốt",
+        historyEmpty: "Chưa có bữa nào được chốt. Hãy chọn món và bấm \"Chốt đi ăn\" để bắt đầu theo dõi.",
+        historySub: time => `Chốt lúc ${time} • Giảm 1 hộp xốp / túi nilon`,
+        fmtSpent: n => `${n.toLocaleString("vi-VN")}.000đ`,
+        fmtMeals: n => `${n} bữa`,
+        fmtPlastic: n => `${n} hộp`,
+        fmtBudgetLabel: (spent, budget, pct) => `${spent}.000đ / ${budget}.000đ (${pct}%)`,
+        fmtItemPrice: n => `~${n}.000đ`,
+        confirmToast: (shop, sec) => `Đã chốt "${shop}" trong ${sec} giây và cộng +1 điểm Sống Xanh.`,
+        clearToast: "Đã xóa toàn bộ lịch sử chi tiêu."
+      }
+    };
+
+    /* =====================================================================
+       2. DATABASE: 17 VERIFIED EATERIES (BILINGUAL VI / EN)
     ===================================================================== */
     const RESTAURANTS = [
       // --- GROUP 1: RICE & DRY DISHES ---
       {
         id: 1,
-        dishName: "Broken Rice with Grilled Pork, Skin & Egg Meatloaf",
+        dishName: { vi: "Cơm tấm sườn bì chả", en: "Broken Rice with Grilled Pork, Skin & Egg Meatloaf" },
         shopName: "Cơm Tấm 229 Vĩnh Viễn",
         image: "https://scontent.fsgn2-8.fna.fbcdn.net/v/t1.6435-9/79085642_136163291164018_6219957614998978560_n.jpg?stp=dst-jpg_tt6&cstp=mx899x899&ctp=s899x899&_nc_cat=105&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=f727a1&_nc_ohc=E_ppukmiihMQ7kNvwGJfaov&_nc_oc=AdqaMNzwjG_mDMpWH_JCOrA-OkHPHX57MMM25zuyL-f4lBs_PWqKG96kCtYTEQvlsTc&_nc_zt=23&_nc_ht=scontent.fsgn2-8.fna&_nc_gid=LmvWRPlS_cnFoV-T5IwL-g&_nc_ss=7b3a8&oh=00_AQVr7DcpGpWXb38zhMiFwkzi66a4PoqlVLuXip7MNc1boQ&oe=6B309A02",
-        groupLabel: "Rice & Dry",
+        groupLabel: { vi: "Món khô", en: "Rice & Dry" },
         type: "dry",
-        priceText: "20k – 33k VND / plate",
-        priceMin: 20,
-        priceMax: 33,
-        avgPrice: 27,
+        priceText: { vi: "20.000đ – 33.000đ/dĩa", en: "20k – 33k VND / plate" },
+        priceMin: 20, priceMax: 33, avgPrice: 27,
         hours: "7:30 – 21:00",
-        address: "229 Vĩnh Viễn, Vườn Lài Ward, Ho Chi Minh City",
+        address: { vi: "229 Vĩnh Viễn, phường Vườn Lài, TP.HCM", en: "229 Vĩnh Viễn, Vườn Lài Ward, Ho Chi Minh City" },
         mapsUrl: "https://maps.app.goo.gl/gnbaJiwLLcQgkGGG9",
-        note: "Budget-friendly local eatery with fast service, ideal for students.",
-        bullets: ["Student-friendly prices from 20k – 33k", "Fast serving with minimal wait", "Open all day from morning to night"],
+        note: { vi: "Quán bình dân, phục vụ nhanh, rất hợp túi tiền sinh viên.", en: "Budget-friendly local eatery with fast service, ideal for students." },
+        bullets: {
+          vi: ["Giá sinh viên chỉ từ 20k – 33k", "Phục vụ nhanh, không đợi lâu", "Mở suốt ngày từ sáng đến tối"],
+          en: ["Student-friendly prices from 20k – 33k", "Fast serving with minimal wait", "Open all day from morning to night"]
+        },
         contexts: ["solo", "quick", "group", "hot", "rain"],
-        spicy: false,
-        seafood: false,
-        beef: false,
-        veg: false
+        spicy: false, seafood: false, beef: false, veg: false
       },
       {
         id: 2,
-        dishName: "Grilled Pork Chop Broken Rice",
+        dishName: { vi: "Cơm tấm sườn nướng", en: "Grilled Pork Chop Broken Rice" },
         shopName: "Cơm tấm Tài 476 Nguyễn Tri Phương",
         image: "https://scontent.fsgn2-9.fna.fbcdn.net/v/t39.30808-6/744042179_1471149125040622_6404527042817427649_n.jpg?stp=dst-jpg_tt6&cstp=mx1000x1000&ctp=s1000x1000&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_ohc=ebqv9khEcl8Q7kNvwGDuhFv&_nc_oc=AdoTeD9LTXrewu-pyMJXM5mGDGZPrJ6dPtEpXHAfF726_weBlWQex8eq5nAZe_tQ25Q&_nc_zt=23&_nc_ht=scontent.fsgn2-9.fna&_nc_gid=Ko0uppXEK462vgWM4EeW3Q&_nc_ss=7b3a8&oh=00_AQX96MWb7t9EBZHE06jeXFdgfrqEcXpdEeBnd32GFOE5ZQ&oe=6B0EF082",
-        groupLabel: "Rice & Dry",
+        groupLabel: { vi: "Món khô", en: "Rice & Dry" },
         type: "dry",
-        priceText: "35k – 115k VND / plate",
-        priceMin: 35,
-        priceMax: 115,
-        avgPrice: 50,
+        priceText: { vi: "35.000đ – 115.000đ/dĩa", en: "35k – 115k VND / plate" },
+        priceMin: 35, priceMax: 115, avgPrice: 50,
         hours: "10:00 – 14:00 & 17:00 – 1:30",
-        address: "476 Nguyễn Tri Phương, Vườn Lài Ward, Ho Chi Minh City",
+        address: { vi: "476 Nguyễn Tri Phương, phường Vườn Lài, TP.HCM", en: "476 Nguyễn Tri Phương, Vườn Lài Ward, Ho Chi Minh City" },
         mapsUrl: "https://maps.app.goo.gl/PHRr4zNUpZV3uyTy7",
-        note: "Savory charcoal-grilled ribs with hearty portions, open late into the night.",
-        bullets: ["Thick, flavorful grilled pork chop", "Open through lunch and late until 1:30 AM", "Great for recharging after long classes"],
+        note: { vi: "Sườn nướng đậm vị, có cả phần sườn cọng lớn, bán tới khuya.", en: "Savory charcoal-grilled ribs with hearty portions, open late into the night." },
+        bullets: {
+          vi: ["Sườn nướng thơm, miếng dày đậm vị", "Bán xuyên trưa và khuya đến 1:30", "Phù hợp nạp năng lượng sau ca học"],
+          en: ["Thick, flavorful grilled pork chop", "Open through lunch and late until 1:30 AM", "Great for recharging after long classes"]
+        },
         contexts: ["solo", "group", "hot", "rain"],
-        spicy: false,
-        seafood: false,
-        beef: false,
-        veg: false
+        spicy: false, seafood: false, beef: false, veg: false
       },
       {
         id: 3,
-        dishName: "Grilled Pork Vermicelli Bowl (Bún Thịt Nướng)",
+        dishName: { vi: "Bún thịt nướng", en: "Grilled Pork Vermicelli Bowl (Bún Thịt Nướng)" },
         shopName: "Bún Thịt Nướng Quán 339",
         image: "https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/506015440_730350276316695_8585537299619545058_n.jpg?stp=dst-jpg_tt6&cstp=mx1280x960&ctp=s1280x960&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=G-Epj3O45c0Q7kNvwGF0MIk&_nc_oc=AdpxIAcC5v2unEswSe7zqnYLudMIlXPUUijd1lVold4_92YlDA3sLADIxMXmGWpARTY&_nc_zt=23&_nc_ht=scontent.fsgn2-6.fna&_nc_gid=gy2HrHemXsxymUxCwzWjZQ&_nc_ss=7b3a8&oh=00_AQUs5ofaoHLxMGk0CaqWfUnp3pDf9Ic_NtLkqwxv34BkiA&oe=6B0F042E",
-        groupLabel: "Rice & Dry",
+        groupLabel: { vi: "Món khô", en: "Rice & Dry" },
         type: "dry",
-        priceText: "22k – 28k VND / bowl",
-        priceMin: 22,
-        priceMax: 28,
-        avgPrice: 25,
+        priceText: { vi: "22.000đ – 28.000đ/tô", en: "22k – 28k VND / bowl" },
+        priceMin: 22, priceMax: 28, avgPrice: 25,
         hours: "9:00 – 21:00",
-        address: "Alley 339/7-9 Tô Hiến Thành, Hòa Hưng Ward, Ho Chi Minh City",
+        address: { vi: "Hẻm 339/7-9 Tô Hiến Thành, phường Hòa Hưng, TP.HCM", en: "Alley 339/7-9 Tô Hiến Thành, Hòa Hưng Ward, Ho Chi Minh City" },
         mapsUrl: "https://maps.app.goo.gl/NEgUreiUMmw5KxRj7",
-        note: "Very gentle student pricing, also serves broken rice on the side.",
-        bullets: ["Wallet-friendly 22k – 28k per bowl", "Fresh herbs and broken rice available", "Reliable go-to for end-of-month budgets"],
+        note: { vi: "Giá siêu mềm cho sinh viên, có bán kèm cơm tấm.", en: "Very gentle student pricing, also serves broken rice on the side." },
+        bullets: {
+          vi: ["Giá mềm chỉ 22k – 28k/tô", "Nhiều rau tươi mát, có kèm cơm tấm", "Lựa chọn hợp lý cho cuối tháng"],
+          en: ["Wallet-friendly 22k – 28k per bowl", "Fresh herbs and broken rice available", "Reliable go-to for end-of-month budgets"]
+        },
         contexts: ["solo", "quick", "group", "hot"],
-        spicy: false,
-        seafood: false,
-        beef: false,
-        veg: false
+        spicy: false, seafood: false, beef: false, veg: false
       },
       {
         id: 4,
-        dishName: "Vermicelli with Fried Tofu & Shrimp Paste",
+        dishName: { vi: "Bún đậu mắm tôm", en: "Vermicelli with Fried Tofu & Shrimp Paste" },
         shopName: "Bún đậu mắm tôm Tiến Hải",
         image: "https://scontent.fsgn2-8.fna.fbcdn.net/v/t1.6435-9/62061970_2419771118089929_3276447833619693568_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=102&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=536f4a&_nc_ohc=S5Bb5quwkgUQ7kNvwFb_KnK&_nc_oc=AdrS2nuS1beGe0G3WWznOxJoIm26TEx1hF4tlKujmD0iAyt6f00FdHdvgsgBHgWKuvc&_nc_zt=23&_nc_ht=scontent.fsgn2-8.fna&_nc_gid=AoC5UownPLPHa5OdJZn_Tg&_nc_ss=7b3a8&oh=00_AQVUDHGWXYfUKzchmfjWi1-V8mHqRV8jEqSk0YChy1s2aw&oe=6B309DC9",
-        groupLabel: "Rice & Dry",
+        groupLabel: { vi: "Món khô", en: "Rice & Dry" },
         type: "dry",
-        priceText: "20k – 55k VND / tray",
-        priceMin: 20,
-        priceMax: 55,
-        avgPrice: 35,
+        priceText: { vi: "20.000đ – 55.000đ/phần", en: "20k – 55k VND / tray" },
+        priceMin: 20, priceMax: 55, avgPrice: 35,
         hours: "9:30 – 22:00",
-        address: "409 Nguyễn Tri Phương, Diên Hồng Ward, Ho Chi Minh City",
+        address: { vi: "409 Nguyễn Tri Phương, phường Diên Hồng, TP.HCM", en: "409 Nguyễn Tri Phương, Diên Hồng Ward, Ho Chi Minh City" },
         mapsUrl: "https://maps.app.goo.gl/FQREJS2NVAPZ9C3h6",
-        note: "Popular 35k platter with generous toppings, great for sharing with friends.",
-        bullets: ["Generous standard platter around 35k", "Easy to spot on Nguyễn Tri Phương St.", "Great vibe for group hangouts"],
+        note: { vi: "Suất phổ biến khoảng 35.000đ, mẹt đầy đặn, rất hợp đi ăn nhóm.", en: "Popular 35k platter with generous toppings, great for sharing with friends." },
+        bullets: {
+          vi: ["Suất phổ biến khoảng 35k đầy đặn", "Mặt tiền Nguyễn Tri Phương dễ tìm", "Phù hợp tụ tập đi ăn nhóm bạn"],
+          en: ["Generous standard platter around 35k", "Easy to spot on Nguyễn Tri Phương St.", "Great vibe for group hangouts"]
+        },
         contexts: ["group", "solo", "hot"],
-        spicy: false,
-        seafood: true,
-        beef: false,
-        veg: false
+        spicy: false, seafood: true, beef: false, veg: false
       },
       {
         id: 5,
-        dishName: "Hanoi Grilled Pork & Vermicelli (Bún Chả)",
-        shopName: "Ô Bun Cha — District 10",
+        dishName: { vi: "Bún chả Hà Nội", en: "Hanoi Grilled Pork & Vermicelli (Bún Chả)" },
+        shopName: "Ô Bun Cha — Quận 10",
         image: "https://obuncha.vn/storage/product/10/Kh%C3%B4ng%20c%C3%B3%20ti%C3%AAu%20%C4%91%E1%BB%81%20(900%20x%20900%20px)%20(43)_1.png",
-        groupLabel: "Rice & Dry",
+        groupLabel: { vi: "Món khô", en: "Rice & Dry" },
         type: "dry",
-        priceText: "Under 100k VND (~55k)",
-        priceMin: 45,
-        priceMax: 75,
-        avgPrice: 55,
+        priceText: { vi: "Dưới 100.000đ/phần (~55k)", en: "Under 100k VND (~55k)" },
+        priceMin: 45, priceMax: 75, avgPrice: 55,
         hours: "7:15 – 21:30",
-        address: "494 Nguyễn Tri Phương, Vườn Lài Ward, Ho Chi Minh City",
+        address: { vi: "494 Nguyễn Tri Phương, phường Vườn Lài, TP.HCM", en: "494 Nguyễn Tri Phương, Vườn Lài Ward, Ho Chi Minh City" },
         mapsUrl: "https://maps.app.goo.gl/a5C6kvgwLa8M2kHe8",
-        note: "Authentic Hanoi flavor, fragrant grilled patties, clean and tidy seating.",
-        bullets: ["Fragrant Hanoi-style grilled pork", "Clean, comfortable indoor seating", "Open continuously from early morning"],
+        note: { vi: "Chuẩn vị Hà Nội, chả nướng thơm, không gian gọn sạch.", en: "Authentic Hanoi flavor, fragrant grilled patties, clean and tidy seating." },
+        bullets: {
+          vi: ["Chả nướng thơm chuẩn vị Hà Nội", "Không gian sạch sẽ, mát mẻ", "Mở cửa từ sáng sớm đến tối"],
+          en: ["Fragrant Hanoi-style grilled pork", "Clean, comfortable indoor seating", "Open continuously from early morning"]
+        },
         contexts: ["solo", "group", "hot"],
-        spicy: false,
-        seafood: false,
-        beef: false,
-        veg: false
+        spicy: false, seafood: false, beef: false, veg: false
       },
       {
         id: 6,
-        dishName: "Sizzling Skillet Bánh Mì (Bánh Mì Chảo)",
+        dishName: { vi: "Bánh mì chảo", en: "Sizzling Skillet Bánh Mì (Bánh Mì Chảo)" },
         shopName: "Bánh mì chảo A Bếp",
         image: "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.6435-9/106523989_3128644527252988_2787997680167029136_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=33274f&_nc_ohc=G3g_mXl7lmUQ7kNvwHUITUN&_nc_oc=Adoj7j9rwjLtv6t0pCaCIR1prshgtLyAhMagvGFXpqzDPH7y8xBi2XI-n_89xbkTnhM&_nc_zt=23&_nc_ht=scontent.fsgn2-3.fna&_nc_gid=TiEMEMqGaY88D6-D7UGnHQ&_nc_ss=7b3a8&oh=00_AQUM6DtMOymEE_Y2iZ25vbQis2pzNT37VoxNLv-6Nu-CRQ&oe=6B30AB60",
-        groupLabel: "Rice & Dry",
+        groupLabel: { vi: "Món khô", en: "Rice & Dry" },
         type: "dry",
-        priceText: "25k – 60k VND / pan",
-        priceMin: 25,
-        priceMax: 60,
-        avgPrice: 38,
+        priceText: { vi: "25.000đ – 60.000đ/chảo", en: "25k – 60k VND / pan" },
+        priceMin: 25, priceMax: 60, avgPrice: 38,
         hours: "5:00 – 23:30",
-        address: "025 Ngô Gia Tự Apt, Sư Vạn Hạnh, Vườn Lài Ward, Ho Chi Minh City",
+        address: { vi: "025 Chung cư Ngô Gia Tự, Sư Vạn Hạnh, phường Vườn Lài, TP.HCM", en: "025 Ngô Gia Tự Apt, Sư Vạn Hạnh, Vườn Lài Ward, Ho Chi Minh City" },
         mapsUrl: "https://maps.app.goo.gl/SMiyxeFLWxKZueBR6",
-        note: "Most combos range from 28k – 47k, serving from early breakfast until late night.",
-        bullets: ["Piping hot skillets with combos from 28k", "Long opening hours: 5:00 to 23:30", "Fits breakfast, lunch, or late-night study"],
+        note: { vi: "Phổ biến 28.000đ – 47.000đ, mở từ sáng sớm đến khuya.", en: "Most combos range from 28k – 47k, serving from early breakfast until late night." },
+        bullets: {
+          vi: ["Chảo nóng hổi, nhiều combo từ 28k", "Mở dài từ 5:00 sáng tới 23:30", "Hợp ăn sáng, trưa lẫn ăn tối muộn"],
+          en: ["Piping hot skillets with combos from 28k", "Long opening hours: 5:00 to 23:30", "Fits breakfast, lunch, or late-night study"]
+        },
         contexts: ["solo", "group", "quick", "rain"],
-        spicy: false,
-        seafood: false,
-        beef: true,
-        veg: false
+        spicy: false, seafood: false, beef: true, veg: false
       },
 
       // --- GROUP 2: NOODLE & SOUP ---
       {
         id: 7,
-        dishName: "Vietnamese Beef Pho (Phở Bò)",
+        dishName: { vi: "Phở bò", en: "Vietnamese Beef Pho (Phở Bò)" },
         shopName: "Phở Quyên",
         image: "https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/480763004_1560749641366650_3478995742844478886_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1365&ctp=s2048x1365&_nc_cat=109&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_ohc=hPj6WAcpl7EQ7kNvwHG1OEC&_nc_oc=AdrxYCfqioXR_OSsAk0cMn17nEsupue0gMH0epAL9ALFlKrhNgMZVFvYzw-vLibF9F4&_nc_zt=23&_nc_ht=scontent.fsgn2-5.fna&_nc_gid=DP3l7VgFQXX7weXJEkoVnw&_nc_ss=7b3a8&oh=00_AQUnFkwBA9VHzLUNIQpPlCwylENDP2A6l6e7zkdWOWV_BA&oe=6B0F0A78",
-        groupLabel: "Noodle & Soup",
+        groupLabel: { vi: "Món nước", en: "Noodle & Soup" },
         type: "soup",
-        priceText: "35k – 50k VND / bowl",
-        priceMin: 35,
-        priceMax: 50,
-        avgPrice: 42,
+        priceText: { vi: "35.000đ – 50.000đ/tô", en: "35k – 50k VND / bowl" },
+        priceMin: 35, priceMax: 50, avgPrice: 42,
         hours: "5:00 – 12:00 & 15:00 – 21:00",
-        address: "Alley 77 Hồ Thị Kỷ, Vườn Lài Ward, Ho Chi Minh City",
+        address: { vi: "Hẻm 77 Hồ Thị Kỷ, phường Vườn Lài, TP.HCM", en: "Alley 77 Hồ Thị Kỷ, Vườn Lài Ward, Ho Chi Minh City" },
         mapsUrl: "https://maps.app.goo.gl/G6BttVuERXiZmPhb6",
-        note: "Serves both morning and evening shifts with speedy service. Cash only.",
-        bullets: ["Rich broth and quick table service", "Open for morning and evening meals", "Note: Cash payment only"],
+        note: { vi: "Bán xuyên suốt sáng và chiều tối, phục vụ nhanh, chỉ nhận tiền mặt.", en: "Serves both morning and evening shifts with speedy service. Cash only." },
+        bullets: {
+          vi: ["Nước dùng đậm đà, lên món nhanh", "Bán cả sáng lẫn chiều tối", "Lưu ý: Quán chỉ nhận tiền mặt"],
+          en: ["Rich broth and quick table service", "Open for morning and evening meals", "Note: Cash payment only"]
+        },
         contexts: ["solo", "quick", "group", "rain"],
-        spicy: false,
-        seafood: false,
-        beef: true,
-        veg: false
+        spicy: false, seafood: false, beef: true, veg: false
       },
       {
         id: 8,
-        dishName: "Dried Shrimp Crab Noodle Soup (Bún Riêu)",
-        shopName: "Bún riêu tôm khô (Alley 209)",
+        dishName: { vi: "Bún riêu tôm khô", en: "Dried Shrimp Crab Noodle Soup (Bún Riêu)" },
+        shopName: "Bún riêu tôm khô (Hẻm 209)",
         image: "https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/560559927_1241756477979889_17236181790183081_n.jpg?stp=dst-jpg_tt6&cstp=mx960x987&ctp=s960x987&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_ohc=W7_lhUShun8Q7kNvwGrtT5m&_nc_oc=Adrx8P95_p9V2LXplZSjkGgE3EfixlkOJwsJOexeiFVcK1YdLsm0gOsX62dAHwza3pM&_nc_zt=23&_nc_ht=scontent.fsgn2-6.fna&_nc_gid=k_IDHLMg1x26asfZTWvlSw&_nc_ss=7b3a8&oh=00_AQVdC12bXXKWASaLRZQAyPON4iuHjk88CgKMhyL-5JJG4w&oe=6B0F03FD",
-        groupLabel: "Noodle & Soup",
+        groupLabel: { vi: "Món nước", en: "Noodle & Soup" },
         type: "soup",
-        priceText: "30k – 45k VND / bowl",
-        priceMin: 30,
-        priceMax: 45,
-        avgPrice: 35,
+        priceText: { vi: "30.000đ – 45.000đ/tô", en: "30k – 45k VND / bowl" },
+        priceMin: 30, priceMax: 45, avgPrice: 35,
         hours: "8:00 – 15:00",
-        address: "Alley 209 Nguyễn Kim, Diên Hồng Ward, Ho Chi Minh City",
+        address: { vi: "Hẻm 209 Nguyễn Kim, phường Diên Hồng, TP.HCM", en: "Alley 209 Nguyễn Kim, Diên Hồng Ward, Ho Chi Minh City" },
         mapsUrl: "https://maps.app.goo.gl/7wW6oqGVnHjEYsmS9",
-        note: "Beloved alleyway spot with comforting home-cooked flavors for brunch and lunch.",
-        bullets: ["Comforting home-style tomato broth", "Affordable 30k – 45k per bowl", "Ideal for late breakfast or lunch"],
+        note: { vi: "Quán hẻm đông khách quen buổi sáng – trưa, hương vị đậm đà kiểu nhà nấu.", en: "Beloved alleyway spot with comforting home-cooked flavors for brunch and lunch." },
+        bullets: {
+          vi: ["Hương vị đậm đà kiểu nhà nấu", "Giá bình dân 30k – 45k/tô", "Hợp ăn sáng muộn hoặc bữa trưa"],
+          en: ["Comforting home-style tomato broth", "Affordable 30k – 45k per bowl", "Ideal for late breakfast or lunch"]
+        },
         contexts: ["solo", "quick", "rain", "hot"],
-        spicy: false,
-        seafood: true,
-        beef: false,
-        veg: false
+        spicy: false, seafood: true, beef: false, veg: false
       },
       {
         id: 9,
-        dishName: "Quảng-Style Turmeric Noodles (Mì Quảng)",
+        dishName: { vi: "Mì Quảng", en: "Quảng-Style Turmeric Noodles (Mì Quảng)" },
         shopName: "Mì Quảng Hội An",
         image: "https://statics.vinpearl.com/mi-quang-hoi-an-2_1631199897.jpg",
-        groupLabel: "Noodle & Soup",
+        groupLabel: { vi: "Món nước", en: "Noodle & Soup" },
         type: "soup",
-        priceText: "35k – 50k VND / bowl",
-        priceMin: 35,
-        priceMax: 50,
-        avgPrice: 42,
+        priceText: { vi: "35.000đ – 50.000đ/tô", en: "35k – 50k VND / bowl" },
+        priceMin: 35, priceMax: 50, avgPrice: 42,
         hours: "6:30 – 20:00",
-        address: "C1B Bửu Long St, Bắc Hải Quarter, Hòa Hưng Ward, Ho Chi Minh City",
+        address: { vi: "C1B đường Bửu Long, Cư xá Bắc Hải, phường Hòa Hưng, TP.HCM", en: "C1B Bửu Long St, Bắc Hải Quarter, Hòa Hưng Ward, Ho Chi Minh City" },
         mapsUrl: "https://maps.app.goo.gl/LJ9Qn9xGkUF7peWB7",
-        note: "Fresh shrimp and pork with a light, balanced broth. Cash only.",
-        bullets: ["Fresh toppings and light, savory broth", "Airy Bắc Hải neighborhood location", "Note: Cash payment only"],
+        note: { vi: "Tôm thịt tươi, nước dùng nấu thanh vừa miệng, quán chỉ nhận tiền mặt.", en: "Fresh shrimp and pork with a light, balanced broth. Cash only." },
+        bullets: {
+          vi: ["Tôm thịt tươi, nước dùng thanh nhẹ", "Khu Cư xá Bắc Hải thoáng mát", "Lưu ý: Quán chỉ nhận tiền mặt"],
+          en: ["Fresh toppings and light, savory broth", "Airy Bắc Hải neighborhood location", "Note: Cash payment only"]
+        },
         contexts: ["solo", "group", "rain", "hot"],
-        spicy: false,
-        seafood: true,
-        beef: false,
-        veg: false
+        spicy: false, seafood: true, beef: false, veg: false
       },
       {
         id: 10,
-        dishName: "Spicy Hue Beef Noodle Soup (Bún Bò Huế)",
+        dishName: { vi: "Bún bò Huế", en: "Spicy Hue Beef Noodle Soup (Bún Bò Huế)" },
         shopName: "Bún Bò Huế Mỡ Nổi Cô Như",
         image: "https://images2.thanhnien.vn/528068263637045248/2025/6/4/anh-man-hinh-2025-06-04-luc-093010-17490042995071596821662.png",
-        groupLabel: "Noodle & Soup",
+        groupLabel: { vi: "Món nước", en: "Noodle & Soup" },
         type: "soup",
-        priceText: "Around 40k VND / bowl",
-        priceMin: 40,
-        priceMax: 45,
-        avgPrice: 40,
+        priceText: { vi: "Khoảng 40.000đ/tô", en: "Around 40k VND / bowl" },
+        priceMin: 40, priceMax: 45, avgPrice: 40,
         hours: "11:00 – 20:00",
-        address: "274/29 Võ Văn Tần, District 3, Ho Chi Minh City",
+        address: { vi: "274/29 Võ Văn Tần, Quận 3, TP.HCM", en: "274/29 Võ Văn Tần, District 3, Ho Chi Minh City" },
         mapsUrl: "https://maps.app.goo.gl/tjokdYNTbnakx7vW8",
-        note: "Signature rich broth right on the border of District 10. Cash only.",
-        bullets: ["Signature bold Hue-style lemongrass broth", "Hearty bowls at ~40k VND", "Right next to District 10, cozy on rainy days"],
+        note: { vi: "Nước dùng đậm đà đặc trưng mỡ nổi, giáp ranh Quận 10 chạy qua rất gần (chỉ nhận tiền mặt).", en: "Signature rich broth right on the border of District 10. Cash only." },
+        bullets: {
+          vi: ["Đặc sản mỡ nổi béo thơm, nước đậm vị", "Giá đồng đều khoảng 40k/tô đầy đặn", "Giáp ranh Q.10, hợp cho ngày mưa"],
+          en: ["Signature bold Hue-style lemongrass broth", "Hearty bowls at ~40k VND", "Right next to District 10, cozy on rainy days"]
+        },
         contexts: ["solo", "group", "rain"],
-        spicy: true,
-        seafood: false,
-        beef: true,
-        veg: false
+        spicy: true, seafood: false, beef: true, veg: false
       },
 
       // --- GROUP 3: VEGETARIAN ---
       {
         id: 11,
-        dishName: "Vegetarian Rice & Traditional Dishes",
+        dishName: { vi: "Cơm chay & Món chay", en: "Vegetarian Rice & Traditional Dishes" },
         shopName: "Cơm chay Thanh Lương",
         image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/e5/8d/87/un-formidable-restaurant.jpg?w=1400&h=-1&s=1",
-        groupLabel: "Vegetarian",
+        groupLabel: { vi: "Món chay", en: "Vegetarian" },
         type: "dry",
-        priceText: "20k – 40k VND / meal",
-        priceMin: 20,
-        priceMax: 40,
-        avgPrice: 30,
+        priceText: { vi: "20.000đ – 40.000đ/phần", en: "20k – 40k VND / meal" },
+        priceMin: 20, priceMax: 40, avgPrice: 30,
         hours: "6:30 – 21:00",
-        address: "545A 3 Tháng 2 St, Diên Hồng Ward, Ho Chi Minh City",
+        address: { vi: "545A Đường 3 Tháng 2, phường Diên Hồng, TP.HCM", en: "545A 3 Tháng 2 St, Diên Hồng Ward, Ho Chi Minh City" },
         mapsUrl: "https://maps.app.goo.gl/X65aHP9GWsC2AYGy9",
-        note: "Over 1,100 reviews with a diverse menu from rice sets to pancakes and hotpot (cash only).",
-        bullets: ["Over 1,100 trusted local reviews", "Wide menu: rice, pancakes, and hotpot", "Starts from 20k (cash only)"],
+        note: { vi: "Hơn 1.100 đánh giá, thực đơn phong phú từ cơm phần, bánh xèo chay đến lẩu chay (chỉ nhận tiền mặt).", en: "Over 1,100 reviews with a diverse menu from rice sets to pancakes and hotpot (cash only)." },
+        bullets: {
+          vi: ["Hơn 1.100 đánh giá uy tín khu Q.10", "Đa dạng cơm phần, bánh xèo, lẩu chay", "Giá mềm từ 20k (chỉ nhận tiền mặt)"],
+          en: ["Over 1,100 trusted local reviews", "Wide menu: rice, pancakes, and hotpot", "Starts from 20k (cash only)"]
+        },
         contexts: ["solo", "quick", "group", "hot", "rain"],
-        spicy: false,
-        seafood: false,
-        beef: false,
-        veg: true
+        spicy: false, seafood: false, beef: false, veg: true
       },
       {
         id: 12,
-        dishName: "Vegetarian Rice & Quảng Noodles",
+        dishName: { vi: "Cơm chay & Mì Quảng chay", en: "Vegetarian Rice & Quảng Noodles" },
         shopName: "Chay Bình An",
         image: "https://down-vn.img.susercontent.com/vn-11134513-7r98o-lstqh5ymw24k75@resize_ss576x330",
-        groupLabel: "Vegetarian",
+        groupLabel: { vi: "Món chay", en: "Vegetarian" },
         type: "dry",
-        priceText: "~35k VND (Buffet 49k)",
-        priceMin: 35,
-        priceMax: 49,
-        avgPrice: 35,
+        priceText: { vi: "~35.000đ/phần (Buffet 49k)", en: "~35k VND (Buffet 49k)" },
+        priceMin: 35, priceMax: 49, avgPrice: 35,
         hours: "8:00 – 21:00",
-        address: "49 Ngô Quyền, Diên Hồng Ward, Ho Chi Minh City",
+        address: { vi: "49 Ngô Quyền, phường Diên Hồng, TP.HCM", en: "49 Ngô Quyền, Diên Hồng Ward, Ho Chi Minh City" },
         mapsUrl: "https://maps.app.goo.gl/gdVPeAgPdCHNoX3s8",
-        note: "Air-conditioned dining room, clean kitchen, complimentary iced tea (cash only).",
-        bullets: ["Cool A/C space with free iced tea", "35k meal sets and 49k buffet option", "Clean kitchen (cash only)"],
+        note: { vi: "Có máy lạnh mát mẻ, bếp sạch, miễn phí trà đá và có thêm mì Quảng chay (chỉ nhận tiền mặt).", en: "Air-conditioned dining room, clean kitchen, complimentary iced tea (cash only)." },
+        bullets: {
+          vi: ["Phòng máy lạnh mát, miễn phí trà đá", "Có cơm phần 35k và buffet 49k", "Bếp sạch sẽ (chỉ nhận tiền mặt)"],
+          en: ["Cool A/C space with free iced tea", "35k meal sets and 49k buffet option", "Clean kitchen (cash only)"]
+        },
         contexts: ["solo", "group", "hot"],
-        spicy: false,
-        seafood: false,
-        beef: false,
-        veg: true
+        spicy: false, seafood: false, beef: false, veg: true
       },
       {
         id: 13,
-        dishName: "Vegetarian Broken Rice & Crispy Pancakes",
+        dishName: { vi: "Cơm tấm chay & Bánh xèo chay", en: "Vegetarian Broken Rice & Crispy Pancakes" },
         shopName: "Quán chay Thôi Kệ",
         image: "https://assets.grab.com/wp-content/uploads/sites/11/2020/10/12181933/10.jpg",
-        groupLabel: "Vegetarian",
+        groupLabel: { vi: "Món chay", en: "Vegetarian" },
         type: "dry",
-        priceText: "25k – 40k VND / meal",
-        priceMin: 25,
-        priceMax: 40,
-        avgPrice: 30,
+        priceText: { vi: "25.000đ – 40.000đ/phần", en: "25k – 40k VND / meal" },
+        priceMin: 25, priceMax: 40, avgPrice: 30,
         hours: "6:30 – 19:30",
-        address: "727 Lê Hồng Phong, Hòa Hưng Ward, Ho Chi Minh City",
+        address: { vi: "727 Lê Hồng Phong, phường Hòa Hưng, TP.HCM", en: "727 Lê Hồng Phong, Hòa Hưng Ward, Ho Chi Minh City" },
         mapsUrl: "https://maps.app.goo.gl/XRnPk2UXWStVV1Uh7",
-        note: "Student favorite in District 10, famous for vegan broken rice and pumpkin milk.",
-        bullets: ["Popular campus favorite around District 10", "Known for vegan broken rice & pumpkin milk", "Fair prices at 25k – 40k"],
+        note: { vi: "Rất đông sinh viên (đặc biệt mùng 1 và rằm), nổi bật với cơm tấm chay, bánh xèo chay và sữa bí đỏ.", en: "Student favorite in District 10, famous for vegan broken rice and pumpkin milk." },
+        bullets: {
+          vi: ["Quán quen đông sinh viên khu Q.10", "Nổi tiếng cơm tấm chay và sữa bí đỏ", "Giá bình dân 25k – 40k/phần"],
+          en: ["Popular campus favorite around District 10", "Known for vegan broken rice & pumpkin milk", "Fair prices at 25k – 40k"]
+        },
         contexts: ["solo", "quick", "group", "hot", "rain"],
-        spicy: false,
-        seafood: false,
-        beef: false,
-        veg: true
+        spicy: false, seafood: false, beef: false, veg: true
       },
 
       // --- GROUP 4: LIGHT BITES & SNACKS ---
       {
         id: 14,
-        dishName: "Crispy Baguette Sticks (Bánh Mì Que)",
+        dishName: { vi: "Bánh mì que", en: "Crispy Baguette Sticks (Bánh Mì Que)" },
         shopName: "Bánh mì que Chip",
         image: "https://down-bs-vn.img.susercontent.com/vn-11134513-7r98o-lsu82dgghdxg7b@resize_ss640x400!@crop_w640_h400_cT",
-        groupLabel: "Light Bites",
+        groupLabel: { vi: "Ăn nhẹ / Vặt", en: "Light Bites" },
         type: "snack",
-        priceText: "Under 25k VND",
-        priceMin: 15,
-        priceMax: 25,
-        avgPrice: 20,
+        priceText: { vi: "Dưới 25.000đ", en: "Under 25k VND" },
+        priceMin: 15, priceMax: 25, avgPrice: 20,
         hours: "7:00 – 21:00",
-        address: "351/5 Lý Thái Tổ, Vườn Lài Ward, Ho Chi Minh City",
+        address: { vi: "351/5 Lý Thái Tổ, phường Vườn Lài, TP.HCM", en: "351/5 Lý Thái Tổ, Vườn Lài Ward, Ho Chi Minh City" },
         mapsUrl: "https://maps.app.goo.gl/fn5Fwei94S9nEYNV8",
-        note: "Rated 4.9/5, compact and quick to grab between lectures.",
-        bullets: ["Highly rated at 4.9/5 on Maps", "Super affordable under 25k", "Quick bite between back-to-back classes"],
+        note: { vi: "Đánh giá 4.9/5, nhỏ gọn dễ ăn lót dạ giữa các tiết học.", en: "Rated 4.9/5, compact and quick to grab between lectures." },
+        bullets: {
+          vi: ["Đánh giá cao 4.9/5 trên bản đồ", "Giá mềm dưới 25k", "Gọn nhẹ, ăn nhanh giữa các ca học"],
+          en: ["Highly rated at 4.9/5 on Maps", "Super affordable under 25k", "Quick bite between back-to-back classes"]
+        },
         contexts: ["solo", "quick", "hot", "rain"],
-        spicy: false,
-        seafood: false,
-        beef: false,
-        veg: false
+        spicy: false, seafood: false, beef: false, veg: false
       },
       {
         id: 15,
-        dishName: "Rice Paper Salad & Rolls (Bánh Tráng Trộn)",
+        dishName: { vi: "Bánh tráng trộn / cuốn", en: "Rice Paper Salad & Rolls (Bánh Tráng Trộn)" },
         shopName: "Bánh tráng phương kiều",
         image: "https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/615695726_3220135454859632_2695679295285642508_n.jpg?stp=dst-jpg_tt6&cstp=mx1206x1608&ctp=s1206x1608&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_ohc=jrcl2KUBBWYQ7kNvwFBk-C4&_nc_oc=AdrVLu8vjIRz6XQas-_RjlHBHGnusmJIIiGvaYhmh5xiZE7i1l6lNJ18fgjg5CEtdaQ&_nc_zt=23&_nc_ht=scontent.fsgn2-5.fna&_nc_gid=yWBNybUglm93mZ_6pHwMqA&_nc_ss=7b3a8&oh=00_AQWHfMHcHch0fYh2gib-I60aEXwn42HZhm4TJq5_c59vSg&oe=6B0F1358",
-        groupLabel: "Light Bites",
+        groupLabel: { vi: "Ăn nhẹ / Vặt", en: "Light Bites" },
         type: "snack",
-        priceText: "20k – 30k VND / serving",
-        priceMin: 20,
-        priceMax: 30,
-        avgPrice: 25,
+        priceText: { vi: "20.000đ – 30.000đ/phần", en: "20k – 30k VND / serving" },
+        priceMin: 20, priceMax: 30, avgPrice: 25,
         hours: "13:00 – 20:00",
-        address: "193/12 Nguyễn Tiểu La, Diên Hồng Ward, Ho Chi Minh City",
+        address: { vi: "193/12 Nguyễn Tiểu La, phường Diên Hồng, TP.HCM", en: "193/12 Nguyễn Tiểu La, Diên Hồng Ward, Ho Chi Minh City" },
         mapsUrl: "https://maps.app.goo.gl/ZfAKSyDv1SBtcpqQ6",
-        note: "Well-loved afternoon street snack spot right along Nguyễn Tiểu La.",
-        bullets: ["Classic afternoon student street snack", "Reasonable 20k – 30k per serving", "Convenient stop near Nguyễn Tiểu La"],
+        note: { vi: "Quán ăn vặt buổi chiều được khen ngon ngay khu vực Nguyễn Tiểu La.", en: "Well-loved afternoon street snack spot right along Nguyễn Tiểu La." },
+        bullets: {
+          vi: ["Món ăn vặt quen thuộc buổi chiều", "Giá bình dân 20k – 30k/phần", "Gần khu Nguyễn Tiểu La dễ ghé"],
+          en: ["Classic afternoon student street snack", "Reasonable 20k – 30k per serving", "Convenient stop near Nguyễn Tiểu La"]
+        },
         contexts: ["solo", "quick", "group", "hot"],
-        spicy: true,
-        seafood: true,
-        beef: false,
-        veg: false
+        spicy: true, seafood: true, beef: false, veg: false
       },
       {
         id: 16,
-        dishName: "Steamed Dim Sum & Shumai (Há Cảo)",
+        dishName: { vi: "Há cảo & xíu mại", en: "Steamed Dim Sum & Shumai (Há Cảo)" },
         shopName: "Quán Há cảo Ngọc Lan",
         image: "https://assets.grab.com/wp-content/uploads/sites/11/2019/10/01144312/foodcollectionsmy_65010566_440544860074322_1869004403072184206_n.jpg",
-        groupLabel: "Light Bites",
+        groupLabel: { vi: "Ăn nhẹ / Vặt", en: "Light Bites" },
         type: "snack",
-        priceText: "20k – 50k VND / plate",
-        priceMin: 20,
-        priceMax: 50,
-        avgPrice: 30,
+        priceText: { vi: "20.000đ – 50.000đ/phần", en: "20k – 50k VND / plate" },
+        priceMin: 20, priceMax: 50, avgPrice: 30,
         hours: "9:00 – 22:00",
-        address: "500 Vĩnh Viễn, Diên Hồng Ward, Ho Chi Minh City",
+        address: { vi: "500 Vĩnh Viễn, phường Diên Hồng, TP.HCM", en: "500 Vĩnh Viễn, Diên Hồng Ward, Ho Chi Minh City" },
         mapsUrl: "https://maps.app.goo.gl/hatyC6BGCRfYfn7u8",
-        note: "Freshly steamed dumplings, great for an afternoon snack or light dinner.",
-        bullets: ["Hot, freshly steamed dim sum & shumai", "Flexible portion sizes from 20k to 50k", "Open until 22:00 for evening cravings"],
+        note: { vi: "Há cảo xíu mại nóng hổi, ăn xế chiều hoặc ăn tối nhẹ đều hợp.", en: "Freshly steamed dumplings, great for an afternoon snack or light dinner." },
+        bullets: {
+          vi: ["Há cảo xíu mại hấp nóng hổi", "Linh hoạt phần nhỏ từ 20k đến 50k", "Mở tới 22:00 tiện ăn xế và tối nhẹ"],
+          en: ["Hot, freshly steamed dim sum & shumai", "Flexible portion sizes from 20k to 50k", "Open until 22:00 for evening cravings"]
+        },
         contexts: ["solo", "quick", "group", "rain"],
-        spicy: false,
-        seafood: true,
-        beef: false,
-        veg: false
+        spicy: false, seafood: true, beef: false, veg: false
       },
       {
         id: 17,
-        dishName: "Traditional Sweet Soup Platter (Chè Mâm)",
+        dishName: { vi: "Chè mâm truyền thống", en: "Traditional Sweet Soup Platter (Chè Mâm)" },
         shopName: "Chè mâm KHÁNH VY",
         image: "https://down-vn.img.susercontent.com/vn-11134513-7r98o-lstpz19k16s920@resize_ss576x330",
-        groupLabel: "Light Bites",
+        groupLabel: { vi: "Ăn nhẹ / Vặt", en: "Light Bites" },
         type: "snack",
-        priceText: "~7k / bowl (16-bowl tray ~158k)",
-        priceMin: 7,
-        priceMax: 40,
-        avgPrice: 25,
+        priceText: { vi: "~7.000đ/chén (Mâm 16 chén ~158k)", en: "~7k / bowl (16-bowl tray ~158k)" },
+        priceMin: 7, priceMax: 40, avgPrice: 25,
         hours: "15:00 – 22:30",
-        address: "032 Block H, Ngô Gia Tự Apt, Vườn Lài Ward, Ho Chi Minh City",
+        address: { vi: "032 Lô H, Chung cư Ngô Gia Tự, phường Vườn Lài, TP.HCM", en: "032 Block H, Ngô Gia Tự Apt, Vườn Lài Ward, Ho Chi Minh City" },
         mapsUrl: "https://maps.app.goo.gl/BvYHTEb4qc28wTji8",
-        note: "Groups of 4–5 can share the iconic 16-bowl sweet soup tray for a very low split.",
-        bullets: ["Single bowls ~7k; 16-bowl tray ~158k", "Very affordable when split among 4–5 friends", "Refreshing afternoon & evening dessert"],
+        note: { vi: "Đi nhóm 4–5 người gọi nguyên mâm 16 chén chia tiền rất rẻ.", en: "Groups of 4–5 can share the iconic 16-bowl sweet soup tray for a very low split." },
+        bullets: {
+          vi: ["Chè lẻ khoảng 7k/chén, mâm 16 chén 158k", "Đi nhóm 4–5 người chia rất tiết kiệm", "Mát lạnh, giải nhiệt buổi chiều tối"],
+          en: ["Single bowls ~7k; 16-bowl tray ~158k", "Very affordable when split among 4–5 friends", "Refreshing afternoon & evening dessert"]
+        },
         contexts: ["group", "solo", "hot"],
-        spicy: false,
-        seafood: false,
-        beef: false,
-        veg: true
+        spicy: false, seafood: false, beef: false, veg: true
       }
     ];
 
     /* =====================================================================
-       2. APP STATE & LABELS
+       3. APP STATE & LANGUAGE HELPERS
     ===================================================================== */
-    const LABELS = {
-      price: { all: "All", u25: "≤ 25k", "25_40": "25k – 40k", "40_60": "40k – 60k", o60: "> 60k" },
-      type: { all: "All", soup: "Noodle & Soup", dry: "Rice & Dry", snack: "Light Bites" },
-      context: { all: "Casual", solo: "Solo Dining", quick: "In a Rush", group: "With Friends", rain: "Rainy Day", hot: "Hot Weather" },
-      exclude: { no_spicy: "No Spicy", no_seafood: "No Seafood", no_beef: "No Beef", veg_only: "Vegetarian Only" }
-    };
+    const LANG_STORAGE_KEY = "angidayta_lang_v1";
+    const STORAGE_KEY = "chotmon_q10_history_v1";
+    const WEEKLY_BUDGET = 500;
+
+    function loadSavedLang() {
+      try {
+        const saved = localStorage.getItem(LANG_STORAGE_KEY);
+        return saved === "vi" || saved === "en" ? saved : "en";
+      } catch {
+        return "en";
+      }
+    }
 
     const state = {
+      lang: loadSavedLang(),
       version: "v2",
       activeTab: "pick",
       step: 1,
@@ -1540,14 +1799,38 @@
       displayedFive: [],
       selectedDish: null,
       v1Current: null,
+      v1HasSearched: false,
       groupMembers: [
-        { name: "Friend 1", maxPrice: 40, no_spicy: false, no_seafood: false, no_beef: false, veg_only: false },
-        { name: "Friend 2", maxPrice: 35, no_spicy: true, no_seafood: false, no_beef: false, veg_only: false },
-        { name: "Friend 3", maxPrice: 45, no_spicy: false, no_seafood: false, no_beef: false, veg_only: false }
+        { maxPrice: 40, no_spicy: false, no_seafood: false, no_beef: false, veg_only: false },
+        { maxPrice: 35, no_spicy: true, no_seafood: false, no_beef: false, veg_only: false },
+        { maxPrice: 45, no_spicy: false, no_seafood: false, no_beef: false, veg_only: false }
       ],
       groupMatches: [],
-      groupIndex: 0
+      groupIndex: 0,
+      groupSearchedBudget: null
     };
+
+    function t(key) {
+      return I18N[state.lang][key];
+    }
+
+    function loc(obj) {
+      return typeof obj === "object" && obj !== null ? obj[state.lang] : obj;
+    }
+
+    function getLabel(group, val) {
+      const map = {
+        price: { all: t("optAll"), u25: "≤ 25k", "25_40": "25k – 40k", "40_60": "40k – 60k", o60: "> 60k" },
+        type: { all: t("optAll"), soup: t("typeSoup"), dry: t("typeDry"), snack: t("typeSnackShort") },
+        context: { all: t("ctxAll"), solo: t("ctxSolo"), quick: t("ctxQuickShort"), group: t("ctxGroup"), rain: t("ctxRain"), hot: t("ctxHot") },
+        exclude: { no_spicy: t("exSpicy"), no_seafood: t("exSeafood"), no_beef: t("exBeef"), veg_only: t("exVeg") }
+      };
+      return map[group][val];
+    }
+
+    function escapeAttr(str) {
+      return String(str).replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/"/g, "&quot;");
+    }
 
     function handleImgFallback(imgEl, label, fallbackClass) {
       const div = document.createElement("div");
@@ -1557,20 +1840,75 @@
     }
 
     /* =====================================================================
-       3. LIVE DECISION TIMER
+       4. LANGUAGE SWITCHER
+    ===================================================================== */
+    function switchLang(lang) {
+      if (lang !== "vi" && lang !== "en") return;
+      state.lang = lang;
+      try { localStorage.setItem(LANG_STORAGE_KEY, lang); } catch {}
+      applyLanguage();
+    }
+
+    function applyLanguage() {
+      document.documentElement.lang = state.lang;
+      document.title = t("pageTitle");
+
+      document.getElementById("btn-lang-vi").classList.toggle("active", state.lang === "vi");
+      document.getElementById("btn-lang-en").classList.toggle("active", state.lang === "en");
+
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (I18N[state.lang][key] !== undefined) {
+          el.textContent = I18N[state.lang][key];
+        }
+      });
+
+      document.getElementById("v1-note").innerHTML = t("v1NoteHtml");
+
+      // Re-sync dynamic views
+      updateBrokeBannerUI();
+      updateStep1Summary();
+      renderTimerText();
+      renderV1ResultBox();
+
+      if (state.step === 2) renderStep2();
+      if (state.step === 3 && state.selectedDish) renderStep3();
+
+      renderGroupMembers();
+      if (state.groupSearchedBudget !== null) {
+        renderGroupResult(state.groupSearchedBudget);
+      } else {
+        renderGroupReadyState();
+      }
+      renderStats();
+    }
+
+    /* =====================================================================
+       5. LIVE DECISION TIMER
     ===================================================================== */
     let timerInterval = null;
     let timerStart = null;
     let timerRunning = false;
+    let timerConfirmed = false;
     let lastRecordedSeconds = "0.0";
+
+    function renderTimerText() {
+      const base = `${lastRecordedSeconds}${t("timerUnit")}`;
+      const text = timerConfirmed ? `${base} (${t("timerConfirmed")})` : base;
+      const v1El = document.getElementById("v1-timer-text");
+      const v2El = document.getElementById("v2-timer-text");
+      if (v1El) v1El.textContent = text;
+      if (v2El) v2El.textContent = text;
+    }
 
     function startTimerIfNeeded() {
       if (timerRunning) return;
       timerStart = Date.now();
       timerRunning = true;
+      timerConfirmed = false;
       timerInterval = setInterval(() => {
         lastRecordedSeconds = ((Date.now() - timerStart) / 1000).toFixed(1);
-        updateTimerDisplays(`${lastRecordedSeconds}s`);
+        renderTimerText();
       }, 100);
     }
 
@@ -1578,28 +1916,23 @@
       if (!timerRunning) return lastRecordedSeconds;
       clearInterval(timerInterval);
       timerRunning = false;
+      timerConfirmed = true;
       lastRecordedSeconds = ((Date.now() - timerStart) / 1000).toFixed(1);
-      updateTimerDisplays(`${lastRecordedSeconds}s (Confirmed)`);
+      renderTimerText();
       return lastRecordedSeconds;
     }
 
     function resetTimer() {
       clearInterval(timerInterval);
       timerRunning = false;
+      timerConfirmed = false;
       timerStart = null;
       lastRecordedSeconds = "0.0";
-      updateTimerDisplays("0.0s");
-    }
-
-    function updateTimerDisplays(text) {
-      const v1El = document.getElementById("v1-timer-text");
-      const v2El = document.getElementById("v2-timer-text");
-      if (v1El) v1El.textContent = text;
-      if (v2El) v2El.textContent = text;
+      renderTimerText();
     }
 
     /* =====================================================================
-       4. NAVIGATION (VERSION / TABS / STEPS)
+       6. NAVIGATION (VERSION / TABS / STEPS)
     ===================================================================== */
     function switchVersion(ver) {
       state.version = ver;
@@ -1613,11 +1946,14 @@
 
     function switchTab(tab) {
       state.activeTab = tab;
-      ["pick", "group", "stats"].forEach(t => {
-        document.getElementById(`tab-${t}`).classList.toggle("active", t === tab);
-        document.getElementById(`panel-${t}`).classList.toggle("hidden", t !== tab);
+      ["pick", "group", "stats"].forEach(tName => {
+        document.getElementById(`tab-${tName}`).classList.toggle("active", tName === tab);
+        document.getElementById(`panel-${tName}`).classList.toggle("hidden", tName !== tab);
       });
-      if (tab === "group") renderGroupMembers();
+      if (tab === "group") {
+        renderGroupMembers();
+        if (state.groupSearchedBudget === null) renderGroupReadyState();
+      }
       if (tab === "stats") renderStats();
     }
 
@@ -1636,7 +1972,7 @@
     }
 
     /* =====================================================================
-       5. FILTER ENGINE
+       7. FILTER ENGINE
     ===================================================================== */
     function matchPriceBucket(item, bucket) {
       if (bucket === "all") return true;
@@ -1671,7 +2007,7 @@
     }
 
     /* =====================================================================
-       6. STEP 1 INTERACTIONS
+       8. STEP 1 INTERACTIONS
     ===================================================================== */
     function selectSingle(group, val, btnEl) {
       startTimerIfNeeded();
@@ -1708,27 +2044,25 @@
       const banner = document.getElementById("broke-banner");
       const text = document.getElementById("broke-status-text");
       banner.classList.toggle("active", state.brokeMode);
-      text.textContent = state.brokeMode ? "Active (≤ 30k)" : "Turn on";
+      text.textContent = state.brokeMode ? t("brokeOn") : t("brokeOff");
     }
 
     function updateStep1Summary() {
       const matches = getFilteredRestaurants();
       const pillsEl = document.getElementById("summary-pills");
-      const priceValue = state.brokeMode ? "End-of-Month (≤ 30k)" : LABELS.price[state.price];
-      const excludeList = [...state.excludes].map(k => LABELS.exclude[k]);
+      const priceValue = state.brokeMode ? t("brokeSummaryVal") : getLabel("price", state.price);
+      const excludeList = [...state.excludes].map(k => getLabel("exclude", k));
 
       let html = `
-        <div class="summary-pill"><span>Budget</span><strong>${priceValue}</strong></div>
-        <div class="summary-pill"><span>Dish Style</span><strong>${LABELS.type[state.type]}</strong></div>
-        <div class="summary-pill"><span>Context</span><strong>${LABELS.context[state.context]}</strong></div>
+        <div class="summary-pill"><span>${t("sumBudget")}</span><strong>${priceValue}</strong></div>
+        <div class="summary-pill"><span>${t("sumStyle")}</span><strong>${getLabel("type", state.type)}</strong></div>
+        <div class="summary-pill"><span>${t("sumContext")}</span><strong>${getLabel("context", state.context)}</strong></div>
       `;
       if (excludeList.length) {
-        html += `<div class="summary-pill warn"><span>Exclusions</span><strong>${excludeList.join(", ")}</strong></div>`;
+        html += `<div class="summary-pill warn"><span>${t("sumExclude")}</span><strong>${excludeList.join(", ")}</strong></div>`;
       }
       pillsEl.innerHTML = html;
-
-      document.getElementById("live-match-count").innerHTML =
-        `Found <span>${matches.length}</span> matching ${matches.length === 1 ? "eatery" : "eateries"} around District 10`;
+      document.getElementById("live-match-count").innerHTML = t("matchCounter")(matches.length);
     }
 
     function resetAllFilters() {
@@ -1749,7 +2083,7 @@
     }
 
     /* =====================================================================
-       7. STEP 2: 3x2 GRID RENDERING & RANDOMIZER
+       9. STEP 2: 3x2 GRID RENDERING & RANDOMIZER
     ===================================================================== */
     function goToStep2() {
       startTimerIfNeeded();
@@ -1763,70 +2097,73 @@
       if (state.filteredAll.length <= 1) return;
       state.displayedFive = shuffleArray(state.filteredAll).slice(0, 5);
       renderStep2();
-      showToast("Refreshed 5 matching picks.");
+      showToast(t("shuffleToast"));
     }
 
     function renderStep2() {
       const tags = [];
-      tags.push(`<button class="back-btn" onclick="setStep(1)">← Back to Filters</button>`);
-      tags.push(`<span class="active-tag">${state.brokeMode ? "End-of-Month ≤ 30k" : LABELS.price[state.price]}</span>`);
-      if (state.type !== "all") tags.push(`<span class="active-tag">${LABELS.type[state.type]}</span>`);
-      if (state.context !== "all") tags.push(`<span class="active-tag">${LABELS.context[state.context]}</span>`);
-      state.excludes.forEach(ex => tags.push(`<span class="active-tag">${LABELS.exclude[ex]}</span>`));
-      tags.push(`<span class="active-tag green">Dine-in • Zero Plastic</span>`);
+      tags.push(`<button class="back-btn" onclick="setStep(1)">${t("backFiltersBtn")}</button>`);
+      tags.push(`<span class="active-tag">${state.brokeMode ? t("brokeShort") : getLabel("price", state.price)}</span>`);
+      if (state.type !== "all") tags.push(`<span class="active-tag">${getLabel("type", state.type)}</span>`);
+      if (state.context !== "all") tags.push(`<span class="active-tag">${getLabel("context", state.context)}</span>`);
+      state.excludes.forEach(ex => tags.push(`<span class="active-tag">${getLabel("exclude", ex)}</span>`));
+      tags.push(`<span class="active-tag green">${t("dineInGreenTag")}</span>`);
       document.getElementById("step2-tags").innerHTML = tags.join("");
 
       const total = state.filteredAll.length;
       const shown = state.displayedFive.length;
-      document.getElementById("step2-count-label").textContent =
-        total ? `Showing ${shown}/${total} eateries + 1 random picker` : "0 results";
+      document.getElementById("step2-count-label").textContent = t("step2Count")(shown, total);
       document.getElementById("btn-reshuffle").classList.toggle("hidden", total <= 5);
 
       const contentEl = document.getElementById("step2-content");
       if (!total) {
         contentEl.innerHTML = `
           <div class="card empty-state">
-            <h3>No eatery matches all selected criteria</h3>
-            <p style="color:var(--muted); font-size:0.86rem; margin-bottom:18px;">
-              Try widening your budget range or removing one of the exclusions.
-            </p>
-            <button class="cta-btn" style="max-width:220px;" onclick="resetAllFilters()">Reset Filters</button>
+            <h3>${t("emptyTitle")}</h3>
+            <p style="color:var(--muted); font-size:0.86rem; margin-bottom:18px;">${t("emptyDesc")}</p>
+            <button class="cta-btn" style="max-width:220px;" onclick="resetAllFilters()">${t("resetFiltersBtn")}</button>
           </div>`;
         return;
       }
 
-      const cardsHtml = state.displayedFive.map(item => `
-        <article class="dish-card" id="dish-card-${item.id}">
-          <div class="dish-thumb-wrap">
-            <img
-              class="dish-thumb-img"
-              src="${item.image}"
-              alt="${item.dishName}"
-              loading="lazy"
-              onerror="handleImgFallback(this, '${item.dishName.replace(/'/g, "\\'")}', 'dish-thumb-fallback')"
-            />
-            <span class="thumb-badge ${item.veg ? "veg" : ""}">${item.veg ? "Vegetarian" : item.groupLabel}</span>
-          </div>
-          <div class="dish-body">
-            <div class="dish-name">${item.dishName}</div>
-            <div class="dish-submeta">${item.shopName}<span>${item.priceText} • ${item.hours}</span></div>
-            <ul class="dish-bullets">
-              ${item.bullets.map(b => `<li>${b}</li>`).join("")}
-            </ul>
-            <div class="dish-footer">
-              <span class="walk-chip">Dine-in</span>
-              <button class="pick-card-btn" onclick="openStep3(${item.id})">Choose →</button>
+      const cardsHtml = state.displayedFive.map(item => {
+        const dishName = loc(item.dishName);
+        const groupLabel = item.veg ? t("vegBadge") : loc(item.groupLabel);
+        const priceText = loc(item.priceText);
+        const bullets = loc(item.bullets);
+        return `
+          <article class="dish-card" id="dish-card-${item.id}">
+            <div class="dish-thumb-wrap">
+              <img
+                class="dish-thumb-img"
+                src="${item.image}"
+                alt="${dishName}"
+                loading="lazy"
+                onerror="handleImgFallback(this, '${escapeAttr(dishName)}', 'dish-thumb-fallback')"
+              />
+              <span class="thumb-badge ${item.veg ? "veg" : ""}">${groupLabel}</span>
             </div>
-          </div>
-        </article>
-      `).join("");
+            <div class="dish-body">
+              <div class="dish-name">${dishName}</div>
+              <div class="dish-submeta">${item.shopName}<span>${priceText} • ${item.hours}</span></div>
+              <ul class="dish-bullets">
+                ${bullets.map(b => `<li>${b}</li>`).join("")}
+              </ul>
+              <div class="dish-footer">
+                <span class="walk-chip">${t("dineInChip")}</span>
+                <button class="pick-card-btn" onclick="openStep3(${item.id})">${t("chooseBtn")}</button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
 
       const randomCardHtml = `
         <div class="random-card">
-          <span class="random-kicker">Random Picker</span>
-          <div class="random-title">Still undecided?</div>
-          <p class="random-desc">Let us pick one spot instantly from ${total} matching eateries around District 10.</p>
-          <button class="random-btn" id="btn-spin-random" onclick="spinAndPickRandom()">Pick Randomly →</button>
+          <span class="random-kicker">${t("randomKicker")}</span>
+          <div class="random-title">${t("randomTitle")}</div>
+          <p class="random-desc">${t("randomDesc")(total)}</p>
+          <button class="random-btn" id="btn-spin-random" onclick="spinAndPickRandom()">${t("randomBtn")}</button>
         </div>
       `;
 
@@ -1838,7 +2175,7 @@
       const btn = document.getElementById("btn-spin-random");
       if (btn) {
         btn.disabled = true;
-        btn.textContent = "Picking...";
+        btn.textContent = t("randomSpinning");
       }
 
       const visibleIds = state.displayedFive.map(d => d.id);
@@ -1855,14 +2192,14 @@
         if (ticks >= 7) {
           clearInterval(spinInterval);
           const winner = state.filteredAll[Math.floor(Math.random() * state.filteredAll.length)];
-          showToast(`Selected for you: ${winner.dishName} — ${winner.shopName}`);
+          showToast(t("randomToast")(loc(winner.dishName), winner.shopName));
           openStep3(winner.id);
         }
       }, 95);
     }
 
     /* =====================================================================
-       8. STEP 3: DETAIL, GOOGLE MAPS EMBED & CONFIRM
+       10. STEP 3: DETAIL, GOOGLE MAPS EMBED & CONFIRM
     ===================================================================== */
     function openStep3(id) {
       const dish = RESTAURANTS.find(r => r.id === id);
@@ -1876,7 +2213,13 @@
 
     function renderStep3() {
       const d = state.selectedDish;
-      const embedQuery = encodeURIComponent(`${d.shopName}, ${d.address}`);
+      const dishName = loc(d.dishName);
+      const priceText = loc(d.priceText);
+      const address = loc(d.address);
+      const note = loc(d.note);
+      const groupLabel = loc(d.groupLabel);
+
+      const embedQuery = encodeURIComponent(`${d.shopName}, ${d.address.vi}`);
       const embedUrl = `https://maps.google.com/maps?q=${embedQuery}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
 
       const nearbySameGroup = RESTAURANTS
@@ -1885,46 +2228,46 @@
 
       const nearbyHtml = nearbySameGroup.length ? `
         <div class="nearby-box">
-          <div class="nearby-title">Similar spots nearby</div>
+          <div class="nearby-title">${t("nearbyTitle")}</div>
           ${nearbySameGroup.map(n => `
             <div class="nearby-item" onclick="openStep3(${n.id})">
-              <div><strong>${n.shopName}</strong><br><span style="font-size:0.76rem; color:var(--muted);">${n.dishName}</span></div>
-              <span class="nearby-price">${n.priceText}</span>
+              <div><strong>${n.shopName}</strong><br><span style="font-size:0.76rem; color:var(--muted);">${loc(n.dishName)}</span></div>
+              <span class="nearby-price">${loc(n.priceText)}</span>
             </div>
           `).join("")}
         </div>` : "";
 
       document.getElementById("step3-content").innerHTML = `
         <div class="card">
-          <div class="panel-heading">Dish &amp; Directions</div>
+          <div class="panel-heading">${t("step3Heading")}</div>
 
           <div class="selected-mini-card">
             <img
               class="selected-mini-thumb"
               src="${d.image}"
-              alt="${d.dishName}"
-              onerror="handleImgFallback(this, '${d.groupLabel.replace(/'/g, "\\'")}', 'selected-mini-fallback')"
+              alt="${dishName}"
+              onerror="handleImgFallback(this, '${escapeAttr(groupLabel)}', 'selected-mini-fallback')"
             />
             <div>
-              <div class="selected-dish-title">${d.dishName} — ${d.shopName}</div>
+              <div class="selected-dish-title">${dishName} — ${d.shopName}</div>
               <div class="selected-dish-meta">
-                ${d.priceText} • <span class="green-txt">Dine-in • Zero Plastic</span>
+                ${priceText} • <span class="green-txt">${t("dineInGreenTag")}</span>
               </div>
             </div>
           </div>
 
           <div class="info-list">
-            <div class="info-row"><strong>Address:</strong> ${d.address}</div>
-            <div class="info-row"><strong>Opening Hours:</strong> ${d.hours}</div>
-            <div class="info-row"><strong>Highlights:</strong> ${d.note}</div>
+            <div class="info-row"><strong>${t("addressLbl")}</strong> ${address}</div>
+            <div class="info-row"><strong>${t("hoursLbl")}</strong> ${d.hours}</div>
+            <div class="info-row"><strong>${t("highlightsLbl")}</strong> ${note}</div>
           </div>
 
           <div class="action-stack">
             <a class="btn-full btn-maps" href="${d.mapsUrl}" target="_blank" rel="noopener noreferrer">
-              Open in Google Maps ↗
+              ${t("openMapsBtn")}
             </a>
             <button class="btn-full btn-confirm" onclick="confirmMeal(${d.id})">
-              Confirm Meal (Log Budget &amp; Green)
+              ${t("confirmMealBtn")}
             </button>
           </div>
 
@@ -1932,10 +2275,10 @@
         </div>
 
         <div class="card map-card">
-          <div class="panel-heading">Route Map</div>
+          <div class="panel-heading">${t("routeMapHeading")}</div>
           <div class="map-frame-wrap">
             <iframe
-              title="Map for ${d.shopName}"
+              title="${d.shopName}"
               src="${embedUrl}"
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
@@ -1943,53 +2286,61 @@
             </iframe>
           </div>
           <div class="map-caption">
-            <span>${d.address}</span>
-            <a href="${d.mapsUrl}" target="_blank" rel="noopener noreferrer">Open full map ↗</a>
+            <span>${address}</span>
+            <a href="${d.mapsUrl}" target="_blank" rel="noopener noreferrer">${t("openFullMap")}</a>
           </div>
         </div>
       `;
     }
 
     /* =====================================================================
-       9. MODE V1 LOGIC (FOR COMPARISON DEMO)
+       11. MODE V1 LOGIC (FOR COMPARISON DEMO)
     ===================================================================== */
+    function renderV1ResultBox() {
+      const box = document.getElementById("v1-result");
+      if (!box) return;
+      if (!state.v1HasSearched) {
+        box.innerHTML = `<em>${t("v1Empty")}</em>`;
+        return;
+      }
+      if (!state.v1Current) {
+        box.textContent = t("v1NoMatch");
+        return;
+      }
+      const p = state.v1Current;
+      box.innerHTML = `<strong>${t("v1Suggestion")}</strong> ${loc(p.dishName)} — ${p.shopName} (${loc(p.priceText)})`;
+    }
+
     function pickV1() {
       startTimerIfNeeded();
+      state.v1HasSearched = true;
       const priceVal = document.getElementById("v1-price").value;
       const typeVal = document.getElementById("v1-type").value;
       const matches = RESTAURANTS.filter(item =>
         matchPriceBucket(item, priceVal) &&
         (typeVal === "all" || item.type === typeVal)
       );
-      const box = document.getElementById("v1-result");
-      if (!matches.length) {
-        box.innerHTML = "No matching dish found for the current selection.";
-        state.v1Current = null;
-        return;
-      }
-      const picked = matches[Math.floor(Math.random() * matches.length)];
-      state.v1Current = picked;
-      box.innerHTML = `<strong>Suggestion:</strong> ${picked.dishName} — ${picked.shopName} (${picked.priceText})`;
+      state.v1Current = matches.length ? matches[Math.floor(Math.random() * matches.length)] : null;
+      renderV1ResultBox();
     }
 
     function confirmV1() {
       if (!state.v1Current) {
-        showToast("Please click 'Find Dish' first.");
+        showToast(t("v1NeedFind"));
         return;
       }
       const sec = stopTimer();
-      showToast(`V1 confirmed "${state.v1Current.shopName}" in ${sec}s.`);
+      showToast(t("v1ConfirmedToast")(state.v1Current.shopName, sec));
     }
 
     /* =====================================================================
-       10. GROUP MODE LOGIC
+       12. GROUP MODE LOGIC
     ===================================================================== */
     function changeMemberCount(delta) {
       const next = state.groupMembers.length + delta;
       if (next < 2 || next > 5) return;
       if (delta > 0) {
         state.groupMembers.push({
-          name: `Friend ${next}`,
           maxPrice: 40,
           no_spicy: false,
           no_seafood: false,
@@ -2011,24 +2362,32 @@
       list.innerHTML = state.groupMembers.map((m, i) => `
         <div class="member-card">
           <div class="member-head">
-            <span>${m.name}</span>
+            <span>${t("friendName")(i + 1)}</span>
             <select onchange="updateMember(${i}, 'maxPrice', Number(this.value))">
-              <option value="25" ${m.maxPrice === 25 ? "selected" : ""}>Max 25k</option>
-              <option value="30" ${m.maxPrice === 30 ? "selected" : ""}>Max 30k</option>
-              <option value="35" ${m.maxPrice === 35 ? "selected" : ""}>Max 35k</option>
-              <option value="40" ${m.maxPrice === 40 ? "selected" : ""}>Max 40k</option>
-              <option value="55" ${m.maxPrice === 55 ? "selected" : ""}>Max 55k</option>
-              <option value="100" ${m.maxPrice === 100 ? "selected" : ""}>Flexible</option>
+              <option value="25" ${m.maxPrice === 25 ? "selected" : ""}>${t("maxPriceOpt")(25)}</option>
+              <option value="30" ${m.maxPrice === 30 ? "selected" : ""}>${t("maxPriceOpt")(30)}</option>
+              <option value="35" ${m.maxPrice === 35 ? "selected" : ""}>${t("maxPriceOpt")(35)}</option>
+              <option value="40" ${m.maxPrice === 40 ? "selected" : ""}>${t("maxPriceOpt")(40)}</option>
+              <option value="55" ${m.maxPrice === 55 ? "selected" : ""}>${t("maxPriceOpt")(55)}</option>
+              <option value="100" ${m.maxPrice === 100 ? "selected" : ""}>${t("flexibleOpt")}</option>
             </select>
           </div>
           <div class="member-checks">
-            <label class="mini-check"><input type="checkbox" ${m.no_spicy ? "checked" : ""} onchange="updateMember(${i}, 'no_spicy', this.checked)"> No Spicy</label>
-            <label class="mini-check"><input type="checkbox" ${m.no_seafood ? "checked" : ""} onchange="updateMember(${i}, 'no_seafood', this.checked)"> No Seafood</label>
-            <label class="mini-check"><input type="checkbox" ${m.no_beef ? "checked" : ""} onchange="updateMember(${i}, 'no_beef', this.checked)"> No Beef</label>
-            <label class="mini-check"><input type="checkbox" ${m.veg_only ? "checked" : ""} onchange="updateMember(${i}, 'veg_only', this.checked)"> Vegetarian</label>
+            <label class="mini-check"><input type="checkbox" ${m.no_spicy ? "checked" : ""} onchange="updateMember(${i}, 'no_spicy', this.checked)"> ${t("exSpicy")}</label>
+            <label class="mini-check"><input type="checkbox" ${m.no_seafood ? "checked" : ""} onchange="updateMember(${i}, 'no_seafood', this.checked)"> ${t("exSeafood")}</label>
+            <label class="mini-check"><input type="checkbox" ${m.no_beef ? "checked" : ""} onchange="updateMember(${i}, 'no_beef', this.checked)"> ${t("chkNoBeef")}</label>
+            <label class="mini-check"><input type="checkbox" ${m.veg_only ? "checked" : ""} onchange="updateMember(${i}, 'veg_only', this.checked)"> ${t("chkVeg")}</label>
           </div>
         </div>
       `).join("");
+    }
+
+    function renderGroupReadyState() {
+      document.getElementById("group-result-box").innerHTML = `
+        <div class="card empty-state">
+          <h3>${t("groupReadyTitle")}</h3>
+          <p style="font-size:0.85rem; color:var(--muted);">${t("groupReadyDesc")}</p>
+        </div>`;
     }
 
     function pickGroupMeal() {
@@ -2048,6 +2407,7 @@
         return true;
       }));
       state.groupIndex = 0;
+      state.groupSearchedBudget = minBudget;
       renderGroupResult(minBudget);
     }
 
@@ -2062,60 +2422,61 @@
       if (!state.groupMatches.length) {
         box.innerHTML = `
           <div class="card empty-state">
-            <h3>Your group's preferences are a bit tight</h3>
-            <p style="font-size:0.85rem; color:var(--muted);">
-              Try raising the max budget by 5k – 10k, or visit <strong>Cơm chay Thanh Lương</strong> or <strong>Cơm Tấm 229</strong> where everyone can order individually.
-            </p>
+            <h3>${t("groupNoMatchTitle")}</h3>
+            <p style="font-size:0.85rem; color:var(--muted);">${t("groupNoMatchDesc")}</p>
           </div>`;
         return;
       }
 
       const d = state.groupMatches[state.groupIndex];
+      const dishName = loc(d.dishName);
+      const priceText = loc(d.priceText);
+      const address = loc(d.address);
+      const note = loc(d.note);
+      const groupLabel = loc(d.groupLabel);
+
       box.innerHTML = `
         <div class="card">
           <div style="font-size:0.78rem; font-weight:600; color:var(--sage-dark); background:var(--sage-soft); padding:6px 13px; border-radius:999px; display:inline-block; margin-bottom:16px;">
-            Matched for ${state.groupMembers.length} friends • Budget ≤ ${minBudget}k • ${state.groupMatches.length} spots
+            ${t("groupBadge")(state.groupMembers.length, minBudget, state.groupMatches.length)}
           </div>
 
           <div class="selected-mini-card">
             <img
               class="selected-mini-thumb"
               src="${d.image}"
-              alt="${d.dishName}"
-              onerror="handleImgFallback(this, '${d.groupLabel.replace(/'/g, "\\'")}', 'selected-mini-fallback')"
+              alt="${dishName}"
+              onerror="handleImgFallback(this, '${escapeAttr(groupLabel)}', 'selected-mini-fallback')"
             />
             <div>
-              <div class="selected-dish-title">${d.dishName} — ${d.shopName}</div>
-              <div class="selected-dish-meta">${d.priceText}</div>
+              <div class="selected-dish-title">${dishName} — ${d.shopName}</div>
+              <div class="selected-dish-meta">${priceText}</div>
             </div>
           </div>
 
           <div class="info-list">
-            <div class="info-row"><strong>Address:</strong> ${d.address}</div>
-            <div class="info-row"><strong>Opening Hours:</strong> ${d.hours}</div>
-            <div class="info-row"><strong>Highlights:</strong> ${d.note}</div>
+            <div class="info-row"><strong>${t("addressLbl")}</strong> ${address}</div>
+            <div class="info-row"><strong>${t("hoursLbl")}</strong> ${d.hours}</div>
+            <div class="info-row"><strong>${t("highlightsLbl")}</strong> ${note}</div>
           </div>
 
           <div class="action-stack" style="margin-bottom:0;">
             <a class="btn-full btn-maps" href="${d.mapsUrl}" target="_blank" rel="noopener noreferrer">
-              Open Google Maps for Group ↗
+              ${t("groupMapsBtn")}
             </a>
             <button class="btn-full btn-confirm" onclick="confirmMeal(${d.id})">
-              Confirm Group Meal (Log Budget)
+              ${t("groupConfirmBtn")}
             </button>
             <button class="back-btn" style="width:100%; padding:10px;" onclick="nextGroupMeal(${minBudget})">
-              Try Another Spot (${state.groupIndex + 1}/${state.groupMatches.length})
+              ${t("groupNextBtn")(state.groupIndex + 1, state.groupMatches.length)}
             </button>
           </div>
         </div>`;
     }
 
     /* =====================================================================
-       11. STATS & LOCALSTORAGE
+       13. STATS & LOCALSTORAGE
     ===================================================================== */
-    const STORAGE_KEY = "chotmon_q10_history_v1";
-    const WEEKLY_BUDGET = 500;
-
     function loadHistory() {
       try {
         return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
@@ -2138,19 +2499,20 @@
       const now = new Date();
       const timeStr = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")} — ${now.getDate()}/${now.getMonth() + 1}`;
       history.unshift({
-        dishName: d.dishName,
+        dishId: d.id,
+        dishName: loc(d.dishName),
         shopName: d.shopName,
         avgPrice: d.avgPrice,
         time: timeStr
       });
       saveHistory(history);
-      showToast(`Confirmed "${d.shopName}" in ${sec}s and saved +1 plastic set.`);
+      showToast(t("confirmToast")(d.shopName, sec));
     }
 
     function clearHistory() {
       saveHistory([]);
       renderStats();
-      showToast("Cleared all meal history.");
+      showToast(t("clearToast"));
     }
 
     function renderStats() {
@@ -2158,10 +2520,10 @@
       const totalSpent = history.reduce((sum, item) => sum + item.avgPrice, 0);
       const pct = Math.min(100, Math.round((totalSpent / WEEKLY_BUDGET) * 100));
 
-      document.getElementById("stat-spent").textContent = `${totalSpent.toLocaleString("en-US")},000 VND`;
-      document.getElementById("stat-meals").textContent = `${history.length} ${history.length === 1 ? "meal" : "meals"}`;
-      document.getElementById("stat-plastic").textContent = `${history.length} ${history.length === 1 ? "set" : "sets"}`;
-      document.getElementById("budget-label").textContent = `${totalSpent}k / ${WEEKLY_BUDGET}k VND (${pct}%)`;
+      document.getElementById("stat-spent").textContent = t("fmtSpent")(totalSpent);
+      document.getElementById("stat-meals").textContent = t("fmtMeals")(history.length);
+      document.getElementById("stat-plastic").textContent = t("fmtPlastic")(history.length);
+      document.getElementById("budget-label").textContent = t("fmtBudgetLabel")(totalSpent, WEEKLY_BUDGET, pct);
 
       const fill = document.getElementById("budget-fill");
       fill.style.width = `${pct}%`;
@@ -2169,35 +2531,38 @@
 
       const listEl = document.getElementById("history-list");
       if (!history.length) {
-        listEl.innerHTML = `<p style="color:var(--muted); font-size:0.85rem;">No meals confirmed yet. Pick a spot and click "Confirm Meal" to start tracking.</p>`;
+        listEl.innerHTML = `<p style="color:var(--muted); font-size:0.85rem;">${t("historyEmpty")}</p>`;
         return;
       }
 
-      listEl.innerHTML = history.map(item => `
-        <div class="history-item">
-          <div>
-            <strong>${item.dishName}</strong> — ${item.shopName}
-            <div style="font-size:0.76rem; color:var(--muted);">Logged at ${item.time} • Saved 1 foam box &amp; plastic bag</div>
+      listEl.innerHTML = history.map(item => {
+        const matched = item.dishId ? RESTAURANTS.find(r => r.id === item.dishId) : null;
+        const displayDish = matched ? loc(matched.dishName) : item.dishName;
+        return `
+          <div class="history-item">
+            <div>
+              <strong>${displayDish}</strong> — ${item.shopName}
+              <div style="font-size:0.76rem; color:var(--muted);">${t("historySub")(item.time)}</div>
+            </div>
+            <div style="font-weight:600; color:var(--rose-dark); white-space:nowrap;">${t("fmtItemPrice")(item.avgPrice)}</div>
           </div>
-          <div style="font-weight:600; color:var(--rose-dark); white-space:nowrap;">~${item.avgPrice}k VND</div>
-        </div>
-      `).join("");
+        `;
+      }).join("");
     }
 
     /* =====================================================================
-       12. TOAST NOTIFICATION & INIT
+       14. TOAST NOTIFICATION & INIT
     ===================================================================== */
     let toastTimer = null;
     function showToast(msg) {
-      const t = document.getElementById("toast");
-      t.textContent = msg;
-      t.classList.add("show");
+      const tEl = document.getElementById("toast");
+      tEl.textContent = msg;
+      tEl.classList.add("show");
       clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => t.classList.remove("show"), 2800);
+      toastTimer = setTimeout(() => tEl.classList.remove("show"), 2800);
     }
 
-    updateStep1Summary();
-    renderGroupMembers();
+    applyLanguage();
   </script>
 </body>
 </html>
