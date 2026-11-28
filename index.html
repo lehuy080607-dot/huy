@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ăn gì đây ta? — Gợi ý quán ngon Quận 10</title>
+  <title>Ăn gì đây ta? — District 10 Student Dining Guide</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
   <style>
     /* ================= 1. DESIGN TOKENS & RESET ================= */
     :root {
@@ -26,14 +26,13 @@
       --radius: 18px;
       --shadow: 0 12px 32px -14px rgba(95, 62, 40, 0.16), 0 2px 6px rgba(95, 62, 40, 0.04);
       --shadow-hover: 0 18px 36px -14px rgba(95, 62, 40, 0.22), 0 4px 10px rgba(95, 62, 40, 0.06);
-      --serif: "Cormorant Garamond", Georgia, serif;
-      --sans: "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font: "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: var(--sans);
+      font-family: var(--font);
       font-weight: 400;
       background-color: var(--cream);
       background-image:
@@ -49,7 +48,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    button, input, select { font-family: inherit; color: inherit; }
+    button, input, select { font-family: var(--font); color: inherit; }
     .hidden { display: none !important; }
 
     /* ================= 2. TOP NAVIGATION BAR ================= */
@@ -73,11 +72,10 @@
       gap: 16px;
     }
     .brand {
-      font-family: var(--serif);
       font-style: italic;
       font-weight: 700;
-      font-size: 1.75rem;
-      letter-spacing: 0.01em;
+      font-size: 1.32rem;
+      letter-spacing: -0.01em;
       color: var(--ink);
       cursor: pointer;
       white-space: nowrap;
@@ -107,10 +105,7 @@
       white-space: nowrap;
     }
     .nav-tab:hover { color: var(--ink); }
-    .nav-tab.active {
-      color: var(--rose-dark);
-      font-weight: 600;
-    }
+    .nav-tab.active { color: var(--rose-dark); font-weight: 600; }
     .nav-tab.active::after {
       content: "";
       position: absolute;
@@ -146,10 +141,7 @@
       cursor: pointer;
       transition: 0.2s;
     }
-    .mode-btn.active {
-      background: var(--ink);
-      color: var(--ivory);
-    }
+    .mode-btn.active { background: var(--ink); color: var(--ivory); }
 
     /* ================= 3. MAIN CONTAINER & CARD ================= */
     .container {
@@ -157,7 +149,6 @@
       margin: 28px auto 0;
       padding: 0 24px;
     }
-
     .card {
       background: linear-gradient(155deg, #fffdf9 0%, #fbf5ec 100%);
       border: 1px solid rgba(255, 255, 255, 0.85);
@@ -168,10 +159,7 @@
     }
 
     /* ================= 4. V1 ROUGH PROTOTYPE ================= */
-    .v1-wrapper {
-      max-width: 720px;
-      margin: 0 auto;
-    }
+    .v1-wrapper { max-width: 720px; margin: 0 auto; }
     .v1-timer-strip {
       display: flex;
       align-items: center;
@@ -182,50 +170,43 @@
       padding: 12px 18px;
       border-radius: 12px;
       margin-bottom: 16px;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
     }
     .v1-timer-strip strong { color: #f4d8a8; }
     .v1-box {
       background: #fff;
       border: 1.5px dashed #a89f96;
       padding: 26px;
-      border-radius: 8px;
-      font-family: Georgia, "Times New Roman", serif;
+      border-radius: 10px;
     }
-    .v1-box h2 {
-      margin-bottom: 10px;
-      font-size: 1.45rem;
-      font-weight: 600;
-    }
+    .v1-box h2 { margin-bottom: 10px; font-size: 1.25rem; font-weight: 600; }
     .v1-note {
       background: #faf3e0;
       border: 1px solid #d6c396;
       padding: 11px 14px;
-      font-family: var(--sans);
       font-size: 0.84rem;
       color: #544634;
       margin-bottom: 18px;
       border-radius: 8px;
     }
-    .v1-field { margin-bottom: 14px; font-family: var(--sans); }
-    .v1-field label { display: block; font-weight: 600; font-size: 0.88rem; margin-bottom: 6px; }
+    .v1-field { margin-bottom: 14px; }
+    .v1-field label { display: block; font-weight: 600; font-size: 0.86rem; margin-bottom: 6px; }
     .v1-field select {
       width: 100%;
       padding: 9px 12px;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       border: 1px solid #b5aba0;
-      border-radius: 6px;
+      border-radius: 8px;
       background: #fff;
     }
     .v1-btn {
       padding: 8px 18px;
-      font-family: var(--sans);
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       font-weight: 500;
       cursor: pointer;
       background: #efeae2;
       border: 1px solid #8a7f74;
-      border-radius: 6px;
+      border-radius: 8px;
       margin-right: 8px;
     }
     .v1-btn:hover { background: #e5ddd1; }
@@ -234,10 +215,9 @@
       padding: 14px;
       background: #faf7f2;
       border: 1px solid #ddd4c7;
-      border-radius: 6px;
+      border-radius: 8px;
       min-height: 54px;
-      font-family: var(--sans);
-      font-size: 0.92rem;
+      font-size: 0.9rem;
     }
 
     /* ================= 5. STEP 1: SMART FILTER ================= */
@@ -259,28 +239,21 @@
       transform: translateY(-1px);
       box-shadow: 0 18px 32px -14px rgba(141, 68, 82, 0.56);
     }
-    .broke-banner.active {
-      background: linear-gradient(100deg, #7c3845 0%, #9f5462 100%);
-    }
+    .broke-banner.active { background: linear-gradient(100deg, #7c3845 0%, #9f5462 100%); }
     .broke-title {
-      font-family: var(--serif);
-      font-size: 1.45rem;
+      font-size: 1.12rem;
       font-weight: 700;
-      letter-spacing: 0.01em;
-      line-height: 1.2;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
       margin-bottom: 2px;
     }
-    .broke-sub {
-      font-size: 0.84rem;
-      opacity: 0.92;
-      font-weight: 300;
-    }
+    .broke-sub { font-size: 0.83rem; opacity: 0.92; font-weight: 300; }
     .broke-toggle-wrap {
       display: flex;
       align-items: center;
       gap: 12px;
       font-weight: 500;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       white-space: nowrap;
     }
     .toggle-track {
@@ -313,87 +286,57 @@
     }
 
     .section-title {
-      font-family: var(--serif);
-      font-size: 1.9rem;
-      font-weight: 600;
-      line-height: 1.15;
+      font-size: 1.38rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      line-height: 1.25;
       color: var(--ink);
       margin-bottom: 6px;
     }
-    .section-sub {
-      font-size: 0.86rem;
-      color: var(--muted);
-      margin-bottom: 22px;
-    }
+    .section-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 22px; }
 
     .filter-group { margin-bottom: 20px; }
     .filter-group:last-child { margin-bottom: 0; }
     .filter-label {
       display: block;
-      font-size: 0.84rem;
+      font-size: 0.83rem;
       font-weight: 600;
-      letter-spacing: 0.02em;
       color: var(--ink);
       margin-bottom: 10px;
     }
-    .chip-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
+    .chip-list { display: flex; flex-wrap: wrap; gap: 8px; }
     .chip {
       border: 1px solid var(--border);
       background: rgba(255, 252, 247, 0.9);
       color: var(--ink);
       padding: 8px 16px;
       border-radius: 999px;
-      font-size: 0.84rem;
+      font-size: 0.83rem;
       font-weight: 500;
       cursor: pointer;
       transition: all 0.18s;
       user-select: none;
     }
-    .chip:hover {
-      border-color: var(--rose);
-      background: var(--rose-soft);
-      color: var(--rose-dark);
-    }
+    .chip:hover { border-color: var(--rose); background: var(--rose-soft); color: var(--rose-dark); }
     .chip.selected {
       background: var(--rose-dark);
       border-color: var(--rose-dark);
       color: var(--ivory);
       box-shadow: 0 6px 14px -6px rgba(141, 68, 82, 0.5);
     }
-    .chip.exclude.selected {
-      background: #7b3b42;
-      border-color: #7b3b42;
-      color: var(--ivory);
-    }
+    .chip.exclude.selected { background: #7b3b42; border-color: #7b3b42; color: var(--ivory); }
 
     /* Sticky Summary Sidebar */
-    .summary-card {
-      position: sticky;
-      top: 90px;
-    }
+    .summary-card { position: sticky; top: 90px; }
     .summary-box-title {
-      font-family: var(--serif);
-      font-size: 1.6rem;
-      font-weight: 600;
-      line-height: 1.2;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
       margin-bottom: 4px;
     }
-    .summary-row-title {
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--muted);
-      margin-bottom: 12px;
-    }
-    .summary-pills {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
+    .summary-row-title { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom: 12px; }
+    .summary-pills { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
     .summary-pill {
       display: flex;
       justify-content: space-between;
@@ -403,19 +346,11 @@
       border: 1px solid var(--border);
       padding: 9px 13px;
       border-radius: 12px;
-      font-size: 0.83rem;
+      font-size: 0.82rem;
       color: var(--muted);
     }
-    .summary-pill strong {
-      color: var(--ink);
-      font-weight: 600;
-      text-align: right;
-    }
-    .summary-pill.warn {
-      background: var(--rose-soft);
-      border-color: var(--border-rose);
-      color: var(--rose-dark);
-    }
+    .summary-pill strong { color: var(--ink); font-weight: 600; text-align: right; }
+    .summary-pill.warn { background: var(--rose-soft); border-color: var(--border-rose); color: var(--rose-dark); }
     .summary-pill.warn strong { color: var(--rose-dark); }
 
     .green-pill {
@@ -424,21 +359,12 @@
       color: var(--sage-dark);
       padding: 10px 13px;
       border-radius: 12px;
-      font-size: 0.8rem;
+      font-size: 0.79rem;
       font-weight: 500;
       margin-bottom: 16px;
     }
-    .match-counter {
-      font-size: 0.88rem;
-      font-weight: 500;
-      margin-bottom: 14px;
-      color: var(--muted);
-    }
-    .match-counter span {
-      color: var(--rose-dark);
-      font-weight: 700;
-      font-size: 1rem;
-    }
+    .match-counter { font-size: 0.86rem; font-weight: 500; margin-bottom: 14px; color: var(--muted); }
+    .match-counter span { color: var(--rose-dark); font-weight: 700; font-size: 0.98rem; }
     .cta-btn {
       width: 100%;
       border: none;
@@ -446,9 +372,8 @@
       color: var(--ivory);
       padding: 13px 20px;
       border-radius: 999px;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       font-weight: 600;
-      letter-spacing: 0.01em;
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
       box-shadow: 0 12px 22px -10px rgba(141, 68, 82, 0.55);
@@ -458,12 +383,7 @@
       filter: brightness(1.03);
       box-shadow: 0 16px 26px -10px rgba(141, 68, 82, 0.62);
     }
-    .cta-tip {
-      margin-top: 12px;
-      font-size: 0.78rem;
-      color: var(--muted);
-      line-height: 1.5;
-    }
+    .cta-tip { margin-top: 12px; font-size: 0.77rem; color: var(--muted); line-height: 1.5; }
 
     /* ================= 6. STEP 2: 3x2 DISH GRID ================= */
     .sub-bar {
@@ -479,52 +399,31 @@
       margin-bottom: 20px;
       box-shadow: var(--shadow);
     }
-    .sub-bar-left {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
-    }
+    .sub-bar-left { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
     .back-btn {
       border: 1px solid var(--border);
       background: var(--ivory);
       color: var(--ink);
       padding: 7px 14px;
       border-radius: 999px;
-      font-size: 0.83rem;
+      font-size: 0.82rem;
       font-weight: 500;
       cursor: pointer;
       transition: 0.18s;
     }
-    .back-btn:hover {
-      background: var(--cream-soft);
-      border-color: var(--rose);
-    }
+    .back-btn:hover { background: var(--cream-soft); border-color: var(--rose); }
     .active-tag {
-      font-size: 0.78rem;
+      font-size: 0.77rem;
       font-weight: 500;
       padding: 5px 12px;
       border-radius: 999px;
       background: var(--rose-soft);
       color: var(--rose-dark);
     }
-    .active-tag.green {
-      background: var(--sage-soft);
-      color: var(--sage-dark);
-    }
-    .sub-bar-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
+    .active-tag.green { background: var(--sage-soft); color: var(--sage-dark); }
+    .sub-bar-right { display: flex; align-items: center; gap: 10px; font-size: 0.81rem; color: var(--muted); }
 
-    .grid-3x2 {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
-    }
+    .grid-3x2 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 
     .dish-card {
       background: var(--ivory);
@@ -573,9 +472,9 @@
       justify-content: center;
       padding: 16px;
       text-align: center;
-      font-family: var(--serif);
       font-style: italic;
-      font-size: 1.25rem;
+      font-size: 0.98rem;
+      font-weight: 500;
       color: var(--rose-dark);
       background: linear-gradient(135deg, #f5ebe0 0%, #ead9cb 100%);
     }
@@ -585,63 +484,34 @@
       left: 12px;
       background: rgba(43, 38, 34, 0.72);
       color: var(--ivory);
-      font-size: 0.72rem;
+      font-size: 0.71rem;
       font-weight: 500;
-      letter-spacing: 0.02em;
       padding: 4px 10px;
       border-radius: 999px;
       backdrop-filter: blur(4px);
     }
-    .thumb-badge.veg {
-      background: rgba(88, 111, 80, 0.88);
-    }
+    .thumb-badge.veg { background: rgba(88, 111, 80, 0.88); }
 
-    .dish-body {
-      padding: 16px 18px 18px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
+    .dish-body { padding: 16px 18px 18px; display: flex; flex-direction: column; flex: 1; }
     .dish-name {
-      font-family: var(--serif);
-      font-size: 1.38rem;
+      font-size: 1.02rem;
       font-weight: 700;
       color: var(--ink);
-      margin-bottom: 3px;
-      line-height: 1.2;
+      margin-bottom: 4px;
+      line-height: 1.3;
     }
-    .dish-submeta {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--rose-dark);
-      margin-bottom: 10px;
-    }
-    .dish-submeta span {
-      display: block;
-      margin-top: 2px;
-      color: var(--muted);
-      font-weight: 400;
-      font-size: 0.78rem;
-    }
-    .dish-bullets {
-      list-style: none;
-      margin-bottom: 16px;
-      flex: 1;
-    }
+    .dish-submeta { font-size: 0.8rem; font-weight: 600; color: var(--rose-dark); margin-bottom: 10px; }
+    .dish-submeta span { display: block; margin-top: 2px; color: var(--muted); font-weight: 400; font-size: 0.77rem; }
+    .dish-bullets { list-style: none; margin-bottom: 16px; flex: 1; }
     .dish-bullets li {
-      font-size: 0.79rem;
+      font-size: 0.78rem;
       color: var(--muted);
       margin-bottom: 4px;
       display: flex;
       align-items: flex-start;
       gap: 7px;
     }
-    .dish-bullets li::before {
-      content: "—";
-      color: var(--rose);
-      font-weight: 600;
-      flex-shrink: 0;
-    }
+    .dish-bullets li::before { content: "—"; color: var(--rose); font-weight: 600; flex-shrink: 0; }
     .dish-footer {
       display: flex;
       align-items: center;
@@ -651,7 +521,7 @@
       border-top: 1px solid var(--border);
     }
     .walk-chip {
-      font-size: 0.73rem;
+      font-size: 0.72rem;
       font-weight: 500;
       color: var(--sage-dark);
       background: var(--sage-soft);
@@ -664,7 +534,7 @@
       color: var(--ivory);
       padding: 7px 14px;
       border-radius: 999px;
-      font-size: 0.79rem;
+      font-size: 0.78rem;
       font-weight: 500;
       cursor: pointer;
       transition: 0.18s;
@@ -685,42 +555,33 @@
       min-height: 320px;
     }
     .random-kicker {
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
+      font-size: 0.71rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--rose-dark);
       margin-bottom: 8px;
       font-weight: 600;
     }
     .random-title {
-      font-family: var(--serif);
       font-style: italic;
-      font-size: 1.75rem;
-      font-weight: 600;
+      font-size: 1.25rem;
+      font-weight: 700;
       color: var(--ink);
       margin-bottom: 8px;
     }
-    .random-desc {
-      font-size: 0.83rem;
-      color: var(--muted);
-      margin-bottom: 20px;
-      max-width: 240px;
-    }
+    .random-desc { font-size: 0.82rem; color: var(--muted); margin-bottom: 20px; max-width: 240px; }
     .random-btn {
       border: 1px solid var(--rose-dark);
       background: var(--ivory);
       color: var(--rose-dark);
       padding: 10px 22px;
       border-radius: 999px;
-      font-size: 0.86rem;
+      font-size: 0.84rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s;
     }
-    .random-btn:hover {
-      background: var(--rose-dark);
-      color: var(--ivory);
-    }
+    .random-btn:hover { background: var(--rose-dark); color: var(--ivory); }
 
     /* ================= 7. STEP 3: DETAIL & MAP ================= */
     .timer-pill {
@@ -729,7 +590,7 @@
       color: var(--muted);
       padding: 6px 14px;
       border-radius: 999px;
-      font-size: 0.82rem;
+      font-size: 0.81rem;
       font-weight: 500;
       font-variant-numeric: tabular-nums;
       display: inline-flex;
@@ -744,13 +605,7 @@
       gap: 22px;
       align-items: stretch;
     }
-    .panel-heading {
-      font-family: var(--serif);
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 14px;
-      color: var(--ink);
-    }
+    .panel-heading { font-size: 1.12rem; font-weight: 700; margin-bottom: 14px; color: var(--ink); }
     .selected-mini-card {
       display: flex;
       align-items: center;
@@ -778,58 +633,33 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: var(--serif);
       font-style: italic;
-      font-size: 0.9rem;
+      font-size: 0.78rem;
       color: var(--rose-dark);
       text-align: center;
       padding: 6px;
       flex-shrink: 0;
     }
     .selected-dish-title {
-      font-family: var(--serif);
-      font-size: 1.38rem;
+      font-size: 1.02rem;
       font-weight: 700;
       color: var(--ink);
       margin-bottom: 4px;
-      line-height: 1.22;
+      line-height: 1.3;
     }
-    .selected-dish-meta {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-    .selected-dish-meta .green-txt {
-      color: var(--sage-dark);
-      font-weight: 600;
-    }
+    .selected-dish-meta { font-size: 0.79rem; color: var(--muted); }
+    .selected-dish-meta .green-txt { color: var(--sage-dark); font-weight: 600; }
 
-    .info-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 20px;
-      font-size: 0.86rem;
-    }
-    .info-row {
-      color: var(--muted);
-      line-height: 1.55;
-    }
-    .info-row strong {
-      color: var(--ink);
-      font-weight: 600;
-    }
+    .info-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; font-size: 0.85rem; }
+    .info-row { color: var(--muted); line-height: 1.55; }
+    .info-row strong { color: var(--ink); font-weight: 600; }
 
-    .action-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
+    .action-stack { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
     .btn-full {
       width: 100%;
       padding: 12px 18px;
       border-radius: 999px;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       font-weight: 600;
       cursor: pointer;
       text-decoration: none;
@@ -839,37 +669,18 @@
       gap: 6px;
       transition: all 0.2s;
     }
-    .btn-maps {
-      background: var(--ivory);
-      color: var(--rose-dark);
-      border: 1.5px solid var(--border-rose);
-    }
-    .btn-maps:hover {
-      background: var(--rose-soft);
-      border-color: var(--rose-dark);
-    }
+    .btn-maps { background: var(--ivory); color: var(--rose-dark); border: 1.5px solid var(--border-rose); }
+    .btn-maps:hover { background: var(--rose-soft); border-color: var(--rose-dark); }
     .btn-confirm {
       border: none;
       background: linear-gradient(100deg, #9b525f 0%, #b5737b 100%);
       color: var(--ivory);
       box-shadow: 0 10px 20px -10px rgba(141, 68, 82, 0.52);
     }
-    .btn-confirm:hover {
-      filter: brightness(1.04);
-      transform: translateY(-1px);
-    }
+    .btn-confirm:hover { filter: brightness(1.04); transform: translateY(-1px); }
 
-    .nearby-box {
-      border-top: 1px solid var(--border);
-      padding-top: 16px;
-    }
-    .nearby-title {
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
+    .nearby-box { border-top: 1px solid var(--border); padding-top: 16px; }
+    .nearby-title { font-size: 0.79rem; font-weight: 600; color: var(--muted); margin-bottom: 8px; }
     .nearby-item {
       display: flex;
       align-items: center;
@@ -878,23 +689,15 @@
       padding: 9px 12px;
       border-radius: 12px;
       cursor: pointer;
-      font-size: 0.84rem;
+      font-size: 0.83rem;
       transition: background 0.18s;
     }
     .nearby-item:hover { background: var(--cream-soft); }
     .nearby-item strong { color: var(--ink); font-weight: 600; }
-    .nearby-price {
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--rose-dark);
-      white-space: nowrap;
-    }
+    .nearby-price { font-size: 0.77rem; font-weight: 600; color: var(--rose-dark); white-space: nowrap; }
 
     /* Map Panel */
-    .map-card {
-      display: flex;
-      flex-direction: column;
-    }
+    .map-card { display: flex; flex-direction: column; }
     .map-frame-wrap {
       flex: 1;
       min-height: 400px;
@@ -917,15 +720,10 @@
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      font-size: 0.81rem;
+      font-size: 0.8rem;
       color: var(--muted);
     }
-    .map-caption a {
-      color: var(--rose-dark);
-      font-weight: 600;
-      text-decoration: none;
-      white-space: nowrap;
-    }
+    .map-caption a { color: var(--rose-dark); font-weight: 600; text-decoration: none; white-space: nowrap; }
     .map-caption a:hover { text-decoration: underline; }
 
     /* ================= 8. GROUP MODE ================= */
@@ -949,26 +747,22 @@
       gap: 10px;
       margin-bottom: 10px;
       font-weight: 600;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
     }
     .member-head select {
       padding: 6px 12px;
       border-radius: 999px;
       border: 1px solid var(--border);
       background: var(--ivory);
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 500;
     }
-    .member-checks {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
+    .member-checks { display: flex; flex-wrap: wrap; gap: 8px; }
     .mini-check {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-size: 0.8rem;
+      font-size: 0.79rem;
       background: var(--ivory);
       border: 1px solid var(--border);
       padding: 5px 11px;
@@ -984,23 +778,15 @@
       color: var(--ink);
       padding: 6px 14px;
       border-radius: 999px;
-      font-size: 0.8rem;
+      font-size: 0.79rem;
       font-weight: 500;
       cursor: pointer;
       transition: 0.18s;
     }
-    .btn-outline-sm:hover {
-      background: var(--cream-soft);
-      border-color: var(--rose);
-    }
+    .btn-outline-sm:hover { background: var(--cream-soft); border-color: var(--rose); }
 
     /* ================= 9. SPENDING & GREEN STATS ================= */
-    .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 22px;
-    }
+    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 22px; }
     .stat-box {
       background: var(--cream-soft);
       border: 1px solid var(--border);
@@ -1009,19 +795,14 @@
       text-align: center;
     }
     .stat-num {
-      font-family: var(--serif);
-      font-size: 2rem;
+      font-size: 1.55rem;
       font-weight: 700;
       color: var(--rose-dark);
-      line-height: 1.15;
+      line-height: 1.2;
       margin-bottom: 4px;
     }
     .stat-box.green .stat-num { color: var(--sage); }
-    .stat-lbl {
-      font-size: 0.8rem;
-      color: var(--muted);
-      font-weight: 500;
-    }
+    .stat-lbl { font-size: 0.79rem; color: var(--muted); font-weight: 500; }
     .progress-bar {
       height: 10px;
       background: #e6ddd1;
@@ -1029,11 +810,7 @@
       overflow: hidden;
       margin: 10px 0 8px;
     }
-    .progress-fill {
-      height: 100%;
-      background: var(--sage);
-      transition: width 0.35s ease;
-    }
+    .progress-fill { height: 100%; background: var(--sage); transition: width 0.35s ease; }
     .history-item {
       display: flex;
       justify-content: space-between;
@@ -1041,21 +818,13 @@
       gap: 12px;
       padding: 13px 0;
       border-bottom: 1px solid var(--border);
-      font-size: 0.88rem;
+      font-size: 0.86rem;
     }
     .history-item:last-child { border-bottom: none; }
 
     /* ================= 10. EMPTY STATE & TOAST ================= */
-    .empty-state {
-      text-align: center;
-      padding: 44px 24px;
-    }
-    .empty-state h3 {
-      font-family: var(--serif);
-      font-size: 1.55rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
+    .empty-state { text-align: center; padding: 44px 24px; }
+    .empty-state h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; }
     .toast {
       position: fixed;
       bottom: 24px;
@@ -1065,7 +834,7 @@
       color: var(--ivory);
       padding: 12px 24px;
       border-radius: 999px;
-      font-size: 0.86rem;
+      font-size: 0.84rem;
       font-weight: 500;
       opacity: 0;
       transition: 0.25s;
@@ -1074,27 +843,18 @@
       max-width: 92vw;
       text-align: center;
     }
-    .toast.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
     /* ================= 11. RESPONSIVE ================= */
     @media (max-width: 960px) {
-      .step1-grid, .step3-grid, .group-layout {
-        grid-template-columns: 1fr;
-      }
+      .step1-grid, .step3-grid, .group-layout { grid-template-columns: 1fr; }
       .summary-card { position: static; }
       .grid-3x2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 640px) {
       .container { padding: 0 16px; }
       .card { padding: 20px; }
-      .navbar-inner {
-        height: auto;
-        padding: 12px 16px;
-        flex-wrap: wrap;
-      }
+      .navbar-inner { height: auto; padding: 12px 16px; flex-wrap: wrap; }
       .nav-tabs {
         order: 3;
         width: 100%;
@@ -1103,7 +863,7 @@
         padding-top: 6px;
         height: 44px;
       }
-      .nav-tab { padding: 0 8px; font-size: 0.84rem; }
+      .nav-tab { padding: 0 8px; font-size: 0.83rem; }
       .grid-3x2, .stat-grid { grid-template-columns: 1fr; }
       .broke-banner { flex-direction: column; align-items: flex-start; }
     }
@@ -1117,13 +877,13 @@
       <div class="brand" onclick="goHome()">Ăn gì đây ta?</div>
 
       <nav class="nav-tabs" id="v2-nav-tabs">
-        <button class="nav-tab active" id="tab-pick" onclick="switchTab('pick')">Tìm món</button>
-        <button class="nav-tab" id="tab-group" onclick="switchTab('group')">Chốt nhóm</button>
-        <button class="nav-tab" id="tab-stats" onclick="switchTab('stats')">Chi tiêu &amp; Xanh</button>
+        <button class="nav-tab active" id="tab-pick" onclick="switchTab('pick')">Find Food</button>
+        <button class="nav-tab" id="tab-group" onclick="switchTab('group')">Group Pick</button>
+        <button class="nav-tab" id="tab-stats" onclick="switchTab('stats')">Budget &amp; Green</button>
       </nav>
 
       <div class="mode-switch">
-        <span>Chế độ:</span>
+        <span>Mode:</span>
         <button class="mode-btn" id="btn-v1" onclick="switchVersion('v1')">V1</button>
         <button class="mode-btn active" id="btn-v2" onclick="switchVersion('v2')">V2</button>
       </div>
@@ -1132,64 +892,64 @@
 
   <main class="container">
 
-    <!-- ================= CHẾ ĐỘ V1 (BẢN THÔ KIỂM THỬ) ================= -->
+    <!-- ================= V1 MODE (ROUGH PROTOTYPE) ================= -->
     <section id="v1-section" class="v1-wrapper hidden">
       <div class="v1-timer-strip">
-        <div>Thời gian ra quyết định (V1): <strong id="v1-timer-text">0.0 giây</strong></div>
-        <button class="btn-outline-sm" onclick="resetTimer()">Bấm giờ lại</button>
+        <div>Decision time (V1): <strong id="v1-timer-text">0.0s</strong></div>
+        <button class="btn-outline-sm" onclick="resetTimer()">Reset Timer</button>
       </div>
 
       <div class="v1-box">
-        <h2>Trang chọn đồ ăn sinh viên (Prototype V1 — Bản thô)</h2>
+        <h2>Student Meal Selector (Prototype V1 — Rough Draft)</h2>
         <div class="v1-note">
-          <strong>Ghi chú kiểm thử V1:</strong> Giao diện thô chỉ có 2 ô chọn Mức giá và Loại món, trả về 1 dòng chữ đơn giản, chưa có bộ lọc món kiêng, chưa có hình ảnh và chưa có bản đồ chỉ đường.
+          <strong>V1 Testing Note:</strong> Basic interface with only 2 dropdown filters (Budget &amp; Dish Type), returning a single plain-text result with no dietary exclusions, no food photos, and no map navigation.
         </div>
 
         <div class="v1-field">
-          <label for="v1-price">1. Chọn mức giá:</label>
+          <label for="v1-price">1. Select budget:</label>
           <select id="v1-price" onchange="startTimerIfNeeded()">
-            <option value="all">-- Tất cả --</option>
-            <option value="u25">Dưới 25.000đ</option>
-            <option value="25_40">25.000đ – 40.000đ</option>
-            <option value="40_60">40.000đ – 60.000đ</option>
-            <option value="o60">Trên 60.000đ</option>
+            <option value="all">-- All --</option>
+            <option value="u25">Under 25,000 VND</option>
+            <option value="25_40">25,000 – 40,000 VND</option>
+            <option value="40_60">40,000 – 60,000 VND</option>
+            <option value="o60">Over 60,000 VND</option>
           </select>
         </div>
 
         <div class="v1-field">
-          <label for="v1-type">2. Chọn loại món:</label>
+          <label for="v1-type">2. Select dish type:</label>
           <select id="v1-type" onchange="startTimerIfNeeded()">
-            <option value="all">-- Tất cả --</option>
-            <option value="soup">Món nước</option>
-            <option value="dry">Món khô</option>
-            <option value="snack">Ăn nhẹ / Ăn vặt</option>
+            <option value="all">-- All --</option>
+            <option value="soup">Noodle / Soup</option>
+            <option value="dry">Rice / Dry Dishes</option>
+            <option value="snack">Light Bites &amp; Snacks</option>
           </select>
         </div>
 
-        <button class="v1-btn" onclick="pickV1()">Tìm món</button>
-        <button class="v1-btn" onclick="confirmV1()">Chốt món này</button>
+        <button class="v1-btn" onclick="pickV1()">Find Dish</button>
+        <button class="v1-btn" onclick="confirmV1()">Confirm Dish</button>
 
         <div class="v1-result" id="v1-result">
-          <em>Chưa có kết quả. Bấm "Tìm món" để hệ thống chọn ngẫu nhiên.</em>
+          <em>No result yet. Click "Find Dish" for a random suggestion.</em>
         </div>
       </div>
     </section>
 
-    <!-- ================= CHẾ ĐỘ V2 (HOÀN THIỆN 3 BƯỚC) ================= -->
+    <!-- ================= V2 MODE (3-STEP EXPERIENCE) ================= -->
     <section id="v2-section">
 
-      <!-- ===== TAB 1: TÌM MÓN (3 STEPS) ===== -->
+      <!-- ===== TAB 1: FIND FOOD (3 STEPS) ===== -->
       <div id="panel-pick">
 
-        <!-- BƯỚC 1: BỘ LỌC THÔNG MINH -->
+        <!-- STEP 1: SMART FILTER -->
         <div id="step-1">
           <div class="broke-banner" id="broke-banner" onclick="toggleBrokeMode()">
             <div>
-              <div class="broke-title">Chế độ cuối tháng ≤ 30k</div>
-              <div class="broke-sub">Ngon, no bụng và nhẹ ví • Bật nhanh một chạm để lọc các quán bình dân quanh trường</div>
+              <div class="broke-title">End-of-Month Mode ≤ 30k</div>
+              <div class="broke-sub">Tasty, filling, and student-friendly • One tap to filter affordable local spots near campus</div>
             </div>
             <div class="broke-toggle-wrap">
-              <span id="broke-status-text">Bật ngay</span>
+              <span id="broke-status-text">Turn on</span>
               <div class="toggle-track"><div class="toggle-knob"></div></div>
             </div>
           </div>
@@ -1197,13 +957,13 @@
           <div class="step1-grid">
             <!-- Left Column: Filter Card -->
             <div class="card">
-              <h1 class="section-title">Hôm nay bạn muốn ăn gì?</h1>
-              <p class="section-sub">Chọn nhanh các tiêu chí bên dưới để Ăn gì đây ta? gợi ý những quán hợp gu quanh Quận 10.</p>
+              <h1 class="section-title">What are you craving today?</h1>
+              <p class="section-sub">Pick a few quick preferences below and let Ăn gì đây ta? curate verified eateries around District 10.</p>
 
               <div class="filter-group">
-                <span class="filter-label">1. Ngân sách hôm nay</span>
+                <span class="filter-label">1. Today's Budget</span>
                 <div class="chip-list" id="filter-price">
-                  <button class="chip selected" data-val="all" onclick="selectSingle('price', 'all', this)">Tất cả</button>
+                  <button class="chip selected" data-val="all" onclick="selectSingle('price', 'all', this)">All</button>
                   <button class="chip" data-val="u25" onclick="selectSingle('price', 'u25', this)">≤ 25k</button>
                   <button class="chip" data-val="25_40" onclick="selectSingle('price', '25_40', this)">25k – 40k</button>
                   <button class="chip" data-val="40_60" onclick="selectSingle('price', '40_60', this)">40k – 60k</button>
@@ -1212,154 +972,154 @@
               </div>
 
               <div class="filter-group">
-                <span class="filter-label">2. Kiểu món ăn</span>
+                <span class="filter-label">2. Dish Style</span>
                 <div class="chip-list" id="filter-type">
-                  <button class="chip selected" data-val="all" onclick="selectSingle('type', 'all', this)">Tất cả</button>
-                  <button class="chip" data-val="soup" onclick="selectSingle('type', 'soup', this)">Món nước</button>
-                  <button class="chip" data-val="dry" onclick="selectSingle('type', 'dry', this)">Món khô</button>
-                  <button class="chip" data-val="snack" onclick="selectSingle('type', 'snack', this)">Ăn nhẹ / Ăn vặt</button>
+                  <button class="chip selected" data-val="all" onclick="selectSingle('type', 'all', this)">All</button>
+                  <button class="chip" data-val="soup" onclick="selectSingle('type', 'soup', this)">Noodle &amp; Soup</button>
+                  <button class="chip" data-val="dry" onclick="selectSingle('type', 'dry', this)">Rice &amp; Dry</button>
+                  <button class="chip" data-val="snack" onclick="selectSingle('type', 'snack', this)">Light Bites &amp; Snacks</button>
                 </div>
               </div>
 
               <div class="filter-group">
-                <span class="filter-label">3. Bối cảnh &amp; Tâm trạng</span>
+                <span class="filter-label">3. Context &amp; Mood</span>
                 <div class="chip-list" id="filter-context">
-                  <button class="chip selected" data-val="all" onclick="selectSingle('context', 'all', this)">Bình thường</button>
-                  <button class="chip" data-val="solo" onclick="selectSingle('context', 'solo', this)">Ăn một mình</button>
-                  <button class="chip" data-val="quick" onclick="selectSingle('context', 'quick', this)">Đang vội (&lt;15p)</button>
-                  <button class="chip" data-val="group" onclick="selectSingle('context', 'group', this)">Đi ăn nhóm</button>
-                  <button class="chip" data-val="rain" onclick="selectSingle('context', 'rain', this)">Trời mưa</button>
-                  <button class="chip" data-val="hot" onclick="selectSingle('context', 'hot', this)">Trời nóng</button>
+                  <button class="chip selected" data-val="all" onclick="selectSingle('context', 'all', this)">Casual</button>
+                  <button class="chip" data-val="solo" onclick="selectSingle('context', 'solo', this)">Solo Dining</button>
+                  <button class="chip" data-val="quick" onclick="selectSingle('context', 'quick', this)">In a Rush (&lt;15m)</button>
+                  <button class="chip" data-val="group" onclick="selectSingle('context', 'group', this)">With Friends</button>
+                  <button class="chip" data-val="rain" onclick="selectSingle('context', 'rain', this)">Rainy Day</button>
+                  <button class="chip" data-val="hot" onclick="selectSingle('context', 'hot', this)">Hot Weather</button>
                 </div>
               </div>
 
               <div class="filter-group">
-                <span class="filter-label">4. Loại trừ nhanh (Chọn nhiều)</span>
+                <span class="filter-label">4. Quick Exclusions (Multi-select)</span>
                 <div class="chip-list" id="filter-exclude">
-                  <button class="chip exclude" data-val="no_spicy" onclick="toggleExclude('no_spicy', this)">Không cay</button>
-                  <button class="chip exclude" data-val="no_seafood" onclick="toggleExclude('no_seafood', this)">Không hải sản</button>
-                  <button class="chip exclude" data-val="no_beef" onclick="toggleExclude('no_beef', this)">Không thịt bò</button>
-                  <button class="chip exclude" data-val="veg_only" onclick="toggleExclude('veg_only', this)">Chỉ ăn chay</button>
+                  <button class="chip exclude" data-val="no_spicy" onclick="toggleExclude('no_spicy', this)">No Spicy</button>
+                  <button class="chip exclude" data-val="no_seafood" onclick="toggleExclude('no_seafood', this)">No Seafood</button>
+                  <button class="chip exclude" data-val="no_beef" onclick="toggleExclude('no_beef', this)">No Beef</button>
+                  <button class="chip exclude" data-val="veg_only" onclick="toggleExclude('veg_only', this)">Vegetarian Only</button>
                 </div>
               </div>
             </div>
 
             <!-- Right Column: Sticky Summary -->
             <aside class="card summary-card">
-              <div class="summary-box-title">Tóm tắt bộ lọc</div>
-              <div class="summary-row-title">Lựa chọn hiện tại của bạn</div>
+              <div class="summary-box-title">Filter Summary</div>
+              <div class="summary-row-title">Your current selections</div>
               <div class="summary-pills" id="summary-pills"></div>
 
               <div class="green-pill">
-                Ưu tiên đi bộ gần trường • Ăn tại quán giảm rác nhựa
+                Walkable spots near campus • Dine-in for zero plastic waste
               </div>
 
               <div class="match-counter" id="live-match-count">
-                Tìm thấy <span>17</span> quán phù hợp quanh Quận 10
+                Found <span>17</span> matching eateries around District 10
               </div>
 
-              <button class="cta-btn" onclick="goToStep2()">Tìm món ngay →</button>
+              <button class="cta-btn" onclick="goToStep2()">Find Food Now →</button>
 
               <p class="cta-tip">
-                Mẹo nhỏ: Bật "Chế độ cuối tháng ≤ 30k" phía trên nếu bạn muốn thu gọn danh sách theo mức giá sinh viên.
+                Tip: Toggle "End-of-Month Mode ≤ 30k" above whenever you want quick budget-friendly picks.
               </p>
             </aside>
           </div>
         </div>
 
-        <!-- BƯỚC 2: HIỆN MÓN (LƯỚI THẺ 3x2) -->
+        <!-- STEP 2: 3x2 GRID -->
         <div id="step-2" class="hidden">
           <div class="sub-bar">
             <div class="sub-bar-left" id="step2-tags"></div>
             <div class="sub-bar-right">
               <span id="step2-count-label"></span>
-              <button class="btn-outline-sm" id="btn-reshuffle" onclick="reshuffleStep2()">Đổi gợi ý khác</button>
+              <button class="btn-outline-sm" id="btn-reshuffle" onclick="reshuffleStep2()">Shuffle Picks</button>
             </div>
           </div>
 
           <div id="step2-content"></div>
         </div>
 
-        <!-- BƯỚC 3: CHỐT MÓN & BẢN ĐỒ -->
+        <!-- STEP 3: DETAIL & MAP -->
         <div id="step-3" class="hidden">
           <div class="sub-bar">
-            <button class="back-btn" onclick="goBackToStep2()">← Quay lại danh sách</button>
-            <div class="timer-pill">Thời gian chọn: <strong id="v2-timer-text">0.0 giây</strong></div>
+            <button class="back-btn" onclick="goBackToStep2()">← Back to Suggestions</button>
+            <div class="timer-pill">Decision time: <strong id="v2-timer-text">0.0s</strong></div>
           </div>
 
           <div class="step3-grid" id="step3-content"></div>
         </div>
       </div>
 
-      <!-- ===== TAB 2: CHỐT NHÓM ===== -->
+      <!-- ===== TAB 2: GROUP PICK ===== -->
       <div id="panel-group" class="hidden">
         <div class="group-layout">
           <div class="card">
             <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:18px;">
               <div>
-                <h2 class="section-title">Chốt món nhóm không cần tranh cãi</h2>
-                <p class="section-sub" style="margin-bottom:0;">Tự động lấy mức ngân sách thấp nhất và loại mọi món có thành viên kiêng ăn.</p>
+                <h2 class="section-title">Group Dining Without the Debate</h2>
+                <p class="section-sub" style="margin-bottom:0;">Automatically matches the lowest budget and respects every member's dietary restrictions.</p>
               </div>
               <div style="display:flex; gap:6px; flex-shrink:0;">
-                <button class="btn-outline-sm" onclick="changeMemberCount(-1)">- Bớt</button>
-                <button class="btn-outline-sm" onclick="changeMemberCount(1)">+ Thêm</button>
+                <button class="btn-outline-sm" onclick="changeMemberCount(-1)">- Remove</button>
+                <button class="btn-outline-sm" onclick="changeMemberCount(1)">+ Add</button>
               </div>
             </div>
 
             <div id="group-members-list"></div>
 
-            <button class="cta-btn" style="margin-top:10px;" onclick="pickGroupMeal()">Tìm giao điểm cho cả nhóm →</button>
+            <button class="cta-btn" style="margin-top:10px;" onclick="pickGroupMeal()">Find Group Match →</button>
           </div>
 
           <div id="group-result-box">
             <div class="card empty-state">
-              <h3>Sẵn sàng chốt kèo cùng nhóm</h3>
-              <p style="font-size:0.86rem; color:var(--muted);">Chọn ngân sách và món kiêng của từng bạn ở bên trái rồi bấm nút tìm giao điểm.</p>
+              <h3>Ready to settle the group vote</h3>
+              <p style="font-size:0.85rem; color:var(--muted);">Set each friend's max budget and dietary restrictions on the left, then click Find Group Match.</p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ===== TAB 3: CHI TIÊU & SỐNG XANH ===== -->
+      <!-- ===== TAB 3: BUDGET & GREEN IMPACT ===== -->
       <div id="panel-stats" class="hidden">
         <div class="card">
           <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:20px; flex-wrap:wrap;">
             <div>
-              <h2 class="section-title">Chi tiêu tuần &amp; Tác động Sống Xanh</h2>
-              <p class="section-sub" style="margin-bottom:0;">Ghi nhận tự động trên trình duyệt mỗi khi bạn bấm "Chốt đi ăn".</p>
+              <h2 class="section-title">Weekly Budget &amp; Green Impact</h2>
+              <p class="section-sub" style="margin-bottom:0;">Saved locally on your browser whenever you click "Confirm Meal".</p>
             </div>
-            <button class="btn-outline-sm" onclick="clearHistory()">Xóa lịch sử</button>
+            <button class="btn-outline-sm" onclick="clearHistory()">Clear History</button>
           </div>
 
           <div class="stat-grid">
             <div class="stat-box">
-              <div class="stat-num" id="stat-spent">0đ</div>
-              <div class="stat-lbl">Ước tính đã chi</div>
+              <div class="stat-num" id="stat-spent">0 VND</div>
+              <div class="stat-lbl">Estimated Spent</div>
             </div>
             <div class="stat-box">
-              <div class="stat-num" id="stat-meals">0 bữa</div>
-              <div class="stat-lbl">Số bữa đã chốt</div>
+              <div class="stat-num" id="stat-meals">0 meals</div>
+              <div class="stat-lbl">Confirmed Meals</div>
             </div>
             <div class="stat-box green">
-              <div class="stat-num" id="stat-plastic">0 hộp</div>
-              <div class="stat-lbl">Hộp xốp / nilon đã giảm</div>
+              <div class="stat-num" id="stat-plastic">0 sets</div>
+              <div class="stat-lbl">Plastic Sets Saved</div>
             </div>
           </div>
 
           <div style="margin-bottom:22px; background:var(--cream-soft); border:1px solid var(--border); border-radius:14px; padding:18px;">
-            <div style="display:flex; justify-content:space-between; font-size:0.86rem; font-weight:600; gap:12px;">
-              <span>Ngân sách ăn uống tuần này</span>
-              <span id="budget-label">0đ / 500.000đ (0%)</span>
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:600; gap:12px;">
+              <span>Weekly Food Budget</span>
+              <span id="budget-label">0k / 500k VND (0%)</span>
             </div>
             <div class="progress-bar">
               <div class="progress-fill" id="budget-fill" style="width:0%"></div>
             </div>
-            <div style="font-size:0.8rem; color:var(--sage-dark); font-weight:500;">
-              Mỗi bữa đi bộ ra quán ăn tại chỗ giúp cắt giảm khoảng 1 hộp xốp cùng 1 túi nilon và tiết kiệm trung bình 15.000đ phí giao hàng.
+            <div style="font-size:0.79rem; color:var(--sage-dark); font-weight:500;">
+              Every dine-in meal avoids roughly 1 foam box plus 1 plastic bag and saves around 15,000 VND in delivery fees.
             </div>
           </div>
 
-          <h3 style="font-family:var(--serif); font-size:1.4rem; font-weight:600; margin-bottom:8px;">Lịch sử các bữa đã chốt</h3>
+          <h3 style="font-size:1.05rem; font-weight:700; margin-bottom:8px;">Confirmed Meal History</h3>
           <div id="history-list"></div>
         </div>
       </div>
@@ -1371,26 +1131,26 @@
 
   <script>
     /* =====================================================================
-       1. DATABASE: 17 QUÁN ĂN QUẬN 10 KÈM HÌNH ẢNH & LINK GOOGLE MAPS
+       1. DATABASE: 17 VERIFIED EATERIES AROUND DISTRICT 10
     ===================================================================== */
     const RESTAURANTS = [
-      // --- NHÓM 1: MÓN KHÔ ---
+      // --- GROUP 1: RICE & DRY DISHES ---
       {
         id: 1,
-        dishName: "Cơm tấm sườn bì chả",
+        dishName: "Broken Rice with Grilled Pork, Skin & Egg Meatloaf",
         shopName: "Cơm Tấm 229 Vĩnh Viễn",
         image: "https://scontent.fsgn2-8.fna.fbcdn.net/v/t1.6435-9/79085642_136163291164018_6219957614998978560_n.jpg?stp=dst-jpg_tt6&cstp=mx899x899&ctp=s899x899&_nc_cat=105&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=f727a1&_nc_ohc=E_ppukmiihMQ7kNvwGJfaov&_nc_oc=AdqaMNzwjG_mDMpWH_JCOrA-OkHPHX57MMM25zuyL-f4lBs_PWqKG96kCtYTEQvlsTc&_nc_zt=23&_nc_ht=scontent.fsgn2-8.fna&_nc_gid=LmvWRPlS_cnFoV-T5IwL-g&_nc_ss=7b3a8&oh=00_AQVr7DcpGpWXb38zhMiFwkzi66a4PoqlVLuXip7MNc1boQ&oe=6B309A02",
-        groupLabel: "Món khô",
+        groupLabel: "Rice & Dry",
         type: "dry",
-        priceText: "20.000đ – 33.000đ/dĩa",
+        priceText: "20k – 33k VND / plate",
         priceMin: 20,
         priceMax: 33,
         avgPrice: 27,
         hours: "7:30 – 21:00",
-        address: "229 Vĩnh Viễn, phường Vườn Lài, TP.HCM",
+        address: "229 Vĩnh Viễn, Vườn Lài Ward, Ho Chi Minh City",
         mapsUrl: "https://maps.app.goo.gl/gnbaJiwLLcQgkGGG9",
-        note: "Quán bình dân, phục vụ nhanh, rất hợp túi tiền sinh viên.",
-        bullets: ["Giá sinh viên chỉ từ 20k – 33k", "Phục vụ nhanh, không đợi lâu", "Mở suốt ngày từ sáng đến tối"],
+        note: "Budget-friendly local eatery with fast service, ideal for students.",
+        bullets: ["Student-friendly prices from 20k – 33k", "Fast serving with minimal wait", "Open all day from morning to night"],
         contexts: ["solo", "quick", "group", "hot", "rain"],
         spicy: false,
         seafood: false,
@@ -1399,20 +1159,20 @@
       },
       {
         id: 2,
-        dishName: "Cơm tấm sườn nướng",
+        dishName: "Grilled Pork Chop Broken Rice",
         shopName: "Cơm tấm Tài 476 Nguyễn Tri Phương",
         image: "https://scontent.fsgn2-9.fna.fbcdn.net/v/t39.30808-6/744042179_1471149125040622_6404527042817427649_n.jpg?stp=dst-jpg_tt6&cstp=mx1000x1000&ctp=s1000x1000&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_ohc=ebqv9khEcl8Q7kNvwGDuhFv&_nc_oc=AdoTeD9LTXrewu-pyMJXM5mGDGZPrJ6dPtEpXHAfF726_weBlWQex8eq5nAZe_tQ25Q&_nc_zt=23&_nc_ht=scontent.fsgn2-9.fna&_nc_gid=Ko0uppXEK462vgWM4EeW3Q&_nc_ss=7b3a8&oh=00_AQX96MWb7t9EBZHE06jeXFdgfrqEcXpdEeBnd32GFOE5ZQ&oe=6B0EF082",
-        groupLabel: "Món khô",
+        groupLabel: "Rice & Dry",
         type: "dry",
-        priceText: "35.000đ – 115.000đ/dĩa",
+        priceText: "35k – 115k VND / plate",
         priceMin: 35,
         priceMax: 115,
         avgPrice: 50,
         hours: "10:00 – 14:00 & 17:00 – 1:30",
-        address: "476 Nguyễn Tri Phương, phường Vườn Lài, TP.HCM",
+        address: "476 Nguyễn Tri Phương, Vườn Lài Ward, Ho Chi Minh City",
         mapsUrl: "https://maps.app.goo.gl/PHRr4zNUpZV3uyTy7",
-        note: "Sườn nướng đậm vị, có cả phần sườn cọng lớn, bán tới khuya.",
-        bullets: ["Sườn nướng thơm, miếng dày đậm vị", "Bán xuyên trưa và khuya đến 1:30", "Phù hợp nạp năng lượng sau ca học"],
+        note: "Savory charcoal-grilled ribs with hearty portions, open late into the night.",
+        bullets: ["Thick, flavorful grilled pork chop", "Open through lunch and late until 1:30 AM", "Great for recharging after long classes"],
         contexts: ["solo", "group", "hot", "rain"],
         spicy: false,
         seafood: false,
@@ -1421,20 +1181,20 @@
       },
       {
         id: 3,
-        dishName: "Bún thịt nướng",
+        dishName: "Grilled Pork Vermicelli Bowl (Bún Thịt Nướng)",
         shopName: "Bún Thịt Nướng Quán 339",
         image: "https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/506015440_730350276316695_8585537299619545058_n.jpg?stp=dst-jpg_tt6&cstp=mx1280x960&ctp=s1280x960&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=G-Epj3O45c0Q7kNvwGF0MIk&_nc_oc=AdpxIAcC5v2unEswSe7zqnYLudMIlXPUUijd1lVold4_92YlDA3sLADIxMXmGWpARTY&_nc_zt=23&_nc_ht=scontent.fsgn2-6.fna&_nc_gid=gy2HrHemXsxymUxCwzWjZQ&_nc_ss=7b3a8&oh=00_AQUs5ofaoHLxMGk0CaqWfUnp3pDf9Ic_NtLkqwxv34BkiA&oe=6B0F042E",
-        groupLabel: "Món khô",
+        groupLabel: "Rice & Dry",
         type: "dry",
-        priceText: "22.000đ – 28.000đ/tô",
+        priceText: "22k – 28k VND / bowl",
         priceMin: 22,
         priceMax: 28,
         avgPrice: 25,
         hours: "9:00 – 21:00",
-        address: "Hẻm 339/7-9 Tô Hiến Thành, phường Hòa Hưng, TP.HCM",
+        address: "Alley 339/7-9 Tô Hiến Thành, Hòa Hưng Ward, Ho Chi Minh City",
         mapsUrl: "https://maps.app.goo.gl/NEgUreiUMmw5KxRj7",
-        note: "Giá siêu mềm cho sinh viên, có bán kèm cơm tấm.",
-        bullets: ["Giá mềm chỉ 22k – 28k/tô", "Nhiều rau tươi mát, có kèm cơm tấm", "Lựa chọn hợp lý cho cuối tháng"],
+        note: "Very gentle student pricing, also serves broken rice on the side.",
+        bullets: ["Wallet-friendly 22k – 28k per bowl", "Fresh herbs and broken rice available", "Reliable go-to for end-of-month budgets"],
         contexts: ["solo", "quick", "group", "hot"],
         spicy: false,
         seafood: false,
@@ -1443,20 +1203,20 @@
       },
       {
         id: 4,
-        dishName: "Bún đậu mắm tôm",
+        dishName: "Vermicelli with Fried Tofu & Shrimp Paste",
         shopName: "Bún đậu mắm tôm Tiến Hải",
         image: "https://scontent.fsgn2-8.fna.fbcdn.net/v/t1.6435-9/62061970_2419771118089929_3276447833619693568_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=102&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=536f4a&_nc_ohc=S5Bb5quwkgUQ7kNvwFb_KnK&_nc_oc=AdrS2nuS1beGe0G3WWznOxJoIm26TEx1hF4tlKujmD0iAyt6f00FdHdvgsgBHgWKuvc&_nc_zt=23&_nc_ht=scontent.fsgn2-8.fna&_nc_gid=AoC5UownPLPHa5OdJZn_Tg&_nc_ss=7b3a8&oh=00_AQVUDHGWXYfUKzchmfjWi1-V8mHqRV8jEqSk0YChy1s2aw&oe=6B309DC9",
-        groupLabel: "Món khô",
+        groupLabel: "Rice & Dry",
         type: "dry",
-        priceText: "20.000đ – 55.000đ/phần",
+        priceText: "20k – 55k VND / tray",
         priceMin: 20,
         priceMax: 55,
         avgPrice: 35,
         hours: "9:30 – 22:00",
-        address: "409 Nguyễn Tri Phương, phường Diên Hồng, TP.HCM",
+        address: "409 Nguyễn Tri Phương, Diên Hồng Ward, Ho Chi Minh City",
         mapsUrl: "https://maps.app.goo.gl/FQREJS2NVAPZ9C3h6",
-        note: "Suất phổ biến khoảng 35.000đ, mẹt đầy đặn, rất hợp đi ăn nhóm.",
-        bullets: ["Suất phổ biến khoảng 35k đầy đặn", "Mặt tiền Nguyễn Tri Phương dễ tìm", "Phù hợp tụ tập đi ăn nhóm bạn"],
+        note: "Popular 35k platter with generous toppings, great for sharing with friends.",
+        bullets: ["Generous standard platter around 35k", "Easy to spot on Nguyễn Tri Phương St.", "Great vibe for group hangouts"],
         contexts: ["group", "solo", "hot"],
         spicy: false,
         seafood: true,
@@ -1465,20 +1225,20 @@
       },
       {
         id: 5,
-        dishName: "Bún chả Hà Nội",
-        shopName: "Ô Bun Cha — Quận 10",
+        dishName: "Hanoi Grilled Pork & Vermicelli (Bún Chả)",
+        shopName: "Ô Bun Cha — District 10",
         image: "https://obuncha.vn/storage/product/10/Kh%C3%B4ng%20c%C3%B3%20ti%C3%AAu%20%C4%91%E1%BB%81%20(900%20x%20900%20px)%20(43)_1.png",
-        groupLabel: "Món khô",
+        groupLabel: "Rice & Dry",
         type: "dry",
-        priceText: "Dưới 100.000đ/phần (~55k)",
+        priceText: "Under 100k VND (~55k)",
         priceMin: 45,
         priceMax: 75,
         avgPrice: 55,
         hours: "7:15 – 21:30",
-        address: "494 Nguyễn Tri Phương, phường Vườn Lài, TP.HCM",
+        address: "494 Nguyễn Tri Phương, Vườn Lài Ward, Ho Chi Minh City",
         mapsUrl: "https://maps.app.goo.gl/a5C6kvgwLa8M2kHe8",
-        note: "Chuẩn vị Hà Nội, chả nướng thơm, không gian gọn sạch.",
-        bullets: ["Chả nướng thơm chuẩn vị Hà Nội", "Không gian sạch sẽ, mát mẻ", "Mở cửa từ sáng sớm đến tối"],
+        note: "Authentic Hanoi flavor, fragrant grilled patties, clean and tidy seating.",
+        bullets: ["Fragrant Hanoi-style grilled pork", "Clean, comfortable indoor seating", "Open continuously from early morning"],
         contexts: ["solo", "group", "hot"],
         spicy: false,
         seafood: false,
@@ -1487,20 +1247,20 @@
       },
       {
         id: 6,
-        dishName: "Bánh mì chảo",
+        dishName: "Sizzling Skillet Bánh Mì (Bánh Mì Chảo)",
         shopName: "Bánh mì chảo A Bếp",
         image: "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.6435-9/106523989_3128644527252988_2787997680167029136_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=33274f&_nc_ohc=G3g_mXl7lmUQ7kNvwHUITUN&_nc_oc=Adoj7j9rwjLtv6t0pCaCIR1prshgtLyAhMagvGFXpqzDPH7y8xBi2XI-n_89xbkTnhM&_nc_zt=23&_nc_ht=scontent.fsgn2-3.fna&_nc_gid=TiEMEMqGaY88D6-D7UGnHQ&_nc_ss=7b3a8&oh=00_AQUM6DtMOymEE_Y2iZ25vbQis2pzNT37VoxNLv-6Nu-CRQ&oe=6B30AB60",
-        groupLabel: "Món khô",
+        groupLabel: "Rice & Dry",
         type: "dry",
-        priceText: "25.000đ – 60.000đ/chảo",
+        priceText: "25k – 60k VND / pan",
         priceMin: 25,
         priceMax: 60,
         avgPrice: 38,
         hours: "5:00 – 23:30",
-        address: "025 Chung cư Ngô Gia Tự, Sư Vạn Hạnh, phường Vườn Lài, TP.HCM",
+        address: "025 Ngô Gia Tự Apt, Sư Vạn Hạnh, Vườn Lài Ward, Ho Chi Minh City",
         mapsUrl: "https://maps.app.goo.gl/SMiyxeFLWxKZueBR6",
-        note: "Phổ biến 28.000đ – 47.000đ, mở từ sáng sớm đến khuya.",
-        bullets: ["Chảo nóng hổi, nhiều combo từ 28k", "Mở dài từ 5:00 sáng tới 23:30", "Hợp ăn sáng, trưa lẫn ăn tối muộn"],
+        note: "Most combos range from 28k – 47k, serving from early breakfast until late night.",
+        bullets: ["Piping hot skillets with combos from 28k", "Long opening hours: 5:00 to 23:30", "Fits breakfast, lunch, or late-night study"],
         contexts: ["solo", "group", "quick", "rain"],
         spicy: false,
         seafood: false,
@@ -1508,23 +1268,23 @@
         veg: false
       },
 
-      // --- NHÓM 2: MÓN NƯỚC ---
+      // --- GROUP 2: NOODLE & SOUP ---
       {
         id: 7,
-        dishName: "Phở bò",
+        dishName: "Vietnamese Beef Pho (Phở Bò)",
         shopName: "Phở Quyên",
         image: "https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/480763004_1560749641366650_3478995742844478886_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1365&ctp=s2048x1365&_nc_cat=109&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_ohc=hPj6WAcpl7EQ7kNvwHG1OEC&_nc_oc=AdrxYCfqioXR_OSsAk0cMn17nEsupue0gMH0epAL9ALFlKrhNgMZVFvYzw-vLibF9F4&_nc_zt=23&_nc_ht=scontent.fsgn2-5.fna&_nc_gid=DP3l7VgFQXX7weXJEkoVnw&_nc_ss=7b3a8&oh=00_AQUnFkwBA9VHzLUNIQpPlCwylENDP2A6l6e7zkdWOWV_BA&oe=6B0F0A78",
-        groupLabel: "Món nước",
+        groupLabel: "Noodle & Soup",
         type: "soup",
-        priceText: "35.000đ – 50.000đ/tô",
+        priceText: "35k – 50k VND / bowl",
         priceMin: 35,
         priceMax: 50,
         avgPrice: 42,
         hours: "5:00 – 12:00 & 15:00 – 21:00",
-        address: "Hẻm 77 Hồ Thị Kỷ, phường Vườn Lài, TP.HCM",
+        address: "Alley 77 Hồ Thị Kỷ, Vườn Lài Ward, Ho Chi Minh City",
         mapsUrl: "https://maps.app.goo.gl/G6BttVuERXiZmPhb6",
-        note: "Bán xuyên suốt sáng và chiều tối, phục vụ nhanh, chỉ nhận tiền mặt.",
-        bullets: ["Nước dùng đậm đà, lên món nhanh", "Bán cả sáng lẫn chiều tối", "Lưu ý: Quán chỉ nhận tiền mặt"],
+        note: "Serves both morning and evening shifts with speedy service. Cash only.",
+        bullets: ["Rich broth and quick table service", "Open for morning and evening meals", "Note: Cash payment only"],
         contexts: ["solo", "quick", "group", "rain"],
         spicy: false,
         seafood: false,
@@ -1533,20 +1293,20 @@
       },
       {
         id: 8,
-        dishName: "Bún riêu tôm khô",
-        shopName: "Bún riêu tôm khô (Hẻm 209)",
+        dishName: "Dried Shrimp Crab Noodle Soup (Bún Riêu)",
+        shopName: "Bún riêu tôm khô (Alley 209)",
         image: "https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/560559927_1241756477979889_17236181790183081_n.jpg?stp=dst-jpg_tt6&cstp=mx960x987&ctp=s960x987&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_ohc=W7_lhUShun8Q7kNvwGrtT5m&_nc_oc=Adrx8P95_p9V2LXplZSjkGgE3EfixlkOJwsJOexeiFVcK1YdLsm0gOsX62dAHwza3pM&_nc_zt=23&_nc_ht=scontent.fsgn2-6.fna&_nc_gid=k_IDHLMg1x26asfZTWvlSw&_nc_ss=7b3a8&oh=00_AQVdC12bXXKWASaLRZQAyPON4iuHjk88CgKMhyL-5JJG4w&oe=6B0F03FD",
-        groupLabel: "Món nước",
+        groupLabel: "Noodle & Soup",
         type: "soup",
-        priceText: "30.000đ – 45.000đ/tô",
+        priceText: "30k – 45k VND / bowl",
         priceMin: 30,
         priceMax: 45,
         avgPrice: 35,
         hours: "8:00 – 15:00",
-        address: "Hẻm 209 Nguyễn Kim, phường Diên Hồng, TP.HCM",
+        address: "Alley 209 Nguyễn Kim, Diên Hồng Ward, Ho Chi Minh City",
         mapsUrl: "https://maps.app.goo.gl/7wW6oqGVnHjEYsmS9",
-        note: "Quán hẻm đông khách quen buổi sáng – trưa, hương vị đậm đà kiểu nhà nấu.",
-        bullets: ["Hương vị đậm đà kiểu nhà nấu", "Giá bình dân 30k – 45k/tô", "Hợp ăn sáng muộn hoặc bữa trưa"],
+        note: "Beloved alleyway spot with comforting home-cooked flavors for brunch and lunch.",
+        bullets: ["Comforting home-style tomato broth", "Affordable 30k – 45k per bowl", "Ideal for late breakfast or lunch"],
         contexts: ["solo", "quick", "rain", "hot"],
         spicy: false,
         seafood: true,
@@ -1555,20 +1315,20 @@
       },
       {
         id: 9,
-        dishName: "Mì Quảng",
+        dishName: "Quảng-Style Turmeric Noodles (Mì Quảng)",
         shopName: "Mì Quảng Hội An",
         image: "https://statics.vinpearl.com/mi-quang-hoi-an-2_1631199897.jpg",
-        groupLabel: "Món nước",
+        groupLabel: "Noodle & Soup",
         type: "soup",
-        priceText: "35.000đ – 50.000đ/tô",
+        priceText: "35k – 50k VND / bowl",
         priceMin: 35,
         priceMax: 50,
         avgPrice: 42,
         hours: "6:30 – 20:00",
-        address: "C1B đường Bửu Long, Cư xá Bắc Hải, phường Hòa Hưng, TP.HCM",
+        address: "C1B Bửu Long St, Bắc Hải Quarter, Hòa Hưng Ward, Ho Chi Minh City",
         mapsUrl: "https://maps.app.goo.gl/LJ9Qn9xGkUF7peWB7",
-        note: "Tôm thịt tươi, nước dùng nấu thanh vừa miệng, quán chỉ nhận tiền mặt.",
-        bullets: ["Tôm thịt tươi, nước dùng thanh nhẹ", "Khu Cư xá Bắc Hải thoáng mát", "Lưu ý: Quán chỉ nhận tiền mặt"],
+        note: "Fresh shrimp and pork with a light, balanced broth. Cash only.",
+        bullets: ["Fresh toppings and light, savory broth", "Airy Bắc Hải neighborhood location", "Note: Cash payment only"],
         contexts: ["solo", "group", "rain", "hot"],
         spicy: false,
         seafood: true,
@@ -1577,20 +1337,20 @@
       },
       {
         id: 10,
-        dishName: "Bún bò Huế",
+        dishName: "Spicy Hue Beef Noodle Soup (Bún Bò Huế)",
         shopName: "Bún Bò Huế Mỡ Nổi Cô Như",
         image: "https://images2.thanhnien.vn/528068263637045248/2025/6/4/anh-man-hinh-2025-06-04-luc-093010-17490042995071596821662.png",
-        groupLabel: "Món nước",
+        groupLabel: "Noodle & Soup",
         type: "soup",
-        priceText: "Khoảng 40.000đ/tô",
+        priceText: "Around 40k VND / bowl",
         priceMin: 40,
         priceMax: 45,
         avgPrice: 40,
         hours: "11:00 – 20:00",
-        address: "274/29 Võ Văn Tần, Quận 3, TP.HCM",
+        address: "274/29 Võ Văn Tần, District 3, Ho Chi Minh City",
         mapsUrl: "https://maps.app.goo.gl/tjokdYNTbnakx7vW8",
-        note: "Nước dùng đậm đà đặc trưng mỡ nổi, giáp ranh Quận 10 chạy qua rất gần (chỉ nhận tiền mặt).",
-        bullets: ["Đặc sản mỡ nổi béo thơm, nước đậm vị", "Giá đồng đều khoảng 40k/tô đầy đặn", "Giáp ranh Q.10, hợp cho ngày mưa"],
+        note: "Signature rich broth right on the border of District 10. Cash only.",
+        bullets: ["Signature bold Hue-style lemongrass broth", "Hearty bowls at ~40k VND", "Right next to District 10, cozy on rainy days"],
         contexts: ["solo", "group", "rain"],
         spicy: true,
         seafood: false,
@@ -1598,23 +1358,23 @@
         veg: false
       },
 
-      // --- NHÓM 3: MÓN CHAY ---
+      // --- GROUP 3: VEGETARIAN ---
       {
         id: 11,
-        dishName: "Cơm chay & Món chay",
+        dishName: "Vegetarian Rice & Traditional Dishes",
         shopName: "Cơm chay Thanh Lương",
         image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/e5/8d/87/un-formidable-restaurant.jpg?w=1400&h=-1&s=1",
-        groupLabel: "Món chay",
+        groupLabel: "Vegetarian",
         type: "dry",
-        priceText: "20.000đ – 40.000đ/phần",
+        priceText: "20k – 40k VND / meal",
         priceMin: 20,
         priceMax: 40,
         avgPrice: 30,
         hours: "6:30 – 21:00",
-        address: "545A Đường 3 Tháng 2, phường Diên Hồng, TP.HCM",
+        address: "545A 3 Tháng 2 St, Diên Hồng Ward, Ho Chi Minh City",
         mapsUrl: "https://maps.app.goo.gl/X65aHP9GWsC2AYGy9",
-        note: "Hơn 1.100 đánh giá, thực đơn phong phú từ cơm phần, bánh xèo chay đến lẩu chay (chỉ nhận tiền mặt).",
-        bullets: ["Hơn 1.100 đánh giá uy tín khu Q.10", "Đa dạng cơm phần, bánh xèo, lẩu chay", "Giá mềm từ 20k (chỉ nhận tiền mặt)"],
+        note: "Over 1,100 reviews with a diverse menu from rice sets to pancakes and hotpot (cash only).",
+        bullets: ["Over 1,100 trusted local reviews", "Wide menu: rice, pancakes, and hotpot", "Starts from 20k (cash only)"],
         contexts: ["solo", "quick", "group", "hot", "rain"],
         spicy: false,
         seafood: false,
@@ -1623,20 +1383,20 @@
       },
       {
         id: 12,
-        dishName: "Cơm chay & Mì Quảng chay",
+        dishName: "Vegetarian Rice & Quảng Noodles",
         shopName: "Chay Bình An",
         image: "https://down-vn.img.susercontent.com/vn-11134513-7r98o-lstqh5ymw24k75@resize_ss576x330",
-        groupLabel: "Món chay",
+        groupLabel: "Vegetarian",
         type: "dry",
-        priceText: "~35.000đ/phần (Buffet 49k)",
+        priceText: "~35k VND (Buffet 49k)",
         priceMin: 35,
         priceMax: 49,
         avgPrice: 35,
         hours: "8:00 – 21:00",
-        address: "49 Ngô Quyền, phường Diên Hồng, TP.HCM",
+        address: "49 Ngô Quyền, Diên Hồng Ward, Ho Chi Minh City",
         mapsUrl: "https://maps.app.goo.gl/gdVPeAgPdCHNoX3s8",
-        note: "Có máy lạnh mát mẻ, bếp sạch, miễn phí trà đá và có thêm mì Quảng chay (chỉ nhận tiền mặt).",
-        bullets: ["Phòng máy lạnh mát, miễn phí trà đá", "Có cơm phần 35k và buffet 49k", "Bếp sạch sẽ (chỉ nhận tiền mặt)"],
+        note: "Air-conditioned dining room, clean kitchen, complimentary iced tea (cash only).",
+        bullets: ["Cool A/C space with free iced tea", "35k meal sets and 49k buffet option", "Clean kitchen (cash only)"],
         contexts: ["solo", "group", "hot"],
         spicy: false,
         seafood: false,
@@ -1645,20 +1405,20 @@
       },
       {
         id: 13,
-        dishName: "Cơm tấm chay & Bánh xèo chay",
+        dishName: "Vegetarian Broken Rice & Crispy Pancakes",
         shopName: "Quán chay Thôi Kệ",
         image: "https://assets.grab.com/wp-content/uploads/sites/11/2020/10/12181933/10.jpg",
-        groupLabel: "Món chay",
+        groupLabel: "Vegetarian",
         type: "dry",
-        priceText: "25.000đ – 40.000đ/phần",
+        priceText: "25k – 40k VND / meal",
         priceMin: 25,
         priceMax: 40,
         avgPrice: 30,
         hours: "6:30 – 19:30",
-        address: "727 Lê Hồng Phong, phường Hòa Hưng, TP.HCM",
+        address: "727 Lê Hồng Phong, Hòa Hưng Ward, Ho Chi Minh City",
         mapsUrl: "https://maps.app.goo.gl/XRnPk2UXWStVV1Uh7",
-        note: "Rất đông sinh viên (đặc biệt mùng 1 và rằm), nổi bật với cơm tấm chay, bánh xèo chay và sữa bí đỏ.",
-        bullets: ["Quán quen đông sinh viên khu Q.10", "Nổi tiếng cơm tấm chay và sữa bí đỏ", "Giá bình dân 25k – 40k/phần"],
+        note: "Student favorite in District 10, famous for vegan broken rice and pumpkin milk.",
+        bullets: ["Popular campus favorite around District 10", "Known for vegan broken rice & pumpkin milk", "Fair prices at 25k – 40k"],
         contexts: ["solo", "quick", "group", "hot", "rain"],
         spicy: false,
         seafood: false,
@@ -1666,23 +1426,23 @@
         veg: true
       },
 
-      // --- NHÓM 4: ĂN NHẸ & ĂN VẶT ---
+      // --- GROUP 4: LIGHT BITES & SNACKS ---
       {
         id: 14,
-        dishName: "Bánh mì que",
+        dishName: "Crispy Baguette Sticks (Bánh Mì Que)",
         shopName: "Bánh mì que Chip",
         image: "https://down-bs-vn.img.susercontent.com/vn-11134513-7r98o-lsu82dgghdxg7b@resize_ss640x400!@crop_w640_h400_cT",
-        groupLabel: "Ăn nhẹ / Vặt",
+        groupLabel: "Light Bites",
         type: "snack",
-        priceText: "Dưới 25.000đ",
+        priceText: "Under 25k VND",
         priceMin: 15,
         priceMax: 25,
         avgPrice: 20,
         hours: "7:00 – 21:00",
-        address: "351/5 Lý Thái Tổ, phường Vườn Lài, TP.HCM",
+        address: "351/5 Lý Thái Tổ, Vườn Lài Ward, Ho Chi Minh City",
         mapsUrl: "https://maps.app.goo.gl/fn5Fwei94S9nEYNV8",
-        note: "Đánh giá 4.9/5, nhỏ gọn dễ ăn lót dạ giữa các tiết học.",
-        bullets: ["Đánh giá cao 4.9/5 trên bản đồ", "Giá mềm dưới 25k", "Gọn nhẹ, ăn nhanh giữa các ca học"],
+        note: "Rated 4.9/5, compact and quick to grab between lectures.",
+        bullets: ["Highly rated at 4.9/5 on Maps", "Super affordable under 25k", "Quick bite between back-to-back classes"],
         contexts: ["solo", "quick", "hot", "rain"],
         spicy: false,
         seafood: false,
@@ -1691,20 +1451,20 @@
       },
       {
         id: 15,
-        dishName: "Bánh tráng trộn / cuốn",
+        dishName: "Rice Paper Salad & Rolls (Bánh Tráng Trộn)",
         shopName: "Bánh tráng phương kiều",
         image: "https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/615695726_3220135454859632_2695679295285642508_n.jpg?stp=dst-jpg_tt6&cstp=mx1206x1608&ctp=s1206x1608&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_ohc=jrcl2KUBBWYQ7kNvwFBk-C4&_nc_oc=AdrVLu8vjIRz6XQas-_RjlHBHGnusmJIIiGvaYhmh5xiZE7i1l6lNJ18fgjg5CEtdaQ&_nc_zt=23&_nc_ht=scontent.fsgn2-5.fna&_nc_gid=yWBNybUglm93mZ_6pHwMqA&_nc_ss=7b3a8&oh=00_AQWHfMHcHch0fYh2gib-I60aEXwn42HZhm4TJq5_c59vSg&oe=6B0F1358",
-        groupLabel: "Ăn nhẹ / Vặt",
+        groupLabel: "Light Bites",
         type: "snack",
-        priceText: "20.000đ – 30.000đ/phần",
+        priceText: "20k – 30k VND / serving",
         priceMin: 20,
         priceMax: 30,
         avgPrice: 25,
         hours: "13:00 – 20:00",
-        address: "193/12 Nguyễn Tiểu La, phường Diên Hồng, TP.HCM",
+        address: "193/12 Nguyễn Tiểu La, Diên Hồng Ward, Ho Chi Minh City",
         mapsUrl: "https://maps.app.goo.gl/ZfAKSyDv1SBtcpqQ6",
-        note: "Quán ăn vặt buổi chiều được khen ngon ngay khu vực Nguyễn Tiểu La.",
-        bullets: ["Món ăn vặt quen thuộc buổi chiều", "Giá bình dân 20k – 30k/phần", "Gần khu Nguyễn Tiểu La dễ ghé"],
+        note: "Well-loved afternoon street snack spot right along Nguyễn Tiểu La.",
+        bullets: ["Classic afternoon student street snack", "Reasonable 20k – 30k per serving", "Convenient stop near Nguyễn Tiểu La"],
         contexts: ["solo", "quick", "group", "hot"],
         spicy: true,
         seafood: true,
@@ -1713,20 +1473,20 @@
       },
       {
         id: 16,
-        dishName: "Há cảo & xíu mại",
+        dishName: "Steamed Dim Sum & Shumai (Há Cảo)",
         shopName: "Quán Há cảo Ngọc Lan",
         image: "https://assets.grab.com/wp-content/uploads/sites/11/2019/10/01144312/foodcollectionsmy_65010566_440544860074322_1869004403072184206_n.jpg",
-        groupLabel: "Ăn nhẹ / Vặt",
+        groupLabel: "Light Bites",
         type: "snack",
-        priceText: "20.000đ – 50.000đ/phần",
+        priceText: "20k – 50k VND / plate",
         priceMin: 20,
         priceMax: 50,
         avgPrice: 30,
         hours: "9:00 – 22:00",
-        address: "500 Vĩnh Viễn, phường Diên Hồng, TP.HCM",
+        address: "500 Vĩnh Viễn, Diên Hồng Ward, Ho Chi Minh City",
         mapsUrl: "https://maps.app.goo.gl/hatyC6BGCRfYfn7u8",
-        note: "Há cảo xíu mại nóng hổi, ăn xế chiều hoặc ăn tối nhẹ đều hợp.",
-        bullets: ["Há cảo xíu mại hấp nóng hổi", "Linh hoạt phần nhỏ từ 20k đến 50k", "Mở tới 22:00 tiện ăn xế và tối nhẹ"],
+        note: "Freshly steamed dumplings, great for an afternoon snack or light dinner.",
+        bullets: ["Hot, freshly steamed dim sum & shumai", "Flexible portion sizes from 20k to 50k", "Open until 22:00 for evening cravings"],
         contexts: ["solo", "quick", "group", "rain"],
         spicy: false,
         seafood: true,
@@ -1735,20 +1495,20 @@
       },
       {
         id: 17,
-        dishName: "Chè mâm truyền thống",
+        dishName: "Traditional Sweet Soup Platter (Chè Mâm)",
         shopName: "Chè mâm KHÁNH VY",
         image: "https://down-vn.img.susercontent.com/vn-11134513-7r98o-lstpz19k16s920@resize_ss576x330",
-        groupLabel: "Ăn nhẹ / Vặt",
+        groupLabel: "Light Bites",
         type: "snack",
-        priceText: "~7.000đ/chén (Mâm 16 chén ~158k)",
+        priceText: "~7k / bowl (16-bowl tray ~158k)",
         priceMin: 7,
         priceMax: 40,
         avgPrice: 25,
         hours: "15:00 – 22:30",
-        address: "032 Lô H, Chung cư Ngô Gia Tự, phường Vườn Lài, TP.HCM",
+        address: "032 Block H, Ngô Gia Tự Apt, Vườn Lài Ward, Ho Chi Minh City",
         mapsUrl: "https://maps.app.goo.gl/BvYHTEb4qc28wTji8",
-        note: "Đi nhóm 4–5 người gọi nguyên mâm 16 chén chia tiền rất rẻ.",
-        bullets: ["Chè lẻ khoảng 7k/chén, mâm 16 chén 158k", "Đi nhóm 4–5 người chia rất tiết kiệm", "Mát lạnh, giải nhiệt buổi chiều tối"],
+        note: "Groups of 4–5 can share the iconic 16-bowl sweet soup tray for a very low split.",
+        bullets: ["Single bowls ~7k; 16-bowl tray ~158k", "Very affordable when split among 4–5 friends", "Refreshing afternoon & evening dessert"],
         contexts: ["group", "solo", "hot"],
         spicy: false,
         seafood: false,
@@ -1761,10 +1521,10 @@
        2. APP STATE & LABELS
     ===================================================================== */
     const LABELS = {
-      price: { all: "Tất cả", u25: "≤ 25k", "25_40": "25k – 40k", "40_60": "40k – 60k", o60: "> 60k" },
-      type: { all: "Tất cả", soup: "Món nước", dry: "Món khô", snack: "Ăn nhẹ / Vặt" },
-      context: { all: "Bình thường", solo: "Ăn một mình", quick: "Đang vội", group: "Đi ăn nhóm", rain: "Trời mưa", hot: "Trời nóng" },
-      exclude: { no_spicy: "Không cay", no_seafood: "Không hải sản", no_beef: "Không thịt bò", veg_only: "Chỉ ăn chay" }
+      price: { all: "All", u25: "≤ 25k", "25_40": "25k – 40k", "40_60": "40k – 60k", o60: "> 60k" },
+      type: { all: "All", soup: "Noodle & Soup", dry: "Rice & Dry", snack: "Light Bites" },
+      context: { all: "Casual", solo: "Solo Dining", quick: "In a Rush", group: "With Friends", rain: "Rainy Day", hot: "Hot Weather" },
+      exclude: { no_spicy: "No Spicy", no_seafood: "No Seafood", no_beef: "No Beef", veg_only: "Vegetarian Only" }
     };
 
     const state = {
@@ -1781,9 +1541,9 @@
       selectedDish: null,
       v1Current: null,
       groupMembers: [
-        { name: "Bạn 1", maxPrice: 40, no_spicy: false, no_seafood: false, no_beef: false, veg_only: false },
-        { name: "Bạn 2", maxPrice: 35, no_spicy: true, no_seafood: false, no_beef: false, veg_only: false },
-        { name: "Bạn 3", maxPrice: 45, no_spicy: false, no_seafood: false, no_beef: false, veg_only: false }
+        { name: "Friend 1", maxPrice: 40, no_spicy: false, no_seafood: false, no_beef: false, veg_only: false },
+        { name: "Friend 2", maxPrice: 35, no_spicy: true, no_seafood: false, no_beef: false, veg_only: false },
+        { name: "Friend 3", maxPrice: 45, no_spicy: false, no_seafood: false, no_beef: false, veg_only: false }
       ],
       groupMatches: [],
       groupIndex: 0
@@ -1810,7 +1570,7 @@
       timerRunning = true;
       timerInterval = setInterval(() => {
         lastRecordedSeconds = ((Date.now() - timerStart) / 1000).toFixed(1);
-        updateTimerDisplays(`${lastRecordedSeconds} giây`);
+        updateTimerDisplays(`${lastRecordedSeconds}s`);
       }, 100);
     }
 
@@ -1819,7 +1579,7 @@
       clearInterval(timerInterval);
       timerRunning = false;
       lastRecordedSeconds = ((Date.now() - timerStart) / 1000).toFixed(1);
-      updateTimerDisplays(`${lastRecordedSeconds} giây (Đã chốt)`);
+      updateTimerDisplays(`${lastRecordedSeconds}s (Confirmed)`);
       return lastRecordedSeconds;
     }
 
@@ -1828,7 +1588,7 @@
       timerRunning = false;
       timerStart = null;
       lastRecordedSeconds = "0.0";
-      updateTimerDisplays("0.0 giây");
+      updateTimerDisplays("0.0s");
     }
 
     function updateTimerDisplays(text) {
@@ -1948,27 +1708,27 @@
       const banner = document.getElementById("broke-banner");
       const text = document.getElementById("broke-status-text");
       banner.classList.toggle("active", state.brokeMode);
-      text.textContent = state.brokeMode ? "Đang bật (≤ 30k)" : "Bật ngay";
+      text.textContent = state.brokeMode ? "Active (≤ 30k)" : "Turn on";
     }
 
     function updateStep1Summary() {
       const matches = getFilteredRestaurants();
       const pillsEl = document.getElementById("summary-pills");
-      const priceValue = state.brokeMode ? "Cuối tháng (≤ 30k)" : LABELS.price[state.price];
+      const priceValue = state.brokeMode ? "End-of-Month (≤ 30k)" : LABELS.price[state.price];
       const excludeList = [...state.excludes].map(k => LABELS.exclude[k]);
 
       let html = `
-        <div class="summary-pill"><span>Ngân sách</span><strong>${priceValue}</strong></div>
-        <div class="summary-pill"><span>Kiểu món</span><strong>${LABELS.type[state.type]}</strong></div>
-        <div class="summary-pill"><span>Bối cảnh</span><strong>${LABELS.context[state.context]}</strong></div>
+        <div class="summary-pill"><span>Budget</span><strong>${priceValue}</strong></div>
+        <div class="summary-pill"><span>Dish Style</span><strong>${LABELS.type[state.type]}</strong></div>
+        <div class="summary-pill"><span>Context</span><strong>${LABELS.context[state.context]}</strong></div>
       `;
       if (excludeList.length) {
-        html += `<div class="summary-pill warn"><span>Loại trừ</span><strong>${excludeList.join(", ")}</strong></div>`;
+        html += `<div class="summary-pill warn"><span>Exclusions</span><strong>${excludeList.join(", ")}</strong></div>`;
       }
       pillsEl.innerHTML = html;
 
       document.getElementById("live-match-count").innerHTML =
-        `Tìm thấy <span>${matches.length}</span> quán phù hợp quanh Quận 10`;
+        `Found <span>${matches.length}</span> matching ${matches.length === 1 ? "eatery" : "eateries"} around District 10`;
     }
 
     function resetAllFilters() {
@@ -2003,34 +1763,34 @@
       if (state.filteredAll.length <= 1) return;
       state.displayedFive = shuffleArray(state.filteredAll).slice(0, 5);
       renderStep2();
-      showToast("Đã làm mới 5 gợi ý quán phù hợp.");
+      showToast("Refreshed 5 matching picks.");
     }
 
     function renderStep2() {
       const tags = [];
-      tags.push(`<button class="back-btn" onclick="setStep(1)">← Quay lại bộ lọc</button>`);
-      tags.push(`<span class="active-tag">${state.brokeMode ? "Cuối tháng ≤ 30k" : LABELS.price[state.price]}</span>`);
+      tags.push(`<button class="back-btn" onclick="setStep(1)">← Back to Filters</button>`);
+      tags.push(`<span class="active-tag">${state.brokeMode ? "End-of-Month ≤ 30k" : LABELS.price[state.price]}</span>`);
       if (state.type !== "all") tags.push(`<span class="active-tag">${LABELS.type[state.type]}</span>`);
       if (state.context !== "all") tags.push(`<span class="active-tag">${LABELS.context[state.context]}</span>`);
       state.excludes.forEach(ex => tags.push(`<span class="active-tag">${LABELS.exclude[ex]}</span>`));
-      tags.push(`<span class="active-tag green">Ăn tại quán • 0 rác nhựa</span>`);
+      tags.push(`<span class="active-tag green">Dine-in • Zero Plastic</span>`);
       document.getElementById("step2-tags").innerHTML = tags.join("");
 
       const total = state.filteredAll.length;
       const shown = state.displayedFive.length;
       document.getElementById("step2-count-label").textContent =
-        total ? `Hiển thị ${shown}/${total} quán + 1 ô chọn ngẫu nhiên` : "0 kết quả";
+        total ? `Showing ${shown}/${total} eateries + 1 random picker` : "0 results";
       document.getElementById("btn-reshuffle").classList.toggle("hidden", total <= 5);
 
       const contentEl = document.getElementById("step2-content");
       if (!total) {
         contentEl.innerHTML = `
           <div class="card empty-state">
-            <h3>Chưa có quán nào khớp hoàn toàn tiêu chí này</h3>
-            <p style="color:var(--muted); font-size:0.88rem; margin-bottom:18px;">
-              Thử nới lỏng mức ngân sách hoặc bỏ bớt một điều kiện loại trừ xem sao nhé.
+            <h3>No eatery matches all selected criteria</h3>
+            <p style="color:var(--muted); font-size:0.86rem; margin-bottom:18px;">
+              Try widening your budget range or removing one of the exclusions.
             </p>
-            <button class="cta-btn" style="max-width:220px;" onclick="resetAllFilters()">Đặt lại bộ lọc</button>
+            <button class="cta-btn" style="max-width:220px;" onclick="resetAllFilters()">Reset Filters</button>
           </div>`;
         return;
       }
@@ -2045,7 +1805,7 @@
               loading="lazy"
               onerror="handleImgFallback(this, '${item.dishName.replace(/'/g, "\\'")}', 'dish-thumb-fallback')"
             />
-            <span class="thumb-badge ${item.veg ? "veg" : ""}">${item.veg ? "Món chay" : item.groupLabel}</span>
+            <span class="thumb-badge ${item.veg ? "veg" : ""}">${item.veg ? "Vegetarian" : item.groupLabel}</span>
           </div>
           <div class="dish-body">
             <div class="dish-name">${item.dishName}</div>
@@ -2054,8 +1814,8 @@
               ${item.bullets.map(b => `<li>${b}</li>`).join("")}
             </ul>
             <div class="dish-footer">
-              <span class="walk-chip">Ăn tại quán</span>
-              <button class="pick-card-btn" onclick="openStep3(${item.id})">Chọn món →</button>
+              <span class="walk-chip">Dine-in</span>
+              <button class="pick-card-btn" onclick="openStep3(${item.id})">Choose →</button>
             </div>
           </div>
         </article>
@@ -2063,10 +1823,10 @@
 
       const randomCardHtml = `
         <div class="random-card">
-          <span class="random-kicker">Gợi ý ngẫu nhiên</span>
-          <div class="random-title">Vẫn phân vân?</div>
-          <p class="random-desc">Để hệ thống chọn giúp một món phù hợp nhất trong ${total} quán quanh Quận 10.</p>
-          <button class="random-btn" id="btn-spin-random" onclick="spinAndPickRandom()">Chọn ngẫu nhiên →</button>
+          <span class="random-kicker">Random Picker</span>
+          <div class="random-title">Still undecided?</div>
+          <p class="random-desc">Let us pick one spot instantly from ${total} matching eateries around District 10.</p>
+          <button class="random-btn" id="btn-spin-random" onclick="spinAndPickRandom()">Pick Randomly →</button>
         </div>
       `;
 
@@ -2078,7 +1838,7 @@
       const btn = document.getElementById("btn-spin-random");
       if (btn) {
         btn.disabled = true;
-        btn.textContent = "Đang chọn món...";
+        btn.textContent = "Picking...";
       }
 
       const visibleIds = state.displayedFive.map(d => d.id);
@@ -2095,7 +1855,7 @@
         if (ticks >= 7) {
           clearInterval(spinInterval);
           const winner = state.filteredAll[Math.floor(Math.random() * state.filteredAll.length)];
-          showToast(`Gợi ý cho bạn: ${winner.dishName} — ${winner.shopName}`);
+          showToast(`Selected for you: ${winner.dishName} — ${winner.shopName}`);
           openStep3(winner.id);
         }
       }, 95);
@@ -2112,9 +1872,7 @@
       setStep(3);
     }
 
-    function goBackToStep2() {
-      setStep(2);
-    }
+    function goBackToStep2() { setStep(2); }
 
     function renderStep3() {
       const d = state.selectedDish;
@@ -2127,10 +1885,10 @@
 
       const nearbyHtml = nearbySameGroup.length ? `
         <div class="nearby-box">
-          <div class="nearby-title">Gợi ý thêm cùng nhóm món gần đây</div>
+          <div class="nearby-title">Similar spots nearby</div>
           ${nearbySameGroup.map(n => `
             <div class="nearby-item" onclick="openStep3(${n.id})">
-              <div><strong>${n.shopName}</strong><br><span style="font-size:0.77rem; color:var(--muted);">${n.dishName}</span></div>
+              <div><strong>${n.shopName}</strong><br><span style="font-size:0.76rem; color:var(--muted);">${n.dishName}</span></div>
               <span class="nearby-price">${n.priceText}</span>
             </div>
           `).join("")}
@@ -2138,7 +1896,7 @@
 
       document.getElementById("step3-content").innerHTML = `
         <div class="card">
-          <div class="panel-heading">Món ăn &amp; Chỉ đường</div>
+          <div class="panel-heading">Dish &amp; Directions</div>
 
           <div class="selected-mini-card">
             <img
@@ -2150,23 +1908,23 @@
             <div>
               <div class="selected-dish-title">${d.dishName} — ${d.shopName}</div>
               <div class="selected-dish-meta">
-                ${d.priceText} • <span class="green-txt">Ăn tại quán • 0 rác nhựa</span>
+                ${d.priceText} • <span class="green-txt">Dine-in • Zero Plastic</span>
               </div>
             </div>
           </div>
 
           <div class="info-list">
-            <div class="info-row"><strong>Địa chỉ:</strong> ${d.address}</div>
-            <div class="info-row"><strong>Giờ mở cửa:</strong> ${d.hours}</div>
-            <div class="info-row"><strong>Điểm nổi bật:</strong> ${d.note}</div>
+            <div class="info-row"><strong>Address:</strong> ${d.address}</div>
+            <div class="info-row"><strong>Opening Hours:</strong> ${d.hours}</div>
+            <div class="info-row"><strong>Highlights:</strong> ${d.note}</div>
           </div>
 
           <div class="action-stack">
             <a class="btn-full btn-maps" href="${d.mapsUrl}" target="_blank" rel="noopener noreferrer">
-              Mở Google Maps chỉ đường ↗
+              Open in Google Maps ↗
             </a>
             <button class="btn-full btn-confirm" onclick="confirmMeal(${d.id})">
-              Chốt đi ăn (Lưu chi tiêu &amp; Xanh)
+              Confirm Meal (Log Budget &amp; Green)
             </button>
           </div>
 
@@ -2174,10 +1932,10 @@
         </div>
 
         <div class="card map-card">
-          <div class="panel-heading">Bản đồ đường đi</div>
+          <div class="panel-heading">Route Map</div>
           <div class="map-frame-wrap">
             <iframe
-              title="Bản đồ ${d.shopName}"
+              title="Map for ${d.shopName}"
               src="${embedUrl}"
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
@@ -2186,7 +1944,7 @@
           </div>
           <div class="map-caption">
             <span>${d.address}</span>
-            <a href="${d.mapsUrl}" target="_blank" rel="noopener noreferrer">Mở toàn màn hình ↗</a>
+            <a href="${d.mapsUrl}" target="_blank" rel="noopener noreferrer">Open full map ↗</a>
           </div>
         </div>
       `;
@@ -2205,22 +1963,22 @@
       );
       const box = document.getElementById("v1-result");
       if (!matches.length) {
-        box.innerHTML = "Không tìm thấy món phù hợp với lựa chọn hiện tại.";
+        box.innerHTML = "No matching dish found for the current selection.";
         state.v1Current = null;
         return;
       }
       const picked = matches[Math.floor(Math.random() * matches.length)];
       state.v1Current = picked;
-      box.innerHTML = `<strong>Gợi ý:</strong> ${picked.dishName} — ${picked.shopName} (${picked.priceText})`;
+      box.innerHTML = `<strong>Suggestion:</strong> ${picked.dishName} — ${picked.shopName} (${picked.priceText})`;
     }
 
     function confirmV1() {
       if (!state.v1Current) {
-        showToast("Hãy bấm 'Tìm món' trước nhé.");
+        showToast("Please click 'Find Dish' first.");
         return;
       }
       const sec = stopTimer();
-      showToast(`V1 chốt "${state.v1Current.dishName}" mất ${sec} giây.`);
+      showToast(`V1 confirmed "${state.v1Current.shopName}" in ${sec}s.`);
     }
 
     /* =====================================================================
@@ -2231,7 +1989,7 @@
       if (next < 2 || next > 5) return;
       if (delta > 0) {
         state.groupMembers.push({
-          name: `Bạn ${next}`,
+          name: `Friend ${next}`,
           maxPrice: 40,
           no_spicy: false,
           no_seafood: false,
@@ -2255,19 +2013,19 @@
           <div class="member-head">
             <span>${m.name}</span>
             <select onchange="updateMember(${i}, 'maxPrice', Number(this.value))">
-              <option value="25" ${m.maxPrice === 25 ? "selected" : ""}>Tối đa 25k</option>
-              <option value="30" ${m.maxPrice === 30 ? "selected" : ""}>Tối đa 30k</option>
-              <option value="35" ${m.maxPrice === 35 ? "selected" : ""}>Tối đa 35k</option>
-              <option value="40" ${m.maxPrice === 40 ? "selected" : ""}>Tối đa 40k</option>
-              <option value="55" ${m.maxPrice === 55 ? "selected" : ""}>Tối đa 55k</option>
-              <option value="100" ${m.maxPrice === 100 ? "selected" : ""}>Thoải mái</option>
+              <option value="25" ${m.maxPrice === 25 ? "selected" : ""}>Max 25k</option>
+              <option value="30" ${m.maxPrice === 30 ? "selected" : ""}>Max 30k</option>
+              <option value="35" ${m.maxPrice === 35 ? "selected" : ""}>Max 35k</option>
+              <option value="40" ${m.maxPrice === 40 ? "selected" : ""}>Max 40k</option>
+              <option value="55" ${m.maxPrice === 55 ? "selected" : ""}>Max 55k</option>
+              <option value="100" ${m.maxPrice === 100 ? "selected" : ""}>Flexible</option>
             </select>
           </div>
           <div class="member-checks">
-            <label class="mini-check"><input type="checkbox" ${m.no_spicy ? "checked" : ""} onchange="updateMember(${i}, 'no_spicy', this.checked)"> Không cay</label>
-            <label class="mini-check"><input type="checkbox" ${m.no_seafood ? "checked" : ""} onchange="updateMember(${i}, 'no_seafood', this.checked)"> Không hải sản</label>
-            <label class="mini-check"><input type="checkbox" ${m.no_beef ? "checked" : ""} onchange="updateMember(${i}, 'no_beef', this.checked)"> Không bò</label>
-            <label class="mini-check"><input type="checkbox" ${m.veg_only ? "checked" : ""} onchange="updateMember(${i}, 'veg_only', this.checked)"> Ăn chay</label>
+            <label class="mini-check"><input type="checkbox" ${m.no_spicy ? "checked" : ""} onchange="updateMember(${i}, 'no_spicy', this.checked)"> No Spicy</label>
+            <label class="mini-check"><input type="checkbox" ${m.no_seafood ? "checked" : ""} onchange="updateMember(${i}, 'no_seafood', this.checked)"> No Seafood</label>
+            <label class="mini-check"><input type="checkbox" ${m.no_beef ? "checked" : ""} onchange="updateMember(${i}, 'no_beef', this.checked)"> No Beef</label>
+            <label class="mini-check"><input type="checkbox" ${m.veg_only ? "checked" : ""} onchange="updateMember(${i}, 'veg_only', this.checked)"> Vegetarian</label>
           </div>
         </div>
       `).join("");
@@ -2304,9 +2062,9 @@
       if (!state.groupMatches.length) {
         box.innerHTML = `
           <div class="card empty-state">
-            <h3>Khẩu vị cả nhóm đang hơi khác nhau</h3>
-            <p style="font-size:0.86rem; color:var(--muted);">
-              Thử nới mức giá tối đa lên thêm 5k – 10k hoặc ghé <strong>Cơm chay Thanh Lương</strong> hay <strong>Cơm Tấm 229</strong> để mọi người tự chọn món theo ý thích.
+            <h3>Your group's preferences are a bit tight</h3>
+            <p style="font-size:0.85rem; color:var(--muted);">
+              Try raising the max budget by 5k – 10k, or visit <strong>Cơm chay Thanh Lương</strong> or <strong>Cơm Tấm 229</strong> where everyone can order individually.
             </p>
           </div>`;
         return;
@@ -2315,8 +2073,8 @@
       const d = state.groupMatches[state.groupIndex];
       box.innerHTML = `
         <div class="card">
-          <div style="font-size:0.79rem; font-weight:600; color:var(--sage-dark); background:var(--sage-soft); padding:6px 13px; border-radius:999px; display:inline-block; margin-bottom:16px;">
-            Giao điểm ${state.groupMembers.length} người • Ngân sách ≤ ${minBudget}k • ${state.groupMatches.length} quán phù hợp
+          <div style="font-size:0.78rem; font-weight:600; color:var(--sage-dark); background:var(--sage-soft); padding:6px 13px; border-radius:999px; display:inline-block; margin-bottom:16px;">
+            Matched for ${state.groupMembers.length} friends • Budget ≤ ${minBudget}k • ${state.groupMatches.length} spots
           </div>
 
           <div class="selected-mini-card">
@@ -2333,20 +2091,20 @@
           </div>
 
           <div class="info-list">
-            <div class="info-row"><strong>Địa chỉ:</strong> ${d.address}</div>
-            <div class="info-row"><strong>Giờ mở cửa:</strong> ${d.hours}</div>
-            <div class="info-row"><strong>Điểm nổi bật:</strong> ${d.note}</div>
+            <div class="info-row"><strong>Address:</strong> ${d.address}</div>
+            <div class="info-row"><strong>Opening Hours:</strong> ${d.hours}</div>
+            <div class="info-row"><strong>Highlights:</strong> ${d.note}</div>
           </div>
 
           <div class="action-stack" style="margin-bottom:0;">
             <a class="btn-full btn-maps" href="${d.mapsUrl}" target="_blank" rel="noopener noreferrer">
-              Mở Google Maps cho cả nhóm ↗
+              Open Google Maps for Group ↗
             </a>
             <button class="btn-full btn-confirm" onclick="confirmMeal(${d.id})">
-              Chốt kèo nhóm (Lưu chi tiêu)
+              Confirm Group Meal (Log Budget)
             </button>
             <button class="back-btn" style="width:100%; padding:10px;" onclick="nextGroupMeal(${minBudget})">
-              Đổi quán khác (${state.groupIndex + 1}/${state.groupMatches.length})
+              Try Another Spot (${state.groupIndex + 1}/${state.groupMatches.length})
             </button>
           </div>
         </div>`;
@@ -2386,13 +2144,13 @@
         time: timeStr
       });
       saveHistory(history);
-      showToast(`Đã chốt "${d.shopName}" trong ${sec}s và cộng +1 điểm Sống Xanh.`);
+      showToast(`Confirmed "${d.shopName}" in ${sec}s and saved +1 plastic set.`);
     }
 
     function clearHistory() {
       saveHistory([]);
       renderStats();
-      showToast("Đã xóa toàn bộ lịch sử chi tiêu.");
+      showToast("Cleared all meal history.");
     }
 
     function renderStats() {
@@ -2400,10 +2158,10 @@
       const totalSpent = history.reduce((sum, item) => sum + item.avgPrice, 0);
       const pct = Math.min(100, Math.round((totalSpent / WEEKLY_BUDGET) * 100));
 
-      document.getElementById("stat-spent").textContent = `${totalSpent.toLocaleString("vi-VN")}.000đ`;
-      document.getElementById("stat-meals").textContent = `${history.length} bữa`;
-      document.getElementById("stat-plastic").textContent = `${history.length} hộp`;
-      document.getElementById("budget-label").textContent = `${totalSpent}.000đ / ${WEEKLY_BUDGET}.000đ (${pct}%)`;
+      document.getElementById("stat-spent").textContent = `${totalSpent.toLocaleString("en-US")},000 VND`;
+      document.getElementById("stat-meals").textContent = `${history.length} ${history.length === 1 ? "meal" : "meals"}`;
+      document.getElementById("stat-plastic").textContent = `${history.length} ${history.length === 1 ? "set" : "sets"}`;
+      document.getElementById("budget-label").textContent = `${totalSpent}k / ${WEEKLY_BUDGET}k VND (${pct}%)`;
 
       const fill = document.getElementById("budget-fill");
       fill.style.width = `${pct}%`;
@@ -2411,7 +2169,7 @@
 
       const listEl = document.getElementById("history-list");
       if (!history.length) {
-        listEl.innerHTML = `<p style="color:var(--muted); font-size:0.86rem;">Chưa có bữa nào được chốt. Hãy chọn món và bấm "Chốt đi ăn" để bắt đầu theo dõi.</p>`;
+        listEl.innerHTML = `<p style="color:var(--muted); font-size:0.85rem;">No meals confirmed yet. Pick a spot and click "Confirm Meal" to start tracking.</p>`;
         return;
       }
 
@@ -2419,9 +2177,9 @@
         <div class="history-item">
           <div>
             <strong>${item.dishName}</strong> — ${item.shopName}
-            <div style="font-size:0.77rem; color:var(--muted);">Chốt lúc ${item.time} • Giảm 1 hộp xốp / túi nilon</div>
+            <div style="font-size:0.76rem; color:var(--muted);">Logged at ${item.time} • Saved 1 foam box &amp; plastic bag</div>
           </div>
-          <div style="font-weight:600; color:var(--rose-dark); white-space:nowrap;">~${item.avgPrice}.000đ</div>
+          <div style="font-weight:600; color:var(--rose-dark); white-space:nowrap;">~${item.avgPrice}k VND</div>
         </div>
       `).join("");
     }
