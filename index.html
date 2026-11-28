@@ -3,37 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ăn gì đây ta? – Ăn Gì Hôm Nay? (Quận 10)</title>
+  <title>Ăn gì đây ta? — Gợi ý quán ngon Quận 10</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet" />
   <style>
     /* ================= 1. DESIGN TOKENS & RESET ================= */
     :root {
-      --primary: #ff6b35;
-      --primary-dark: #e5531f;
-      --primary-soft: #fff3ee;
-      --green: #16a34a;
-      --green-dark: #15803d;
-      --green-soft: #dcfce7;
-      --blue: #2563eb;
-      --blue-dark: #1d4ed8;
-      --bg: #f8fafc;
-      --card: #ffffff;
-      --text: #0f172a;
-      --muted: #64748b;
-      --border: #e2e8f0;
-      --radius: 16px;
-      --shadow: 0 8px 28px rgba(15, 23, 42, 0.06);
+      --cream: #f5ede1;
+      --cream-soft: #faf5ed;
+      --ivory: #fffcf7;
+      --ink: #2b2622;
+      --muted: #6e6258;
+      --rose: #b87c82;
+      --rose-dark: #8d4452;
+      --rose-soft: #f5e7e9;
+      --sage: #586f50;
+      --sage-dark: #42563c;
+      --sage-soft: #e6ecd9;
+      --border: rgba(43, 38, 34, 0.11);
+      --border-rose: rgba(141, 68, 82, 0.28);
+      --radius: 18px;
+      --shadow: 0 12px 32px -14px rgba(95, 62, 40, 0.16), 0 2px 6px rgba(95, 62, 40, 0.04);
+      --shadow-hover: 0 18px 36px -14px rgba(95, 62, 40, 0.22), 0 4px 10px rgba(95, 62, 40, 0.06);
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --sans: "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
+      font-family: var(--sans);
+      font-weight: 400;
+      background-color: var(--cream);
+      background-image:
+        radial-gradient(60% 48% at 10% 6%, rgba(255, 250, 240, 0.9), transparent 70%),
+        radial-gradient(48% 45% at 92% 14%, rgba(223, 230, 207, 0.5), transparent 70%),
+        radial-gradient(52% 48% at 86% 92%, rgba(207, 166, 171, 0.34), transparent 70%),
+        radial-gradient(rgba(120, 100, 80, 0.14) 1px, transparent 1.2px);
+      background-size: auto, auto, auto, 26px 26px;
+      color: var(--ink);
+      line-height: 1.6;
       min-height: 100vh;
-      padding-bottom: 56px;
+      padding-bottom: 64px;
+      -webkit-font-smoothing: antialiased;
     }
 
+    button, input, select { font-family: inherit; color: inherit; }
     .hidden { display: none !important; }
 
     /* ================= 2. TOP NAVIGATION BAR ================= */
@@ -41,45 +57,38 @@
       position: sticky;
       top: 0;
       z-index: 60;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(10px);
+      background: rgba(255, 252, 247, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
     .navbar-inner {
-      max-width: 1140px;
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 0 20px;
-      height: 64px;
+      padding: 0 24px;
+      height: 68px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
     }
     .brand {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--text);
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 700;
+      font-size: 1.75rem;
+      letter-spacing: 0.01em;
+      color: var(--ink);
       cursor: pointer;
       white-space: nowrap;
+      transition: color 0.2s;
     }
-    .brand-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      background: var(--primary-soft);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-    }
+    .brand:hover { color: var(--rose-dark); }
 
     .nav-tabs {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       height: 100%;
     }
     .nav-tab {
@@ -88,70 +97,73 @@
       border: none;
       background: transparent;
       padding: 0 16px;
-      font-size: 0.94rem;
-      font-weight: 700;
+      font-size: 0.9rem;
+      font-weight: 500;
       color: var(--muted);
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      transition: color 0.18s;
+      transition: color 0.2s;
       white-space: nowrap;
     }
-    .nav-tab:hover { color: var(--text); }
-    .nav-tab.active { color: var(--primary); }
+    .nav-tab:hover { color: var(--ink); }
+    .nav-tab.active {
+      color: var(--rose-dark);
+      font-weight: 600;
+    }
     .nav-tab.active::after {
       content: "";
       position: absolute;
-      left: 12px;
-      right: 12px;
+      left: 16px;
+      right: 16px;
       bottom: 0;
-      height: 3px;
-      border-radius: 3px 3px 0 0;
-      background: var(--primary);
+      height: 2px;
+      border-radius: 2px 2px 0 0;
+      background: var(--rose-dark);
     }
 
     .mode-switch {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: #f1f5f9;
-      padding: 4px 6px 4px 12px;
+      gap: 4px;
+      background: var(--cream-soft);
+      padding: 4px 5px 4px 12px;
       border-radius: 999px;
       border: 1px solid var(--border);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--muted);
-      font-weight: 700;
+      font-weight: 500;
       white-space: nowrap;
     }
     .mode-btn {
       border: none;
       background: transparent;
-      padding: 5px 11px;
+      padding: 4px 11px;
       border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 800;
+      font-size: 0.78rem;
+      font-weight: 600;
       color: var(--muted);
       cursor: pointer;
-      transition: 0.18s;
+      transition: 0.2s;
     }
     .mode-btn.active {
-      background: var(--text);
-      color: #fff;
+      background: var(--ink);
+      color: var(--ivory);
     }
 
-    /* ================= 3. MAIN CONTAINER ================= */
+    /* ================= 3. MAIN CONTAINER & CARD ================= */
     .container {
-      max-width: 1140px;
-      margin: 22px auto 0;
-      padding: 0 20px;
+      max-width: 1120px;
+      margin: 28px auto 0;
+      padding: 0 24px;
     }
 
     .card {
-      background: var(--card);
-      border: 1px solid var(--border);
+      background: linear-gradient(155deg, #fffdf9 0%, #fbf5ec 100%);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      outline: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 22px;
+      padding: 26px;
       box-shadow: var(--shadow);
     }
 
@@ -164,200 +176,217 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #1e293b;
-      color: #fff;
-      padding: 10px 16px;
-      border-radius: 10px;
+      gap: 12px;
+      background: var(--ink);
+      color: var(--ivory);
+      padding: 12px 18px;
+      border-radius: 12px;
       margin-bottom: 16px;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
     }
+    .v1-timer-strip strong { color: #f4d8a8; }
     .v1-box {
       background: #fff;
-      border: 2px dashed #94a3b8;
-      padding: 24px;
-      font-family: "Times New Roman", Times, serif;
+      border: 1.5px dashed #a89f96;
+      padding: 26px;
+      border-radius: 8px;
+      font-family: Georgia, "Times New Roman", serif;
     }
-    .v1-box h2 { margin-bottom: 10px; font-size: 1.45rem; }
+    .v1-box h2 {
+      margin-bottom: 10px;
+      font-size: 1.45rem;
+      font-weight: 600;
+    }
     .v1-note {
-      background: #fef9c3;
-      border: 1px solid #eab308;
-      padding: 10px 14px;
-      font-family: sans-serif;
-      font-size: 0.86rem;
+      background: #faf3e0;
+      border: 1px solid #d6c396;
+      padding: 11px 14px;
+      font-family: var(--sans);
+      font-size: 0.84rem;
+      color: #544634;
       margin-bottom: 18px;
-      border-radius: 6px;
+      border-radius: 8px;
     }
-    .v1-field { margin-bottom: 14px; }
-    .v1-field label { display: block; font-weight: bold; margin-bottom: 6px; }
+    .v1-field { margin-bottom: 14px; font-family: var(--sans); }
+    .v1-field label { display: block; font-weight: 600; font-size: 0.88rem; margin-bottom: 6px; }
     .v1-field select {
       width: 100%;
-      padding: 9px;
-      font-size: 1rem;
-      border: 1px solid #64748b;
+      padding: 9px 12px;
+      font-size: 0.92rem;
+      border: 1px solid #b5aba0;
+      border-radius: 6px;
+      background: #fff;
     }
     .v1-btn {
-      padding: 8px 16px;
-      font-size: 1rem;
+      padding: 8px 18px;
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      font-weight: 500;
       cursor: pointer;
-      background: #e2e8f0;
-      border: 1px solid #475569;
+      background: #efeae2;
+      border: 1px solid #8a7f74;
+      border-radius: 6px;
       margin-right: 8px;
     }
+    .v1-btn:hover { background: #e5ddd1; }
     .v1-result {
       margin-top: 16px;
       padding: 14px;
-      background: #f1f5f9;
-      border: 1px solid #cbd5e1;
+      background: #faf7f2;
+      border: 1px solid #ddd4c7;
+      border-radius: 6px;
       min-height: 54px;
+      font-family: var(--sans);
+      font-size: 0.92rem;
     }
 
-    /* ================= 5. STEP 1: SMART FILTER (LAPTOP 2-COL) ================= */
+    /* ================= 5. STEP 1: SMART FILTER ================= */
     .broke-banner {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      background: linear-gradient(95deg, #f97316 0%, #ff5c28 100%);
-      color: #fff;
-      padding: 16px 24px;
+      background: linear-gradient(100deg, #a6626a 0%, #c68e93 100%);
+      color: #fffcf9;
+      padding: 18px 26px;
       border-radius: var(--radius);
-      margin-bottom: 20px;
-      box-shadow: 0 10px 24px rgba(255, 107, 53, 0.25);
+      margin-bottom: 22px;
+      box-shadow: 0 14px 28px -14px rgba(141, 68, 82, 0.48);
       cursor: pointer;
-      transition: transform 0.15s, box-shadow 0.15s;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.25s;
     }
     .broke-banner:hover {
       transform: translateY(-1px);
-      box-shadow: 0 12px 28px rgba(255, 107, 53, 0.32);
+      box-shadow: 0 18px 32px -14px rgba(141, 68, 82, 0.56);
     }
     .broke-banner.active {
-      background: linear-gradient(95deg, #dc2626 0%, #ea580c 100%);
-    }
-    .broke-left {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .broke-fire {
-      font-size: 1.9rem;
-      line-height: 1;
+      background: linear-gradient(100deg, #7c3845 0%, #9f5462 100%);
     }
     .broke-title {
-      font-size: 1.05rem;
-      font-weight: 800;
+      font-family: var(--serif);
+      font-size: 1.45rem;
+      font-weight: 700;
       letter-spacing: 0.01em;
+      line-height: 1.2;
+      margin-bottom: 2px;
     }
     .broke-sub {
-      font-size: 0.86rem;
+      font-size: 0.84rem;
       opacity: 0.92;
+      font-weight: 300;
     }
     .broke-toggle-wrap {
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      font-size: 0.9rem;
+      gap: 12px;
+      font-weight: 500;
+      font-size: 0.85rem;
       white-space: nowrap;
     }
     .toggle-track {
       width: 48px;
       height: 26px;
-      background: rgba(255, 255, 255, 0.35);
+      background: rgba(255, 252, 247, 0.34);
       border-radius: 999px;
       position: relative;
-      transition: 0.2s;
+      transition: 0.25s;
     }
     .toggle-knob {
       width: 20px;
       height: 20px;
-      background: #fff;
+      background: #fffcf7;
       border-radius: 50%;
       position: absolute;
       top: 3px;
       left: 3px;
-      transition: 0.2s;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: 0.25s;
+      box-shadow: 0 2px 5px rgba(43, 38, 34, 0.22);
     }
-    .broke-banner.active .toggle-track { background: #16a34a; }
+    .broke-banner.active .toggle-track { background: var(--sage); }
     .broke-banner.active .toggle-knob { left: 25px; }
 
     .step1-grid {
       display: grid;
-      grid-template-columns: minmax(0, 68%) minmax(280px, 32%);
-      gap: 20px;
+      grid-template-columns: minmax(0, 66%) minmax(290px, 34%);
+      gap: 22px;
       align-items: start;
     }
 
     .section-title {
-      font-size: 1.25rem;
-      font-weight: 800;
-      margin-bottom: 4px;
+      font-family: var(--serif);
+      font-size: 1.9rem;
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 6px;
     }
     .section-sub {
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       color: var(--muted);
-      margin-bottom: 18px;
+      margin-bottom: 22px;
     }
 
-    .filter-group { margin-bottom: 18px; }
+    .filter-group { margin-bottom: 20px; }
     .filter-group:last-child { margin-bottom: 0; }
     .filter-label {
       display: block;
-      font-size: 0.92rem;
-      font-weight: 800;
-      color: var(--text);
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--ink);
       margin-bottom: 10px;
     }
     .chip-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 9px;
+      gap: 8px;
     }
     .chip {
-      border: 1.5px solid var(--border);
-      background: #fff;
-      color: var(--text);
-      padding: 8px 15px;
+      border: 1px solid var(--border);
+      background: rgba(255, 252, 247, 0.9);
+      color: var(--ink);
+      padding: 8px 16px;
       border-radius: 999px;
-      font-size: 0.88rem;
-      font-weight: 600;
+      font-size: 0.84rem;
+      font-weight: 500;
       cursor: pointer;
-      transition: all 0.15s;
+      transition: all 0.18s;
       user-select: none;
     }
     .chip:hover {
-      border-color: var(--primary);
-      background: #fff9f6;
+      border-color: var(--rose);
+      background: var(--rose-soft);
+      color: var(--rose-dark);
     }
     .chip.selected {
-      background: var(--primary);
-      border-color: var(--primary);
-      color: #fff;
-      font-weight: 700;
-      box-shadow: 0 4px 10px rgba(255, 107, 53, 0.24);
+      background: var(--rose-dark);
+      border-color: var(--rose-dark);
+      color: var(--ivory);
+      box-shadow: 0 6px 14px -6px rgba(141, 68, 82, 0.5);
     }
     .chip.exclude.selected {
-      background: #ef4444;
-      border-color: #ef4444;
-      color: #fff;
-      box-shadow: 0 4px 10px rgba(239, 68, 68, 0.22);
+      background: #7b3b42;
+      border-color: #7b3b42;
+      color: var(--ivory);
     }
 
     /* Sticky Summary Sidebar */
     .summary-card {
       position: sticky;
-      top: 84px;
+      top: 90px;
     }
     .summary-box-title {
-      font-size: 1.12rem;
-      font-weight: 800;
-      margin-bottom: 14px;
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 4px;
     }
     .summary-row-title {
-      font-size: 0.84rem;
-      font-weight: 700;
+      font-size: 0.8rem;
+      font-weight: 500;
       color: var(--muted);
-      margin-bottom: 8px;
+      margin-bottom: 12px;
     }
     .summary-pills {
       display: flex;
@@ -366,61 +395,74 @@
       margin-bottom: 14px;
     }
     .summary-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      padding: 8px 12px;
-      border-radius: 10px;
-      font-size: 0.86rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-    .green-pill {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 8px;
-      background: var(--green-soft);
-      border: 1px solid #bbf7d0;
-      color: var(--green-dark);
-      padding: 9px 12px;
-      border-radius: 10px;
+      gap: 10px;
+      background: var(--cream-soft);
+      border: 1px solid var(--border);
+      padding: 9px 13px;
+      border-radius: 12px;
       font-size: 0.83rem;
-      font-weight: 700;
+      color: var(--muted);
+    }
+    .summary-pill strong {
+      color: var(--ink);
+      font-weight: 600;
+      text-align: right;
+    }
+    .summary-pill.warn {
+      background: var(--rose-soft);
+      border-color: var(--border-rose);
+      color: var(--rose-dark);
+    }
+    .summary-pill.warn strong { color: var(--rose-dark); }
+
+    .green-pill {
+      background: var(--sage-soft);
+      border: 1px solid rgba(88, 111, 80, 0.22);
+      color: var(--sage-dark);
+      padding: 10px 13px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 500;
       margin-bottom: 16px;
     }
     .match-counter {
-      font-size: 0.92rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: var(--text);
+      font-size: 0.88rem;
+      font-weight: 500;
+      margin-bottom: 14px;
+      color: var(--muted);
     }
     .match-counter span {
-      color: var(--primary-dark);
-      font-size: 1.05rem;
+      color: var(--rose-dark);
+      font-weight: 700;
+      font-size: 1rem;
     }
     .cta-btn {
       width: 100%;
       border: none;
-      background: linear-gradient(95deg, #ff6b35, #f95322);
-      color: #fff;
-      padding: 14px 18px;
-      border-radius: 12px;
-      font-size: 0.98rem;
-      font-weight: 800;
+      background: linear-gradient(100deg, #9b525f 0%, #b5737b 100%);
+      color: var(--ivory);
+      padding: 13px 20px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
       cursor: pointer;
-      transition: transform 0.15s, box-shadow 0.15s;
-      box-shadow: 0 8px 18px rgba(255, 107, 53, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+      box-shadow: 0 12px 22px -10px rgba(141, 68, 82, 0.55);
     }
     .cta-btn:hover {
       transform: translateY(-1px);
-      box-shadow: 0 10px 22px rgba(255, 107, 53, 0.38);
+      filter: brightness(1.03);
+      box-shadow: 0 16px 26px -10px rgba(141, 68, 82, 0.62);
     }
     .cta-tip {
       margin-top: 12px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--muted);
+      line-height: 1.5;
     }
 
     /* ================= 6. STEP 2: 3x2 DISH GRID ================= */
@@ -430,12 +472,12 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      background: var(--card);
+      background: var(--ivory);
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 12px 16px;
-      margin-bottom: 18px;
-      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
     }
     .sub-bar-left {
       display: flex;
@@ -445,68 +487,70 @@
     }
     .back-btn {
       border: 1px solid var(--border);
-      background: #fff;
-      color: var(--text);
+      background: var(--ivory);
+      color: var(--ink);
       padding: 7px 14px;
-      border-radius: 10px;
-      font-size: 0.86rem;
-      font-weight: 700;
+      border-radius: 999px;
+      font-size: 0.83rem;
+      font-weight: 500;
       cursor: pointer;
-      transition: 0.15s;
+      transition: 0.18s;
     }
-    .back-btn:hover { background: #f1f5f9; }
+    .back-btn:hover {
+      background: var(--cream-soft);
+      border-color: var(--rose);
+    }
     .active-tag {
-      font-size: 0.8rem;
-      font-weight: 700;
-      padding: 5px 11px;
-      border-radius: 8px;
-      background: var(--primary-soft);
-      color: var(--primary-dark);
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: var(--rose-soft);
+      color: var(--rose-dark);
     }
     .active-tag.green {
-      background: var(--green-soft);
-      color: var(--green-dark);
+      background: var(--sage-soft);
+      color: var(--sage-dark);
     }
     .sub-bar-right {
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 0.86rem;
+      font-size: 0.82rem;
       color: var(--muted);
-      font-weight: 600;
     }
 
     .grid-3x2 {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
+      gap: 20px;
     }
 
     .dish-card {
-      background: var(--card);
+      background: var(--ivory);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       overflow: hidden;
       display: flex;
       flex-direction: column;
       box-shadow: var(--shadow);
-      transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
+      transition: transform 0.22s, border-color 0.22s, box-shadow 0.22s;
     }
     .dish-card:hover {
-      transform: translateY(-3px);
-      border-color: #fdba74;
-      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.09);
+      transform: translateY(-4px);
+      border-color: var(--border-rose);
+      box-shadow: var(--shadow-hover);
     }
     .dish-card.highlight-spin {
-      border: 2.5px solid var(--primary);
-      box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.22);
+      border: 2px solid var(--rose-dark);
+      box-shadow: 0 0 0 4px rgba(141, 68, 82, 0.18);
       transform: scale(1.02);
     }
 
     .dish-thumb-wrap {
       position: relative;
-      height: 158px;
-      background: linear-gradient(135deg, #fff1ec, #fde68a);
+      height: 170px;
+      background: linear-gradient(135deg, #efe4d6, #e6d6c4);
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -517,73 +561,85 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      filter: sepia(0.08) saturate(0.96) contrast(1.02);
+      transition: transform 0.35s ease;
     }
+    .dish-card:hover .dish-thumb-img { transform: scale(1.03); }
     .dish-thumb-fallback {
       width: 100%;
       height: 100%;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 3.4rem;
-      background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
+      padding: 16px;
+      text-align: center;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--rose-dark);
+      background: linear-gradient(135deg, #f5ebe0 0%, #ead9cb 100%);
     }
     .thumb-badge {
       position: absolute;
-      top: 10px;
-      left: 10px;
-      background: rgba(15, 23, 42, 0.78);
-      color: #fff;
-      font-size: 0.73rem;
-      font-weight: 700;
-      padding: 4px 9px;
+      top: 12px;
+      left: 12px;
+      background: rgba(43, 38, 34, 0.72);
+      color: var(--ivory);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      padding: 4px 10px;
       border-radius: 999px;
       backdrop-filter: blur(4px);
     }
     .thumb-badge.veg {
-      background: rgba(22, 163, 74, 0.92);
+      background: rgba(88, 111, 80, 0.88);
     }
 
     .dish-body {
-      padding: 15px 16px 16px;
+      padding: 16px 18px 18px;
       display: flex;
       flex-direction: column;
       flex: 1;
     }
     .dish-name {
-      font-size: 1.02rem;
-      font-weight: 800;
-      color: var(--primary-dark);
+      font-family: var(--serif);
+      font-size: 1.38rem;
+      font-weight: 700;
+      color: var(--ink);
       margin-bottom: 3px;
-      line-height: 1.3;
+      line-height: 1.2;
     }
     .dish-submeta {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--text);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--rose-dark);
       margin-bottom: 10px;
     }
     .dish-submeta span {
+      display: block;
+      margin-top: 2px;
       color: var(--muted);
-      font-weight: 600;
+      font-weight: 400;
+      font-size: 0.78rem;
     }
     .dish-bullets {
       list-style: none;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       flex: 1;
     }
     .dish-bullets li {
-      font-size: 0.82rem;
-      color: #475569;
+      font-size: 0.79rem;
+      color: var(--muted);
       margin-bottom: 4px;
       display: flex;
       align-items: flex-start;
-      gap: 6px;
+      gap: 7px;
     }
     .dish-bullets li::before {
-      content: "✓";
-      color: var(--green);
-      font-weight: 800;
+      content: "—";
+      color: var(--rose);
+      font-weight: 600;
       flex-shrink: 0;
     }
     .dish-footer {
@@ -591,201 +647,226 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      padding-top: 8px;
-      border-top: 1px solid #f1f5f9;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
     }
     .walk-chip {
-      font-size: 0.76rem;
-      font-weight: 700;
-      color: var(--green-dark);
-      background: var(--green-soft);
-      padding: 4px 8px;
-      border-radius: 8px;
+      font-size: 0.73rem;
+      font-weight: 500;
+      color: var(--sage-dark);
+      background: var(--sage-soft);
+      padding: 4px 10px;
+      border-radius: 999px;
     }
     .pick-card-btn {
       border: none;
-      background: var(--primary);
-      color: #fff;
+      background: var(--rose-dark);
+      color: var(--ivory);
       padding: 7px 14px;
-      border-radius: 9px;
-      font-size: 0.83rem;
-      font-weight: 700;
+      border-radius: 999px;
+      font-size: 0.79rem;
+      font-weight: 500;
       cursor: pointer;
-      transition: 0.15s;
+      transition: 0.18s;
     }
-    .pick-card-btn:hover { background: var(--primary-dark); }
+    .pick-card-btn:hover { background: #753441; }
 
     /* 6th Slot: Random Card */
     .random-card {
-      background: linear-gradient(180deg, #fffbeb 0%, #fff7ed 100%);
-      border: 2px dashed #fdba74;
+      background: linear-gradient(165deg, #fffdf9 0%, #f5ece1 100%);
+      border: 1.5px dashed var(--rose);
       border-radius: var(--radius);
-      padding: 24px 20px;
+      padding: 28px 22px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      min-height: 310px;
+      min-height: 320px;
     }
-    .random-icon {
-      font-size: 3.1rem;
-      margin-bottom: 10px;
+    .random-kicker {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--rose-dark);
+      margin-bottom: 8px;
+      font-weight: 600;
     }
     .random-title {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: #9a3412;
-      margin-bottom: 6px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 8px;
     }
     .random-desc {
-      font-size: 0.86rem;
-      color: #7c2d12;
-      margin-bottom: 18px;
+      font-size: 0.83rem;
+      color: var(--muted);
+      margin-bottom: 20px;
       max-width: 240px;
     }
     .random-btn {
-      border: none;
-      background: linear-gradient(95deg, #ff6b35, #ea580c);
-      color: #fff;
-      padding: 11px 22px;
-      border-radius: 10px;
-      font-size: 0.92rem;
-      font-weight: 800;
-      cursor: pointer;
-      box-shadow: 0 6px 16px rgba(234, 88, 12, 0.28);
-      transition: 0.15s;
-    }
-    .random-btn:hover { transform: translateY(-1px); }
-
-    /* ================= 7. STEP 3: DETAIL & MAP (45% / 55%) ================= */
-    .timer-pill {
-      background: #0f172a;
-      color: #fff;
-      padding: 7px 14px;
+      border: 1px solid var(--rose-dark);
+      background: var(--ivory);
+      color: var(--rose-dark);
+      padding: 10px 22px;
       border-radius: 999px;
-      font-size: 0.84rem;
-      font-weight: 700;
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .random-btn:hover {
+      background: var(--rose-dark);
+      color: var(--ivory);
+    }
+
+    /* ================= 7. STEP 3: DETAIL & MAP ================= */
+    .timer-pill {
+      background: var(--cream-soft);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 500;
       font-variant-numeric: tabular-nums;
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
-    .timer-pill strong { color: #fde047; }
+    .timer-pill strong { color: var(--rose-dark); font-weight: 600; }
 
     .step3-grid {
       display: grid;
-      grid-template-columns: minmax(0, 45%) minmax(0, 55%);
-      gap: 20px;
+      grid-template-columns: minmax(0, 44%) minmax(0, 56%);
+      gap: 22px;
       align-items: stretch;
     }
     .panel-heading {
-      font-size: 1.08rem;
-      font-weight: 800;
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 600;
       margin-bottom: 14px;
+      color: var(--ink);
     }
     .selected-mini-card {
       display: flex;
       align-items: center;
       gap: 14px;
-      background: #f8fafc;
+      background: var(--cream-soft);
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 12px;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
     .selected-mini-thumb {
-      width: 72px;
-      height: 72px;
+      width: 76px;
+      height: 76px;
       border-radius: 12px;
       object-fit: cover;
       flex-shrink: 0;
-      background: #ffedd5;
+      background: #efe4d6;
+      filter: sepia(0.08) saturate(0.96);
     }
     .selected-mini-fallback {
-      width: 72px;
-      height: 72px;
+      width: 76px;
+      height: 76px;
       border-radius: 12px;
-      background: #ffedd5;
+      background: #efe4d6;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--rose-dark);
+      text-align: center;
+      padding: 6px;
       flex-shrink: 0;
     }
     .selected-dish-title {
-      font-size: 1.04rem;
-      font-weight: 800;
-      color: var(--text);
+      font-family: var(--serif);
+      font-size: 1.38rem;
+      font-weight: 700;
+      color: var(--ink);
       margin-bottom: 4px;
-      line-height: 1.3;
+      line-height: 1.22;
     }
     .selected-dish-meta {
-      font-size: 0.83rem;
+      font-size: 0.8rem;
       color: var(--muted);
-      font-weight: 600;
     }
     .selected-dish-meta .green-txt {
-      color: var(--green-dark);
-      font-weight: 700;
+      color: var(--sage-dark);
+      font-weight: 600;
     }
 
     .info-list {
       display: flex;
       flex-direction: column;
-      gap: 9px;
-      margin-bottom: 18px;
-      font-size: 0.9rem;
+      gap: 10px;
+      margin-bottom: 20px;
+      font-size: 0.86rem;
     }
     .info-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      color: #334155;
+      color: var(--muted);
+      line-height: 1.55;
     }
-    .info-row strong { color: var(--text); }
+    .info-row strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
 
     .action-stack {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
     .btn-full {
       width: 100%;
-      border: none;
-      padding: 13px 16px;
-      border-radius: 12px;
-      font-size: 0.94rem;
-      font-weight: 800;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 600;
       cursor: pointer;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      transition: 0.15s;
+      gap: 6px;
+      transition: all 0.2s;
     }
     .btn-maps {
-      background: var(--blue);
-      color: #fff;
-      box-shadow: 0 6px 14px rgba(37, 99, 235, 0.25);
+      background: var(--ivory);
+      color: var(--rose-dark);
+      border: 1.5px solid var(--border-rose);
     }
-    .btn-maps:hover { background: var(--blue-dark); }
+    .btn-maps:hover {
+      background: var(--rose-soft);
+      border-color: var(--rose-dark);
+    }
     .btn-confirm {
-      background: var(--green);
-      color: #fff;
-      box-shadow: 0 6px 14px rgba(22, 163, 74, 0.25);
+      border: none;
+      background: linear-gradient(100deg, #9b525f 0%, #b5737b 100%);
+      color: var(--ivory);
+      box-shadow: 0 10px 20px -10px rgba(141, 68, 82, 0.52);
     }
-    .btn-confirm:hover { background: var(--green-dark); }
+    .btn-confirm:hover {
+      filter: brightness(1.04);
+      transform: translateY(-1px);
+    }
 
     .nearby-box {
       border-top: 1px solid var(--border);
-      padding-top: 14px;
+      padding-top: 16px;
     }
     .nearby-title {
-      font-size: 0.85rem;
-      font-weight: 800;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
       color: var(--muted);
       margin-bottom: 8px;
     }
@@ -794,18 +875,18 @@
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      padding: 8px 10px;
-      border-radius: 10px;
+      padding: 9px 12px;
+      border-radius: 12px;
       cursor: pointer;
-      font-size: 0.86rem;
-      transition: background 0.15s;
+      font-size: 0.84rem;
+      transition: background 0.18s;
     }
-    .nearby-item:hover { background: #f1f5f9; }
-    .nearby-item strong { color: var(--text); }
+    .nearby-item:hover { background: var(--cream-soft); }
+    .nearby-item strong { color: var(--ink); font-weight: 600; }
     .nearby-price {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--primary-dark);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--rose-dark);
       white-space: nowrap;
     }
 
@@ -816,18 +897,19 @@
     }
     .map-frame-wrap {
       flex: 1;
-      min-height: 390px;
+      min-height: 400px;
       border-radius: 14px;
       overflow: hidden;
       border: 1px solid var(--border);
-      background: #e2e8f0;
+      background: #eae2d6;
     }
     .map-frame-wrap iframe {
       width: 100%;
       height: 100%;
-      min-height: 390px;
+      min-height: 400px;
       border: 0;
       display: block;
+      filter: sepia(0.14) saturate(0.88);
     }
     .map-caption {
       margin-top: 12px;
@@ -835,12 +917,12 @@
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      font-size: 0.83rem;
+      font-size: 0.81rem;
       color: var(--muted);
     }
     .map-caption a {
-      color: var(--blue);
-      font-weight: 700;
+      color: var(--rose-dark);
+      font-weight: 600;
       text-decoration: none;
       white-space: nowrap;
     }
@@ -849,15 +931,15 @@
     /* ================= 8. GROUP MODE ================= */
     .group-layout {
       display: grid;
-      grid-template-columns: minmax(0, 58%) minmax(0, 42%);
-      gap: 20px;
+      grid-template-columns: minmax(0, 56%) minmax(0, 44%);
+      gap: 22px;
       align-items: start;
     }
     .member-card {
-      background: #f8fafc;
+      background: var(--cream-soft);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 13px 14px;
+      border-radius: 14px;
+      padding: 14px 16px;
       margin-bottom: 10px;
     }
     .member-head {
@@ -866,16 +948,16 @@
       align-items: center;
       gap: 10px;
       margin-bottom: 10px;
-      font-weight: 800;
-      font-size: 0.92rem;
+      font-weight: 600;
+      font-size: 0.88rem;
     }
     .member-head select {
-      padding: 6px 10px;
-      border-radius: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
       border: 1px solid var(--border);
-      background: #fff;
-      font-size: 0.84rem;
-      font-weight: 600;
+      background: var(--ivory);
+      font-size: 0.82rem;
+      font-weight: 500;
     }
     .member-checks {
       display: flex;
@@ -885,95 +967,110 @@
     .mini-check {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      font-size: 0.82rem;
-      background: #fff;
+      gap: 6px;
+      font-size: 0.8rem;
+      background: var(--ivory);
       border: 1px solid var(--border);
-      padding: 5px 10px;
-      border-radius: 8px;
+      padding: 5px 11px;
+      border-radius: 999px;
       cursor: pointer;
-      font-weight: 600;
+      font-weight: 500;
     }
+    .mini-check input { accent-color: var(--rose-dark); }
+
     .btn-outline-sm {
       border: 1px solid var(--border);
-      background: #fff;
-      padding: 6px 12px;
-      border-radius: 9px;
-      font-size: 0.83rem;
-      font-weight: 700;
+      background: var(--ivory);
+      color: var(--ink);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 500;
       cursor: pointer;
+      transition: 0.18s;
     }
-    .btn-outline-sm:hover { background: #f1f5f9; }
+    .btn-outline-sm:hover {
+      background: var(--cream-soft);
+      border-color: var(--rose);
+    }
 
     /* ================= 9. SPENDING & GREEN STATS ================= */
     .stat-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-bottom: 20px;
+      gap: 16px;
+      margin-bottom: 22px;
     }
     .stat-box {
-      background: #f8fafc;
+      background: var(--cream-soft);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 18px 14px;
+      padding: 20px 16px;
       text-align: center;
     }
     .stat-num {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--primary-dark);
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--rose-dark);
+      line-height: 1.15;
       margin-bottom: 4px;
     }
-    .stat-box.green .stat-num { color: var(--green); }
+    .stat-box.green .stat-num { color: var(--sage); }
     .stat-lbl {
-      font-size: 0.83rem;
+      font-size: 0.8rem;
       color: var(--muted);
-      font-weight: 700;
+      font-weight: 500;
     }
     .progress-bar {
-      height: 14px;
-      background: #e2e8f0;
+      height: 10px;
+      background: #e6ddd1;
       border-radius: 999px;
       overflow: hidden;
       margin: 10px 0 8px;
     }
     .progress-fill {
       height: 100%;
-      background: var(--green);
-      transition: width 0.3s ease;
+      background: var(--sage);
+      transition: width 0.35s ease;
     }
     .history-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 12px;
-      padding: 12px 0;
+      padding: 13px 0;
       border-bottom: 1px solid var(--border);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
     }
     .history-item:last-child { border-bottom: none; }
 
     /* ================= 10. EMPTY STATE & TOAST ================= */
     .empty-state {
       text-align: center;
-      padding: 40px 20px;
+      padding: 44px 24px;
+    }
+    .empty-state h3 {
+      font-family: var(--serif);
+      font-size: 1.55rem;
+      font-weight: 600;
+      margin-bottom: 6px;
     }
     .toast {
       position: fixed;
       bottom: 24px;
       left: 50%;
       transform: translateX(-50%) translateY(90px);
-      background: #0f172a;
-      color: #fff;
-      padding: 12px 22px;
+      background: var(--ink);
+      color: var(--ivory);
+      padding: 12px 24px;
       border-radius: 999px;
-      font-size: 0.9rem;
-      font-weight: 700;
+      font-size: 0.86rem;
+      font-weight: 500;
       opacity: 0;
       transition: 0.25s;
       z-index: 120;
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.28);
+      box-shadow: 0 12px 28px rgba(43, 38, 34, 0.28);
       max-width: 92vw;
       text-align: center;
     }
@@ -991,9 +1088,11 @@
       .grid-3x2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 640px) {
+      .container { padding: 0 16px; }
+      .card { padding: 20px; }
       .navbar-inner {
         height: auto;
-        padding: 10px 14px;
+        padding: 12px 16px;
         flex-wrap: wrap;
       }
       .nav-tabs {
@@ -1015,15 +1114,12 @@
   <!-- ================= NAVBAR ================= -->
   <header class="navbar">
     <div class="navbar-inner">
-      <div class="brand" onclick="goHome()">
-        <span class="brand-icon">🍜</span>
-        <span>Ăn gì đây ta?</span>
-      </div>
+      <div class="brand" onclick="goHome()">Ăn gì đây ta?</div>
 
       <nav class="nav-tabs" id="v2-nav-tabs">
-        <button class="nav-tab active" id="tab-pick" onclick="switchTab('pick')">🎯 Tìm món</button>
-        <button class="nav-tab" id="tab-group" onclick="switchTab('group')">👥 Chốt nhóm</button>
-        <button class="nav-tab" id="tab-stats" onclick="switchTab('stats')">📊 Chi tiêu & Xanh</button>
+        <button class="nav-tab active" id="tab-pick" onclick="switchTab('pick')">Tìm món</button>
+        <button class="nav-tab" id="tab-group" onclick="switchTab('group')">Chốt nhóm</button>
+        <button class="nav-tab" id="tab-stats" onclick="switchTab('stats')">Chi tiêu &amp; Xanh</button>
       </nav>
 
       <div class="mode-switch">
@@ -1039,14 +1135,14 @@
     <!-- ================= CHẾ ĐỘ V1 (BẢN THÔ KIỂM THỬ) ================= -->
     <section id="v1-section" class="v1-wrapper hidden">
       <div class="v1-timer-strip">
-        <div>⏱️ Thời gian ra quyết định (V1): <strong id="v1-timer-text" style="color:#fde047;">0.0 giây</strong></div>
+        <div>Thời gian ra quyết định (V1): <strong id="v1-timer-text">0.0 giây</strong></div>
         <button class="btn-outline-sm" onclick="resetTimer()">Bấm giờ lại</button>
       </div>
 
       <div class="v1-box">
-        <h2>Trang chọn đồ ăn sinh viên (Prototype V1 - Bản thô)</h2>
+        <h2>Trang chọn đồ ăn sinh viên (Prototype V1 — Bản thô)</h2>
         <div class="v1-note">
-          <strong>Ghi chú kiểm thử V1:</strong> Giao diện thô chỉ có 2 dropdown lọc Mức giá & Loại món, trả về 1 dòng chữ đơn giản, chưa có bộ lọc dị ứng, chưa có ảnh món, chưa có bản đồ chỉ đường.
+          <strong>Ghi chú kiểm thử V1:</strong> Giao diện thô chỉ có 2 ô chọn Mức giá và Loại món, trả về 1 dòng chữ đơn giản, chưa có bộ lọc món kiêng, chưa có hình ảnh và chưa có bản đồ chỉ đường.
         </div>
 
         <div class="v1-field">
@@ -1054,8 +1150,8 @@
           <select id="v1-price" onchange="startTimerIfNeeded()">
             <option value="all">-- Tất cả --</option>
             <option value="u25">Dưới 25.000đ</option>
-            <option value="25_40">25.000đ - 40.000đ</option>
-            <option value="40_60">40.000đ - 60.000đ</option>
+            <option value="25_40">25.000đ – 40.000đ</option>
+            <option value="40_60">40.000đ – 60.000đ</option>
             <option value="o60">Trên 60.000đ</option>
           </select>
         </div>
@@ -1088,12 +1184,9 @@
         <!-- BƯỚC 1: BỘ LỌC THÔNG MINH -->
         <div id="step-1">
           <div class="broke-banner" id="broke-banner" onclick="toggleBrokeMode()">
-            <div class="broke-left">
-              <div class="broke-fire">🔥</div>
-              <div>
-                <div class="broke-title">CHẾ ĐỘ CUỐI THÁNG ≤ 30K</div>
-                <div class="broke-sub">Ngon - Rẻ - No bụng • Bật nhanh 1 chạm để lọc quán bình dân không lo rỗng ví</div>
-              </div>
+            <div>
+              <div class="broke-title">Chế độ cuối tháng ≤ 30k</div>
+              <div class="broke-sub">Ngon, no bụng và nhẹ ví • Bật nhanh một chạm để lọc các quán bình dân quanh trường</div>
             </div>
             <div class="broke-toggle-wrap">
               <span id="broke-status-text">Bật ngay</span>
@@ -1105,15 +1198,15 @@
             <!-- Left Column: Filter Card -->
             <div class="card">
               <h1 class="section-title">Hôm nay bạn muốn ăn gì?</h1>
-              <p class="section-sub">Chọn nhanh các tiêu chí bên dưới để Ăn gì đây ta? gợi ý quán chuẩn gu quanh Quận 10</p>
+              <p class="section-sub">Chọn nhanh các tiêu chí bên dưới để Ăn gì đây ta? gợi ý những quán hợp gu quanh Quận 10.</p>
 
               <div class="filter-group">
                 <span class="filter-label">1. Ngân sách hôm nay</span>
                 <div class="chip-list" id="filter-price">
                   <button class="chip selected" data-val="all" onclick="selectSingle('price', 'all', this)">Tất cả</button>
                   <button class="chip" data-val="u25" onclick="selectSingle('price', 'u25', this)">≤ 25k</button>
-                  <button class="chip" data-val="25_40" onclick="selectSingle('price', '25_40', this)">25k - 40k</button>
-                  <button class="chip" data-val="40_60" onclick="selectSingle('price', '40_60', this)">40k - 60k</button>
+                  <button class="chip" data-val="25_40" onclick="selectSingle('price', '25_40', this)">25k – 40k</button>
+                  <button class="chip" data-val="40_60" onclick="selectSingle('price', '40_60', this)">40k – 60k</button>
                   <button class="chip" data-val="o60" onclick="selectSingle('price', 'o60', this)">&gt; 60k</button>
                 </div>
               </div>
@@ -1122,31 +1215,31 @@
                 <span class="filter-label">2. Kiểu món ăn</span>
                 <div class="chip-list" id="filter-type">
                   <button class="chip selected" data-val="all" onclick="selectSingle('type', 'all', this)">Tất cả</button>
-                  <button class="chip" data-val="soup" onclick="selectSingle('type', 'soup', this)">🍜 Món nước</button>
-                  <button class="chip" data-val="dry" onclick="selectSingle('type', 'dry', this)">🍚 Món khô</button>
-                  <button class="chip" data-val="snack" onclick="selectSingle('type', 'snack', this)">🥟 Ăn nhẹ / Ăn vặt</button>
+                  <button class="chip" data-val="soup" onclick="selectSingle('type', 'soup', this)">Món nước</button>
+                  <button class="chip" data-val="dry" onclick="selectSingle('type', 'dry', this)">Món khô</button>
+                  <button class="chip" data-val="snack" onclick="selectSingle('type', 'snack', this)">Ăn nhẹ / Ăn vặt</button>
                 </div>
               </div>
 
               <div class="filter-group">
-                <span class="filter-label">3. Bối cảnh & Tâm trạng</span>
+                <span class="filter-label">3. Bối cảnh &amp; Tâm trạng</span>
                 <div class="chip-list" id="filter-context">
                   <button class="chip selected" data-val="all" onclick="selectSingle('context', 'all', this)">Bình thường</button>
-                  <button class="chip" data-val="solo" onclick="selectSingle('context', 'solo', this)">🧍 Ăn một mình</button>
-                  <button class="chip" data-val="quick" onclick="selectSingle('context', 'quick', this)">⚡ Đang vội (&lt;15p)</button>
-                  <button class="chip" data-val="group" onclick="selectSingle('context', 'group', this)">👯 Đi ăn nhóm</button>
-                  <button class="chip" data-val="rain" onclick="selectSingle('context', 'rain', this)">🌧️ Trời mưa</button>
-                  <button class="chip" data-val="hot" onclick="selectSingle('context', 'hot', this)">☀️ Trời nóng</button>
+                  <button class="chip" data-val="solo" onclick="selectSingle('context', 'solo', this)">Ăn một mình</button>
+                  <button class="chip" data-val="quick" onclick="selectSingle('context', 'quick', this)">Đang vội (&lt;15p)</button>
+                  <button class="chip" data-val="group" onclick="selectSingle('context', 'group', this)">Đi ăn nhóm</button>
+                  <button class="chip" data-val="rain" onclick="selectSingle('context', 'rain', this)">Trời mưa</button>
+                  <button class="chip" data-val="hot" onclick="selectSingle('context', 'hot', this)">Trời nóng</button>
                 </div>
               </div>
 
               <div class="filter-group">
                 <span class="filter-label">4. Loại trừ nhanh (Chọn nhiều)</span>
                 <div class="chip-list" id="filter-exclude">
-                  <button class="chip exclude" data-val="no_spicy" onclick="toggleExclude('no_spicy', this)">🚫 Không cay</button>
-                  <button class="chip exclude" data-val="no_seafood" onclick="toggleExclude('no_seafood', this)">🚫 Không hải sản</button>
-                  <button class="chip exclude" data-val="no_beef" onclick="toggleExclude('no_beef', this)">🚫 Không thịt bò</button>
-                  <button class="chip exclude" data-val="veg_only" onclick="toggleExclude('veg_only', this)">🥬 Chỉ ăn chay</button>
+                  <button class="chip exclude" data-val="no_spicy" onclick="toggleExclude('no_spicy', this)">Không cay</button>
+                  <button class="chip exclude" data-val="no_seafood" onclick="toggleExclude('no_seafood', this)">Không hải sản</button>
+                  <button class="chip exclude" data-val="no_beef" onclick="toggleExclude('no_beef', this)">Không thịt bò</button>
+                  <button class="chip exclude" data-val="veg_only" onclick="toggleExclude('veg_only', this)">Chỉ ăn chay</button>
                 </div>
               </div>
             </div>
@@ -1154,22 +1247,21 @@
             <!-- Right Column: Sticky Summary -->
             <aside class="card summary-card">
               <div class="summary-box-title">Tóm tắt bộ lọc</div>
-              <div class="summary-row-title">📋 Lựa chọn của bạn</div>
+              <div class="summary-row-title">Lựa chọn hiện tại của bạn</div>
               <div class="summary-pills" id="summary-pills"></div>
 
               <div class="green-pill">
-                <span>🌱</span>
-                <span>Ưu tiên đi bộ gần trường • 0 rác nhựa</span>
+                Ưu tiên đi bộ gần trường • Ăn tại quán giảm rác nhựa
               </div>
 
               <div class="match-counter" id="live-match-count">
-                🎯 Tìm thấy <span>17</span> quán phù hợp quanh Quận 10
+                Tìm thấy <span>17</span> quán phù hợp quanh Quận 10
               </div>
 
-              <button class="cta-btn" onclick="goToStep2()">🎲 TÌM MÓN NGAY →</button>
+              <button class="cta-btn" onclick="goToStep2()">Tìm món ngay →</button>
 
               <p class="cta-tip">
-                💡 Mẹo: Bật "Chế độ cuối tháng" phía trên nếu ngân sách hôm nay dưới 30k!
+                Mẹo nhỏ: Bật "Chế độ cuối tháng ≤ 30k" phía trên nếu bạn muốn thu gọn danh sách theo mức giá sinh viên.
               </p>
             </aside>
           </div>
@@ -1181,7 +1273,7 @@
             <div class="sub-bar-left" id="step2-tags"></div>
             <div class="sub-bar-right">
               <span id="step2-count-label"></span>
-              <button class="btn-outline-sm" id="btn-reshuffle" onclick="reshuffleStep2()">🔄 Đổi gợi ý khác</button>
+              <button class="btn-outline-sm" id="btn-reshuffle" onclick="reshuffleStep2()">Đổi gợi ý khác</button>
             </div>
           </div>
 
@@ -1192,7 +1284,7 @@
         <div id="step-3" class="hidden">
           <div class="sub-bar">
             <button class="back-btn" onclick="goBackToStep2()">← Quay lại danh sách</button>
-            <div class="timer-pill">⏱️ Thời gian chọn: <strong id="v2-timer-text">0.0 giây</strong></div>
+            <div class="timer-pill">Thời gian chọn: <strong id="v2-timer-text">0.0 giây</strong></div>
           </div>
 
           <div class="step3-grid" id="step3-content"></div>
@@ -1203,10 +1295,10 @@
       <div id="panel-group" class="hidden">
         <div class="group-layout">
           <div class="card">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:18px;">
               <div>
-                <h2 class="section-title">👥 Chốt món nhóm không cần cãi nhau</h2>
-                <p class="section-sub" style="margin-bottom:0;">Tự động lấy mức giá thấp nhất và loại mọi món có thành viên kiêng ăn.</p>
+                <h2 class="section-title">Chốt món nhóm không cần tranh cãi</h2>
+                <p class="section-sub" style="margin-bottom:0;">Tự động lấy mức ngân sách thấp nhất và loại mọi món có thành viên kiêng ăn.</p>
               </div>
               <div style="display:flex; gap:6px; flex-shrink:0;">
                 <button class="btn-outline-sm" onclick="changeMemberCount(-1)">- Bớt</button>
@@ -1216,14 +1308,13 @@
 
             <div id="group-members-list"></div>
 
-            <button class="cta-btn" style="margin-top:8px;" onclick="pickGroupMeal()">🤝 Tìm giao điểm cho cả nhóm</button>
+            <button class="cta-btn" style="margin-top:10px;" onclick="pickGroupMeal()">Tìm giao điểm cho cả nhóm →</button>
           </div>
 
           <div id="group-result-box">
             <div class="card empty-state">
-              <div style="font-size:2.6rem; margin-bottom:10px;">👯</div>
-              <h3 style="margin-bottom:6px;">Sẵn sàng chốt kèo nhóm!</h3>
-              <p style="font-size:0.88rem; color:var(--muted);">Chọn ngân sách và món kiêng của từng bạn ở bên trái rồi bấm nút tìm giao điểm nhé.</p>
+              <h3>Sẵn sàng chốt kèo cùng nhóm</h3>
+              <p style="font-size:0.86rem; color:var(--muted);">Chọn ngân sách và món kiêng của từng bạn ở bên trái rồi bấm nút tìm giao điểm.</p>
             </div>
           </div>
         </div>
@@ -1232,12 +1323,12 @@
       <!-- ===== TAB 3: CHI TIÊU & SỐNG XANH ===== -->
       <div id="panel-stats" class="hidden">
         <div class="card">
-          <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:18px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:20px; flex-wrap:wrap;">
             <div>
-              <h2 class="section-title">📊 Chi tiêu tuần & Tác động Sống Xanh</h2>
-              <p class="section-sub" style="margin-bottom:0;">Theo dõi tự động từ các bữa bạn bấm "✅ Chốt đi ăn"</p>
+              <h2 class="section-title">Chi tiêu tuần &amp; Tác động Sống Xanh</h2>
+              <p class="section-sub" style="margin-bottom:0;">Ghi nhận tự động trên trình duyệt mỗi khi bạn bấm "Chốt đi ăn".</p>
             </div>
-            <button class="btn-outline-sm" onclick="clearHistory()">🗑️ Xóa lịch sử</button>
+            <button class="btn-outline-sm" onclick="clearHistory()">Xóa lịch sử</button>
           </div>
 
           <div class="stat-grid">
@@ -1251,24 +1342,24 @@
             </div>
             <div class="stat-box green">
               <div class="stat-num" id="stat-plastic">0 hộp</div>
-              <div class="stat-lbl">Hộp xốp/nilon đã giảm</div>
+              <div class="stat-lbl">Hộp xốp / nilon đã giảm</div>
             </div>
           </div>
 
-          <div style="margin-bottom:20px; background:#f8fafc; border:1px solid var(--border); border-radius:14px; padding:16px;">
-            <div style="display:flex; justify-content:space-between; font-size:0.9rem; font-weight:800;">
+          <div style="margin-bottom:22px; background:var(--cream-soft); border:1px solid var(--border); border-radius:14px; padding:18px;">
+            <div style="display:flex; justify-content:space-between; font-size:0.86rem; font-weight:600; gap:12px;">
               <span>Ngân sách ăn uống tuần này</span>
               <span id="budget-label">0đ / 500.000đ (0%)</span>
             </div>
             <div class="progress-bar">
               <div class="progress-fill" id="budget-fill" style="width:0%"></div>
             </div>
-            <div style="font-size:0.82rem; color:var(--green-dark); font-weight:600;">
-              🌱 Mỗi bữa đi bộ ra quán ăn tại chỗ giúp cắt giảm ~1 hộp xốp + 1 túi nilon và tiết kiệm ~15.000đ phí giao hàng.
+            <div style="font-size:0.8rem; color:var(--sage-dark); font-weight:500;">
+              Mỗi bữa đi bộ ra quán ăn tại chỗ giúp cắt giảm khoảng 1 hộp xốp cùng 1 túi nilon và tiết kiệm trung bình 15.000đ phí giao hàng.
             </div>
           </div>
 
-          <h3 style="font-size:1rem; font-weight:800; margin-bottom:8px;">Lịch sử các bữa đã chốt</h3>
+          <h3 style="font-family:var(--serif); font-size:1.4rem; font-weight:600; margin-bottom:8px;">Lịch sử các bữa đã chốt</h3>
           <div id="history-list"></div>
         </div>
       </div>
@@ -1280,7 +1371,7 @@
 
   <script>
     /* =====================================================================
-       1. DATABASE: 17 QUÁN ĂN QUẬN 10 KÈM LINK ẢNH & GOOGLE MAPS CHÍNH XÁC
+       1. DATABASE: 17 QUÁN ĂN QUẬN 10 KÈM HÌNH ẢNH & LINK GOOGLE MAPS
     ===================================================================== */
     const RESTAURANTS = [
       // --- NHÓM 1: MÓN KHÔ ---
@@ -1288,7 +1379,6 @@
         id: 1,
         dishName: "Cơm tấm sườn bì chả",
         shopName: "Cơm Tấm 229 Vĩnh Viễn",
-        emoji: "🍛",
         image: "https://scontent.fsgn2-8.fna.fbcdn.net/v/t1.6435-9/79085642_136163291164018_6219957614998978560_n.jpg?stp=dst-jpg_tt6&cstp=mx899x899&ctp=s899x899&_nc_cat=105&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=f727a1&_nc_ohc=E_ppukmiihMQ7kNvwGJfaov&_nc_oc=AdqaMNzwjG_mDMpWH_JCOrA-OkHPHX57MMM25zuyL-f4lBs_PWqKG96kCtYTEQvlsTc&_nc_zt=23&_nc_ht=scontent.fsgn2-8.fna&_nc_gid=LmvWRPlS_cnFoV-T5IwL-g&_nc_ss=7b3a8&oh=00_AQVr7DcpGpWXb38zhMiFwkzi66a4PoqlVLuXip7MNc1boQ&oe=6B309A02",
         groupLabel: "Món khô",
         type: "dry",
@@ -1311,7 +1401,6 @@
         id: 2,
         dishName: "Cơm tấm sườn nướng",
         shopName: "Cơm tấm Tài 476 Nguyễn Tri Phương",
-        emoji: "🍖",
         image: "https://scontent.fsgn2-9.fna.fbcdn.net/v/t39.30808-6/744042179_1471149125040622_6404527042817427649_n.jpg?stp=dst-jpg_tt6&cstp=mx1000x1000&ctp=s1000x1000&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_ohc=ebqv9khEcl8Q7kNvwGDuhFv&_nc_oc=AdoTeD9LTXrewu-pyMJXM5mGDGZPrJ6dPtEpXHAfF726_weBlWQex8eq5nAZe_tQ25Q&_nc_zt=23&_nc_ht=scontent.fsgn2-9.fna&_nc_gid=Ko0uppXEK462vgWM4EeW3Q&_nc_ss=7b3a8&oh=00_AQX96MWb7t9EBZHE06jeXFdgfrqEcXpdEeBnd32GFOE5ZQ&oe=6B0EF082",
         groupLabel: "Món khô",
         type: "dry",
@@ -1334,7 +1423,6 @@
         id: 3,
         dishName: "Bún thịt nướng",
         shopName: "Bún Thịt Nướng Quán 339",
-        emoji: "🥢",
         image: "https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/506015440_730350276316695_8585537299619545058_n.jpg?stp=dst-jpg_tt6&cstp=mx1280x960&ctp=s1280x960&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=G-Epj3O45c0Q7kNvwGF0MIk&_nc_oc=AdpxIAcC5v2unEswSe7zqnYLudMIlXPUUijd1lVold4_92YlDA3sLADIxMXmGWpARTY&_nc_zt=23&_nc_ht=scontent.fsgn2-6.fna&_nc_gid=gy2HrHemXsxymUxCwzWjZQ&_nc_ss=7b3a8&oh=00_AQUs5ofaoHLxMGk0CaqWfUnp3pDf9Ic_NtLkqwxv34BkiA&oe=6B0F042E",
         groupLabel: "Món khô",
         type: "dry",
@@ -1346,7 +1434,7 @@
         address: "Hẻm 339/7-9 Tô Hiến Thành, phường Hòa Hưng, TP.HCM",
         mapsUrl: "https://maps.app.goo.gl/NEgUreiUMmw5KxRj7",
         note: "Giá siêu mềm cho sinh viên, có bán kèm cơm tấm.",
-        bullets: ["Giá siêu mềm chỉ 22k – 28k/tô", "Nhiều rau tươi mát, có kèm cơm tấm", "Cứu cánh chuẩn bài cho cuối tháng"],
+        bullets: ["Giá mềm chỉ 22k – 28k/tô", "Nhiều rau tươi mát, có kèm cơm tấm", "Lựa chọn hợp lý cho cuối tháng"],
         contexts: ["solo", "quick", "group", "hot"],
         spicy: false,
         seafood: false,
@@ -1357,7 +1445,6 @@
         id: 4,
         dishName: "Bún đậu mắm tôm",
         shopName: "Bún đậu mắm tôm Tiến Hải",
-        emoji: "🧆",
         image: "https://scontent.fsgn2-8.fna.fbcdn.net/v/t1.6435-9/62061970_2419771118089929_3276447833619693568_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=102&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=536f4a&_nc_ohc=S5Bb5quwkgUQ7kNvwFb_KnK&_nc_oc=AdrS2nuS1beGe0G3WWznOxJoIm26TEx1hF4tlKujmD0iAyt6f00FdHdvgsgBHgWKuvc&_nc_zt=23&_nc_ht=scontent.fsgn2-8.fna&_nc_gid=AoC5UownPLPHa5OdJZn_Tg&_nc_ss=7b3a8&oh=00_AQVUDHGWXYfUKzchmfjWi1-V8mHqRV8jEqSk0YChy1s2aw&oe=6B309DC9",
         groupLabel: "Món khô",
         type: "dry",
@@ -1369,7 +1456,7 @@
         address: "409 Nguyễn Tri Phương, phường Diên Hồng, TP.HCM",
         mapsUrl: "https://maps.app.goo.gl/FQREJS2NVAPZ9C3h6",
         note: "Suất phổ biến khoảng 35.000đ, mẹt đầy đặn, rất hợp đi ăn nhóm.",
-        bullets: ["Suất phổ biến ~35k đầy đặn", "Mặt tiền Nguyễn Tri Phương dễ tìm", "Cực hợp tụ tập đi ăn nhóm bạn"],
+        bullets: ["Suất phổ biến khoảng 35k đầy đặn", "Mặt tiền Nguyễn Tri Phương dễ tìm", "Phù hợp tụ tập đi ăn nhóm bạn"],
         contexts: ["group", "solo", "hot"],
         spicy: false,
         seafood: true,
@@ -1379,8 +1466,7 @@
       {
         id: 5,
         dishName: "Bún chả Hà Nội",
-        shopName: "Ô Bun Cha - Quận 10",
-        emoji: "🍲",
+        shopName: "Ô Bun Cha — Quận 10",
         image: "https://obuncha.vn/storage/product/10/Kh%C3%B4ng%20c%C3%B3%20ti%C3%AAu%20%C4%91%E1%BB%81%20(900%20x%20900%20px)%20(43)_1.png",
         groupLabel: "Món khô",
         type: "dry",
@@ -1403,7 +1489,6 @@
         id: 6,
         dishName: "Bánh mì chảo",
         shopName: "Bánh mì chảo A Bếp",
-        emoji: "🍳",
         image: "https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.6435-9/106523989_3128644527252988_2787997680167029136_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=33274f&_nc_ohc=G3g_mXl7lmUQ7kNvwHUITUN&_nc_oc=Adoj7j9rwjLtv6t0pCaCIR1prshgtLyAhMagvGFXpqzDPH7y8xBi2XI-n_89xbkTnhM&_nc_zt=23&_nc_ht=scontent.fsgn2-3.fna&_nc_gid=TiEMEMqGaY88D6-D7UGnHQ&_nc_ss=7b3a8&oh=00_AQUM6DtMOymEE_Y2iZ25vbQis2pzNT37VoxNLv-6Nu-CRQ&oe=6B30AB60",
         groupLabel: "Món khô",
         type: "dry",
@@ -1415,7 +1500,7 @@
         address: "025 Chung cư Ngô Gia Tự, Sư Vạn Hạnh, phường Vườn Lài, TP.HCM",
         mapsUrl: "https://maps.app.goo.gl/SMiyxeFLWxKZueBR6",
         note: "Phổ biến 28.000đ – 47.000đ, mở từ sáng sớm đến khuya.",
-        bullets: ["Chảo nóng hổi, nhiều combo từ 28k", "Mở cực dài từ 5:00 sáng tới 23:30", "Hợp ăn sáng, trưa lẫn ăn tối muộn"],
+        bullets: ["Chảo nóng hổi, nhiều combo từ 28k", "Mở dài từ 5:00 sáng tới 23:30", "Hợp ăn sáng, trưa lẫn ăn tối muộn"],
         contexts: ["solo", "group", "quick", "rain"],
         spicy: false,
         seafood: false,
@@ -1428,7 +1513,6 @@
         id: 7,
         dishName: "Phở bò",
         shopName: "Phở Quyên",
-        emoji: "🍜",
         image: "https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/480763004_1560749641366650_3478995742844478886_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1365&ctp=s2048x1365&_nc_cat=109&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_ohc=hPj6WAcpl7EQ7kNvwHG1OEC&_nc_oc=AdrxYCfqioXR_OSsAk0cMn17nEsupue0gMH0epAL9ALFlKrhNgMZVFvYzw-vLibF9F4&_nc_zt=23&_nc_ht=scontent.fsgn2-5.fna&_nc_gid=DP3l7VgFQXX7weXJEkoVnw&_nc_ss=7b3a8&oh=00_AQUnFkwBA9VHzLUNIQpPlCwylENDP2A6l6e7zkdWOWV_BA&oe=6B0F0A78",
         groupLabel: "Món nước",
         type: "soup",
@@ -1440,7 +1524,7 @@
         address: "Hẻm 77 Hồ Thị Kỷ, phường Vườn Lài, TP.HCM",
         mapsUrl: "https://maps.app.goo.gl/G6BttVuERXiZmPhb6",
         note: "Bán xuyên suốt sáng và chiều tối, phục vụ nhanh, chỉ nhận tiền mặt.",
-        bullets: ["Nước dùng đậm đà, lên món rất nhanh", "Bán cả sáng lẫn chiều tối", "Lưu ý: Quán chỉ nhận tiền mặt"],
+        bullets: ["Nước dùng đậm đà, lên món nhanh", "Bán cả sáng lẫn chiều tối", "Lưu ý: Quán chỉ nhận tiền mặt"],
         contexts: ["solo", "quick", "group", "rain"],
         spicy: false,
         seafood: false,
@@ -1451,7 +1535,6 @@
         id: 8,
         dishName: "Bún riêu tôm khô",
         shopName: "Bún riêu tôm khô (Hẻm 209)",
-        emoji: "🍲",
         image: "https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/560559927_1241756477979889_17236181790183081_n.jpg?stp=dst-jpg_tt6&cstp=mx960x987&ctp=s960x987&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_ohc=W7_lhUShun8Q7kNvwGrtT5m&_nc_oc=Adrx8P95_p9V2LXplZSjkGgE3EfixlkOJwsJOexeiFVcK1YdLsm0gOsX62dAHwza3pM&_nc_zt=23&_nc_ht=scontent.fsgn2-6.fna&_nc_gid=k_IDHLMg1x26asfZTWvlSw&_nc_ss=7b3a8&oh=00_AQVdC12bXXKWASaLRZQAyPON4iuHjk88CgKMhyL-5JJG4w&oe=6B0F03FD",
         groupLabel: "Món nước",
         type: "soup",
@@ -1463,7 +1546,7 @@
         address: "Hẻm 209 Nguyễn Kim, phường Diên Hồng, TP.HCM",
         mapsUrl: "https://maps.app.goo.gl/7wW6oqGVnHjEYsmS9",
         note: "Quán hẻm đông khách quen buổi sáng – trưa, hương vị đậm đà kiểu nhà nấu.",
-        bullets: ["Hương vị đậm đà chuẩn kiểu nhà nấu", "Giá bình dân 30k – 45k/tô", "Rất hợp ăn sáng muộn hoặc bữa trưa"],
+        bullets: ["Hương vị đậm đà kiểu nhà nấu", "Giá bình dân 30k – 45k/tô", "Hợp ăn sáng muộn hoặc bữa trưa"],
         contexts: ["solo", "quick", "rain", "hot"],
         spicy: false,
         seafood: true,
@@ -1474,7 +1557,6 @@
         id: 9,
         dishName: "Mì Quảng",
         shopName: "Mì Quảng Hội An",
-        emoji: "🍜",
         image: "https://statics.vinpearl.com/mi-quang-hoi-an-2_1631199897.jpg",
         groupLabel: "Món nước",
         type: "soup",
@@ -1497,7 +1579,6 @@
         id: 10,
         dishName: "Bún bò Huế",
         shopName: "Bún Bò Huế Mỡ Nổi Cô Như",
-        emoji: "🌶️",
         image: "https://images2.thanhnien.vn/528068263637045248/2025/6/4/anh-man-hinh-2025-06-04-luc-093010-17490042995071596821662.png",
         groupLabel: "Món nước",
         type: "soup",
@@ -1509,7 +1590,7 @@
         address: "274/29 Võ Văn Tần, Quận 3, TP.HCM",
         mapsUrl: "https://maps.app.goo.gl/tjokdYNTbnakx7vW8",
         note: "Nước dùng đậm đà đặc trưng mỡ nổi, giáp ranh Quận 10 chạy qua rất gần (chỉ nhận tiền mặt).",
-        bullets: ["Đặc sản mỡ nổi béo thơm, nước đậm vị", "Giá đồng đều khoảng 40k/tô đầy đặn", "Giáp ranh Q.10, cực hợp ngày mưa"],
+        bullets: ["Đặc sản mỡ nổi béo thơm, nước đậm vị", "Giá đồng đều khoảng 40k/tô đầy đặn", "Giáp ranh Q.10, hợp cho ngày mưa"],
         contexts: ["solo", "group", "rain"],
         spicy: true,
         seafood: false,
@@ -1522,7 +1603,6 @@
         id: 11,
         dishName: "Cơm chay & Món chay",
         shopName: "Cơm chay Thanh Lương",
-        emoji: "🥬",
         image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/e5/8d/87/un-formidable-restaurant.jpg?w=1400&h=-1&s=1",
         groupLabel: "Món chay",
         type: "dry",
@@ -1545,7 +1625,6 @@
         id: 12,
         dishName: "Cơm chay & Mì Quảng chay",
         shopName: "Chay Bình An",
-        emoji: "🥗",
         image: "https://down-vn.img.susercontent.com/vn-11134513-7r98o-lstqh5ymw24k75@resize_ss576x330",
         groupLabel: "Món chay",
         type: "dry",
@@ -1557,7 +1636,7 @@
         address: "49 Ngô Quyền, phường Diên Hồng, TP.HCM",
         mapsUrl: "https://maps.app.goo.gl/gdVPeAgPdCHNoX3s8",
         note: "Có máy lạnh mát mẻ, bếp sạch, miễn phí trà đá và có thêm mì Quảng chay (chỉ nhận tiền mặt).",
-        bullets: ["Phòng máy lạnh mát, miễn phí trà đá", "Có cơm phần 35k & buffet 49k", "Bếp sạch sẽ (chỉ nhận tiền mặt)"],
+        bullets: ["Phòng máy lạnh mát, miễn phí trà đá", "Có cơm phần 35k và buffet 49k", "Bếp sạch sẽ (chỉ nhận tiền mặt)"],
         contexts: ["solo", "group", "hot"],
         spicy: false,
         seafood: false,
@@ -1568,7 +1647,6 @@
         id: 13,
         dishName: "Cơm tấm chay & Bánh xèo chay",
         shopName: "Quán chay Thôi Kệ",
-        emoji: "🌱",
         image: "https://assets.grab.com/wp-content/uploads/sites/11/2020/10/12181933/10.jpg",
         groupLabel: "Món chay",
         type: "dry",
@@ -1580,7 +1658,7 @@
         address: "727 Lê Hồng Phong, phường Hòa Hưng, TP.HCM",
         mapsUrl: "https://maps.app.goo.gl/XRnPk2UXWStVV1Uh7",
         note: "Rất đông sinh viên (đặc biệt mùng 1 và rằm), nổi bật với cơm tấm chay, bánh xèo chay và sữa bí đỏ.",
-        bullets: ["Quán ruột đông sinh viên khu Q.10", "Nổi tiếng cơm tấm chay & sữa bí đỏ", "Giá bình dân 25k – 40k/phần"],
+        bullets: ["Quán quen đông sinh viên khu Q.10", "Nổi tiếng cơm tấm chay và sữa bí đỏ", "Giá bình dân 25k – 40k/phần"],
         contexts: ["solo", "quick", "group", "hot", "rain"],
         spicy: false,
         seafood: false,
@@ -1593,7 +1671,6 @@
         id: 14,
         dishName: "Bánh mì que",
         shopName: "Bánh mì que Chip",
-        emoji: "🥖",
         image: "https://down-bs-vn.img.susercontent.com/vn-11134513-7r98o-lsu82dgghdxg7b@resize_ss640x400!@crop_w640_h400_cT",
         groupLabel: "Ăn nhẹ / Vặt",
         type: "snack",
@@ -1604,8 +1681,8 @@
         hours: "7:00 – 21:00",
         address: "351/5 Lý Thái Tổ, phường Vườn Lài, TP.HCM",
         mapsUrl: "https://maps.app.goo.gl/fn5Fwei94S9nEYNV8",
-        note: "Đánh giá 4.9★, nhỏ gọn dễ ăn lót dạ giữa các tiết học.",
-        bullets: ["Đánh giá cực cao 4.9★", "Giá siêu mềm dưới 25k", "Gọn nhẹ, ăn nhanh giữa các ca học"],
+        note: "Đánh giá 4.9/5, nhỏ gọn dễ ăn lót dạ giữa các tiết học.",
+        bullets: ["Đánh giá cao 4.9/5 trên bản đồ", "Giá mềm dưới 25k", "Gọn nhẹ, ăn nhanh giữa các ca học"],
         contexts: ["solo", "quick", "hot", "rain"],
         spicy: false,
         seafood: false,
@@ -1616,7 +1693,6 @@
         id: 15,
         dishName: "Bánh tráng trộn / cuốn",
         shopName: "Bánh tráng phương kiều",
-        emoji: "🌮",
         image: "https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/615695726_3220135454859632_2695679295285642508_n.jpg?stp=dst-jpg_tt6&cstp=mx1206x1608&ctp=s1206x1608&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_ohc=jrcl2KUBBWYQ7kNvwFBk-C4&_nc_oc=AdrVLu8vjIRz6XQas-_RjlHBHGnusmJIIiGvaYhmh5xiZE7i1l6lNJ18fgjg5CEtdaQ&_nc_zt=23&_nc_ht=scontent.fsgn2-5.fna&_nc_gid=yWBNybUglm93mZ_6pHwMqA&_nc_ss=7b3a8&oh=00_AQWHfMHcHch0fYh2gib-I60aEXwn42HZhm4TJq5_c59vSg&oe=6B0F1358",
         groupLabel: "Ăn nhẹ / Vặt",
         type: "snack",
@@ -1628,7 +1704,7 @@
         address: "193/12 Nguyễn Tiểu La, phường Diên Hồng, TP.HCM",
         mapsUrl: "https://maps.app.goo.gl/ZfAKSyDv1SBtcpqQ6",
         note: "Quán ăn vặt buổi chiều được khen ngon ngay khu vực Nguyễn Tiểu La.",
-        bullets: ["Món ăn vặt chân ái buổi chiều", "Giá bình dân 20k – 30k/phần", "Gần khu Nguyễn Tiểu La dễ ghé"],
+        bullets: ["Món ăn vặt quen thuộc buổi chiều", "Giá bình dân 20k – 30k/phần", "Gần khu Nguyễn Tiểu La dễ ghé"],
         contexts: ["solo", "quick", "group", "hot"],
         spicy: true,
         seafood: true,
@@ -1639,7 +1715,6 @@
         id: 16,
         dishName: "Há cảo & xíu mại",
         shopName: "Quán Há cảo Ngọc Lan",
-        emoji: "🥟",
         image: "https://assets.grab.com/wp-content/uploads/sites/11/2019/10/01144312/foodcollectionsmy_65010566_440544860074322_1869004403072184206_n.jpg",
         groupLabel: "Ăn nhẹ / Vặt",
         type: "snack",
@@ -1651,7 +1726,7 @@
         address: "500 Vĩnh Viễn, phường Diên Hồng, TP.HCM",
         mapsUrl: "https://maps.app.goo.gl/hatyC6BGCRfYfn7u8",
         note: "Há cảo xíu mại nóng hổi, ăn xế chiều hoặc ăn tối nhẹ đều hợp.",
-        bullets: ["Há cảo xíu mại hấp nóng hổi", "Linh hoạt phần nhỏ từ 20k đến 50k", "Mở tới 22:00 tiện ăn xế & tối nhẹ"],
+        bullets: ["Há cảo xíu mại hấp nóng hổi", "Linh hoạt phần nhỏ từ 20k đến 50k", "Mở tới 22:00 tiện ăn xế và tối nhẹ"],
         contexts: ["solo", "quick", "group", "rain"],
         spicy: false,
         seafood: true,
@@ -1662,7 +1737,6 @@
         id: 17,
         dishName: "Chè mâm truyền thống",
         shopName: "Chè mâm KHÁNH VY",
-        emoji: "🍧",
         image: "https://down-vn.img.susercontent.com/vn-11134513-7r98o-lstpz19k16s920@resize_ss576x330",
         groupLabel: "Ăn nhẹ / Vặt",
         type: "snack",
@@ -1674,7 +1748,7 @@
         address: "032 Lô H, Chung cư Ngô Gia Tự, phường Vườn Lài, TP.HCM",
         mapsUrl: "https://maps.app.goo.gl/BvYHTEb4qc28wTji8",
         note: "Đi nhóm 4–5 người gọi nguyên mâm 16 chén chia tiền rất rẻ.",
-        bullets: ["Chè lẻ chỉ ~7k/chén, mâm 16 chén 158k", "Đi nhóm 4–5 người chia siêu rẻ", "Mát lạnh, giải nhiệt buổi chiều tối"],
+        bullets: ["Chè lẻ khoảng 7k/chén, mâm 16 chén 158k", "Đi nhóm 4–5 người chia rất tiết kiệm", "Mát lạnh, giải nhiệt buổi chiều tối"],
         contexts: ["group", "solo", "hot"],
         spicy: false,
         seafood: false,
@@ -1687,9 +1761,9 @@
        2. APP STATE & LABELS
     ===================================================================== */
     const LABELS = {
-      price: { all: "Tất cả", u25: "≤ 25k", "25_40": "25k - 40k", "40_60": "40k - 60k", o60: "> 60k" },
-      type: { all: "Tất cả", soup: "🍜 Món nước", dry: "🍚 Món khô", snack: "🥟 Ăn nhẹ / Vặt" },
-      context: { all: "Bình thường", solo: "🧍 Ăn một mình", quick: "⚡ Đang vội", group: "👯 Đi ăn nhóm", rain: "🌧️ Trời mưa", hot: "☀️ Trời nóng" },
+      price: { all: "Tất cả", u25: "≤ 25k", "25_40": "25k – 40k", "40_60": "40k – 60k", o60: "> 60k" },
+      type: { all: "Tất cả", soup: "Món nước", dry: "Món khô", snack: "Ăn nhẹ / Vặt" },
+      context: { all: "Bình thường", solo: "Ăn một mình", quick: "Đang vội", group: "Đi ăn nhóm", rain: "Trời mưa", hot: "Trời nóng" },
       exclude: { no_spicy: "Không cay", no_seafood: "Không hải sản", no_beef: "Không thịt bò", veg_only: "Chỉ ăn chay" }
     };
 
@@ -1715,6 +1789,13 @@
       groupIndex: 0
     };
 
+    function handleImgFallback(imgEl, label, fallbackClass) {
+      const div = document.createElement("div");
+      div.className = fallbackClass;
+      div.textContent = label;
+      imgEl.replaceWith(div);
+    }
+
     /* =====================================================================
        3. LIVE DECISION TIMER
     ===================================================================== */
@@ -1738,7 +1819,7 @@
       clearInterval(timerInterval);
       timerRunning = false;
       lastRecordedSeconds = ((Date.now() - timerStart) / 1000).toFixed(1);
-      updateTimerDisplays(`${lastRecordedSeconds} giây (Đã chốt!)`);
+      updateTimerDisplays(`${lastRecordedSeconds} giây (Đã chốt)`);
       return lastRecordedSeconds;
     }
 
@@ -1873,21 +1954,21 @@
     function updateStep1Summary() {
       const matches = getFilteredRestaurants();
       const pillsEl = document.getElementById("summary-pills");
-      const priceDisplay = state.brokeMode ? "🔥 Cuối tháng (≤ 30k)" : `💵 Ngân sách: ${LABELS.price[state.price]}`;
+      const priceValue = state.brokeMode ? "Cuối tháng (≤ 30k)" : LABELS.price[state.price];
       const excludeList = [...state.excludes].map(k => LABELS.exclude[k]);
 
       let html = `
-        <div class="summary-pill">${priceDisplay}</div>
-        <div class="summary-pill">🍽️ Kiểu món: ${LABELS.type[state.type]}</div>
-        <div class="summary-pill">✨ Bối cảnh: ${LABELS.context[state.context]}</div>
+        <div class="summary-pill"><span>Ngân sách</span><strong>${priceValue}</strong></div>
+        <div class="summary-pill"><span>Kiểu món</span><strong>${LABELS.type[state.type]}</strong></div>
+        <div class="summary-pill"><span>Bối cảnh</span><strong>${LABELS.context[state.context]}</strong></div>
       `;
       if (excludeList.length) {
-        html += `<div class="summary-pill" style="border-color:#fecaca; background:#fef2f2; color:#b91c1c;">🚫 Loại trừ: ${excludeList.join(", ")}</div>`;
+        html += `<div class="summary-pill warn"><span>Loại trừ</span><strong>${excludeList.join(", ")}</strong></div>`;
       }
       pillsEl.innerHTML = html;
 
       document.getElementById("live-match-count").innerHTML =
-        `🎯 Tìm thấy <span>${matches.length}</span> quán phù hợp quanh Quận 10`;
+        `Tìm thấy <span>${matches.length}</span> quán phù hợp quanh Quận 10`;
     }
 
     function resetAllFilters() {
@@ -1922,35 +2003,34 @@
       if (state.filteredAll.length <= 1) return;
       state.displayedFive = shuffleArray(state.filteredAll).slice(0, 5);
       renderStep2();
-      showToast("Đã làm mới 5 gợi ý quán phù hợp!");
+      showToast("Đã làm mới 5 gợi ý quán phù hợp.");
     }
 
     function renderStep2() {
       const tags = [];
       tags.push(`<button class="back-btn" onclick="setStep(1)">← Quay lại bộ lọc</button>`);
-      tags.push(`<span class="active-tag">${state.brokeMode ? "🔥 Cuối tháng ≤ 30k" : LABELS.price[state.price]}</span>`);
+      tags.push(`<span class="active-tag">${state.brokeMode ? "Cuối tháng ≤ 30k" : LABELS.price[state.price]}</span>`);
       if (state.type !== "all") tags.push(`<span class="active-tag">${LABELS.type[state.type]}</span>`);
       if (state.context !== "all") tags.push(`<span class="active-tag">${LABELS.context[state.context]}</span>`);
-      state.excludes.forEach(ex => tags.push(`<span class="active-tag">🚫 ${LABELS.exclude[ex]}</span>`));
-      tags.push(`<span class="active-tag green">🌱 Ăn tại quán • 0 rác nhựa</span>`);
+      state.excludes.forEach(ex => tags.push(`<span class="active-tag">${LABELS.exclude[ex]}</span>`));
+      tags.push(`<span class="active-tag green">Ăn tại quán • 0 rác nhựa</span>`);
       document.getElementById("step2-tags").innerHTML = tags.join("");
 
       const total = state.filteredAll.length;
       const shown = state.displayedFive.length;
       document.getElementById("step2-count-label").textContent =
-        total ? `Hiển thị ${shown}/${total} quán + 1 ô Quay Random` : "0 kết quả";
+        total ? `Hiển thị ${shown}/${total} quán + 1 ô chọn ngẫu nhiên` : "0 kết quả";
       document.getElementById("btn-reshuffle").classList.toggle("hidden", total <= 5);
 
       const contentEl = document.getElementById("step2-content");
       if (!total) {
         contentEl.innerHTML = `
           <div class="card empty-state">
-            <div style="font-size:2.8rem; margin-bottom:10px;">😅</div>
-            <h3 style="margin-bottom:6px;">Hơi khắt khe rồi! Không có quán nào khớp 100% tiêu chí này</h3>
-            <p style="color:var(--muted); font-size:0.9rem; margin-bottom:18px;">
-              Thử nới lỏng mức giá hoặc bỏ bớt 1 bộ lọc bối cảnh/loại trừ xem sao nhé.
+            <h3>Chưa có quán nào khớp hoàn toàn tiêu chí này</h3>
+            <p style="color:var(--muted); font-size:0.88rem; margin-bottom:18px;">
+              Thử nới lỏng mức ngân sách hoặc bỏ bớt một điều kiện loại trừ xem sao nhé.
             </p>
-            <button class="cta-btn" style="max-width:240px;" onclick="resetAllFilters()">Đặt lại bộ lọc</button>
+            <button class="cta-btn" style="max-width:220px;" onclick="resetAllFilters()">Đặt lại bộ lọc</button>
           </div>`;
         return;
       }
@@ -1963,18 +2043,18 @@
               src="${item.image}"
               alt="${item.dishName}"
               loading="lazy"
-              onerror="this.outerHTML='<div class=\\'dish-thumb-fallback\\'>${item.emoji}</div>'"
+              onerror="handleImgFallback(this, '${item.dishName.replace(/'/g, "\\'")}', 'dish-thumb-fallback')"
             />
-            <span class="thumb-badge ${item.veg ? "veg" : ""}">${item.veg ? "🥬 Chay" : item.groupLabel}</span>
+            <span class="thumb-badge ${item.veg ? "veg" : ""}">${item.veg ? "Món chay" : item.groupLabel}</span>
           </div>
           <div class="dish-body">
             <div class="dish-name">${item.dishName}</div>
-            <div class="dish-submeta">${item.shopName}<br><span>💵 ${item.priceText} • ⏰ ${item.hours}</span></div>
+            <div class="dish-submeta">${item.shopName}<span>${item.priceText} • ${item.hours}</span></div>
             <ul class="dish-bullets">
               ${item.bullets.map(b => `<li>${b}</li>`).join("")}
             </ul>
             <div class="dish-footer">
-              <span class="walk-chip">🌱 Ăn tại quán</span>
+              <span class="walk-chip">Ăn tại quán</span>
               <button class="pick-card-btn" onclick="openStep3(${item.id})">Chọn món →</button>
             </div>
           </div>
@@ -1983,10 +2063,10 @@
 
       const randomCardHtml = `
         <div class="random-card">
-          <div class="random-icon">🎲</div>
-          <div class="random-title">VẪN PHÂN VÂN?</div>
-          <p class="random-desc">Để máy tự quay ngẫu nhiên 1 món chân ái trong ${total} quán phù hợp ngay lập tức!</p>
-          <button class="random-btn" id="btn-spin-random" onclick="spinAndPickRandom()">🎲 Quay Random →</button>
+          <span class="random-kicker">Gợi ý ngẫu nhiên</span>
+          <div class="random-title">Vẫn phân vân?</div>
+          <p class="random-desc">Để hệ thống chọn giúp một món phù hợp nhất trong ${total} quán quanh Quận 10.</p>
+          <button class="random-btn" id="btn-spin-random" onclick="spinAndPickRandom()">Chọn ngẫu nhiên →</button>
         </div>
       `;
 
@@ -1998,7 +2078,7 @@
       const btn = document.getElementById("btn-spin-random");
       if (btn) {
         btn.disabled = true;
-        btn.textContent = "⏳ Đang quay món...";
+        btn.textContent = "Đang chọn món...";
       }
 
       const visibleIds = state.displayedFive.map(d => d.id);
@@ -2015,7 +2095,7 @@
         if (ticks >= 7) {
           clearInterval(spinInterval);
           const winner = state.filteredAll[Math.floor(Math.random() * state.filteredAll.length)];
-          showToast(`🎯 Trúng ngay: ${winner.dishName} – ${winner.shopName}!`);
+          showToast(`Gợi ý cho bạn: ${winner.dishName} — ${winner.shopName}`);
           openStep3(winner.id);
         }
       }, 95);
@@ -2047,10 +2127,10 @@
 
       const nearbyHtml = nearbySameGroup.length ? `
         <div class="nearby-box">
-          <div class="nearby-title">💡 Gợi ý thêm cùng nhóm món gần đây</div>
+          <div class="nearby-title">Gợi ý thêm cùng nhóm món gần đây</div>
           ${nearbySameGroup.map(n => `
             <div class="nearby-item" onclick="openStep3(${n.id})">
-              <div><strong>${n.emoji} ${n.shopName}</strong><br><span style="font-size:0.78rem; color:var(--muted);">${n.dishName}</span></div>
+              <div><strong>${n.shopName}</strong><br><span style="font-size:0.77rem; color:var(--muted);">${n.dishName}</span></div>
               <span class="nearby-price">${n.priceText}</span>
             </div>
           `).join("")}
@@ -2058,35 +2138,35 @@
 
       document.getElementById("step3-content").innerHTML = `
         <div class="card">
-          <div class="panel-heading">Món ăn & Chỉ đường</div>
+          <div class="panel-heading">Món ăn &amp; Chỉ đường</div>
 
           <div class="selected-mini-card">
             <img
               class="selected-mini-thumb"
               src="${d.image}"
               alt="${d.dishName}"
-              onerror="this.outerHTML='<div class=\\'selected-mini-fallback\\'>${d.emoji}</div>'"
+              onerror="handleImgFallback(this, '${d.groupLabel.replace(/'/g, "\\'")}', 'selected-mini-fallback')"
             />
             <div>
-              <div class="selected-dish-title">${d.dishName} – ${d.shopName}</div>
+              <div class="selected-dish-title">${d.dishName} — ${d.shopName}</div>
               <div class="selected-dish-meta">
-                💵 ${d.priceText} • <span class="green-txt">🌱 Ăn tại quán • 0 rác nhựa</span>
+                ${d.priceText} • <span class="green-txt">Ăn tại quán • 0 rác nhựa</span>
               </div>
             </div>
           </div>
 
           <div class="info-list">
-            <div class="info-row"><span>📍</span><div><strong>Địa chỉ:</strong> ${d.address}</div></div>
-            <div class="info-row"><span>⏰</span><div><strong>Giờ mở cửa:</strong> ${d.hours}</div></div>
-            <div class="info-row"><span>✓</span><div><strong>Điểm nổi bật:</strong> ${d.note}</div></div>
+            <div class="info-row"><strong>Địa chỉ:</strong> ${d.address}</div>
+            <div class="info-row"><strong>Giờ mở cửa:</strong> ${d.hours}</div>
+            <div class="info-row"><strong>Điểm nổi bật:</strong> ${d.note}</div>
           </div>
 
           <div class="action-stack">
             <a class="btn-full btn-maps" href="${d.mapsUrl}" target="_blank" rel="noopener noreferrer">
-              📍 Mở Google Maps chỉ đường
+              Mở Google Maps chỉ đường ↗
             </a>
             <button class="btn-full btn-confirm" onclick="confirmMeal(${d.id})">
-              ✅ Chốt đi ăn (Lưu chi tiêu & Xanh)
+              Chốt đi ăn (Lưu chi tiêu &amp; Xanh)
             </button>
           </div>
 
@@ -2105,7 +2185,7 @@
             </iframe>
           </div>
           <div class="map-caption">
-            <span>📌 ${d.address}</span>
+            <span>${d.address}</span>
             <a href="${d.mapsUrl}" target="_blank" rel="noopener noreferrer">Mở toàn màn hình ↗</a>
           </div>
         </div>
@@ -2131,16 +2211,16 @@
       }
       const picked = matches[Math.floor(Math.random() * matches.length)];
       state.v1Current = picked;
-      box.innerHTML = `<strong>Gợi ý:</strong> ${picked.dishName} – ${picked.shopName} (${picked.priceText})`;
+      box.innerHTML = `<strong>Gợi ý:</strong> ${picked.dishName} — ${picked.shopName} (${picked.priceText})`;
     }
 
     function confirmV1() {
       if (!state.v1Current) {
-        showToast("Hãy bấm 'Tìm món' trước nhé!");
+        showToast("Hãy bấm 'Tìm món' trước nhé.");
         return;
       }
       const sec = stopTimer();
-      showToast(`V1 chốt "${state.v1Current.dishName}" mất ${sec} giây!`);
+      showToast(`V1 chốt "${state.v1Current.dishName}" mất ${sec} giây.`);
     }
 
     /* =====================================================================
@@ -2173,7 +2253,7 @@
       list.innerHTML = state.groupMembers.map((m, i) => `
         <div class="member-card">
           <div class="member-head">
-            <span>👤 ${m.name}</span>
+            <span>${m.name}</span>
             <select onchange="updateMember(${i}, 'maxPrice', Number(this.value))">
               <option value="25" ${m.maxPrice === 25 ? "selected" : ""}>Tối đa 25k</option>
               <option value="30" ${m.maxPrice === 30 ? "selected" : ""}>Tối đa 30k</option>
@@ -2224,10 +2304,9 @@
       if (!state.groupMatches.length) {
         box.innerHTML = `
           <div class="card empty-state">
-            <div style="font-size:2.4rem; margin-bottom:8px;">😅</div>
-            <h3 style="margin-bottom:6px;">Khẩu vị cả nhóm hơi "chọi" nhau rồi!</h3>
-            <p style="font-size:0.88rem; color:var(--muted);">
-              Thử nới mức giá tối đa lên thêm 5k–10k hoặc ghé <strong>Cơm chay Thanh Lương</strong> / <strong>Cơm Tấm 229</strong> để ai thích món nào tự chọn nhé!
+            <h3>Khẩu vị cả nhóm đang hơi khác nhau</h3>
+            <p style="font-size:0.86rem; color:var(--muted);">
+              Thử nới mức giá tối đa lên thêm 5k – 10k hoặc ghé <strong>Cơm chay Thanh Lương</strong> hay <strong>Cơm Tấm 229</strong> để mọi người tự chọn món theo ý thích.
             </p>
           </div>`;
         return;
@@ -2236,8 +2315,8 @@
       const d = state.groupMatches[state.groupIndex];
       box.innerHTML = `
         <div class="card">
-          <div style="font-size:0.82rem; font-weight:800; color:var(--green-dark); background:var(--green-soft); padding:6px 12px; border-radius:9px; display:inline-block; margin-bottom:14px;">
-            🤝 Giao điểm ${state.groupMembers.length} người (Ngân sách chung ≤ ${minBudget}k • ${state.groupMatches.length} quán hợp)
+          <div style="font-size:0.79rem; font-weight:600; color:var(--sage-dark); background:var(--sage-soft); padding:6px 13px; border-radius:999px; display:inline-block; margin-bottom:16px;">
+            Giao điểm ${state.groupMembers.length} người • Ngân sách ≤ ${minBudget}k • ${state.groupMatches.length} quán phù hợp
           </div>
 
           <div class="selected-mini-card">
@@ -2245,29 +2324,29 @@
               class="selected-mini-thumb"
               src="${d.image}"
               alt="${d.dishName}"
-              onerror="this.outerHTML='<div class=\\'selected-mini-fallback\\'>${d.emoji}</div>'"
+              onerror="handleImgFallback(this, '${d.groupLabel.replace(/'/g, "\\'")}', 'selected-mini-fallback')"
             />
             <div>
-              <div class="selected-dish-title">${d.dishName} – ${d.shopName}</div>
-              <div class="selected-dish-meta">💵 ${d.priceText}</div>
+              <div class="selected-dish-title">${d.dishName} — ${d.shopName}</div>
+              <div class="selected-dish-meta">${d.priceText}</div>
             </div>
           </div>
 
           <div class="info-list">
-            <div class="info-row"><span>📍</span><div><strong>Địa chỉ:</strong> ${d.address}</div></div>
-            <div class="info-row"><span>⏰</span><div><strong>Giờ mở cửa:</strong> ${d.hours}</div></div>
-            <div class="info-row"><span>✓</span><div><strong>Điểm nổi bật:</strong> ${d.note}</div></div>
+            <div class="info-row"><strong>Địa chỉ:</strong> ${d.address}</div>
+            <div class="info-row"><strong>Giờ mở cửa:</strong> ${d.hours}</div>
+            <div class="info-row"><strong>Điểm nổi bật:</strong> ${d.note}</div>
           </div>
 
           <div class="action-stack" style="margin-bottom:0;">
             <a class="btn-full btn-maps" href="${d.mapsUrl}" target="_blank" rel="noopener noreferrer">
-              📍 Mở Google Maps cho cả nhóm
+              Mở Google Maps cho cả nhóm ↗
             </a>
             <button class="btn-full btn-confirm" onclick="confirmMeal(${d.id})">
-              ✅ Chốt kèo nhóm (Lưu chi tiêu)
+              Chốt kèo nhóm (Lưu chi tiêu)
             </button>
             <button class="back-btn" style="width:100%; padding:10px;" onclick="nextGroupMeal(${minBudget})">
-              🔄 Đổi quán khác (${state.groupIndex + 1}/${state.groupMatches.length})
+              Đổi quán khác (${state.groupIndex + 1}/${state.groupMatches.length})
             </button>
           </div>
         </div>`;
@@ -2277,7 +2356,7 @@
        11. STATS & LOCALSTORAGE
     ===================================================================== */
     const STORAGE_KEY = "chotmon_q10_history_v1";
-    const WEEKLY_BUDGET = 500; // 500k VND
+    const WEEKLY_BUDGET = 500;
 
     function loadHistory() {
       try {
@@ -2299,22 +2378,21 @@
       const sec = stopTimer();
       const history = loadHistory();
       const now = new Date();
-      const timeStr = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")} - ${now.getDate()}/${now.getMonth() + 1}`;
+      const timeStr = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")} — ${now.getDate()}/${now.getMonth() + 1}`;
       history.unshift({
         dishName: d.dishName,
         shopName: d.shopName,
-        emoji: d.emoji,
         avgPrice: d.avgPrice,
         time: timeStr
       });
       saveHistory(history);
-      showToast(`🎉 Đã chốt "${d.shopName}" trong ${sec}s & cộng +1 điểm Sống Xanh!`);
+      showToast(`Đã chốt "${d.shopName}" trong ${sec}s và cộng +1 điểm Sống Xanh.`);
     }
 
     function clearHistory() {
       saveHistory([]);
       renderStats();
-      showToast("Đã xóa toàn bộ lịch sử chi tiêu!");
+      showToast("Đã xóa toàn bộ lịch sử chi tiêu.");
     }
 
     function renderStats() {
@@ -2329,21 +2407,21 @@
 
       const fill = document.getElementById("budget-fill");
       fill.style.width = `${pct}%`;
-      fill.style.background = pct >= 90 ? "#ef4444" : pct >= 70 ? "#f59e0b" : "#16a34a";
+      fill.style.background = pct >= 90 ? "#9b3f4a" : pct >= 70 ? "#c48b53" : "#586f50";
 
       const listEl = document.getElementById("history-list");
       if (!history.length) {
-        listEl.innerHTML = `<p style="color:var(--muted); font-size:0.9rem;">Chưa có bữa nào được chốt. Hãy chọn món và bấm "✅ Chốt đi ăn" nhé!</p>`;
+        listEl.innerHTML = `<p style="color:var(--muted); font-size:0.86rem;">Chưa có bữa nào được chốt. Hãy chọn món và bấm "Chốt đi ăn" để bắt đầu theo dõi.</p>`;
         return;
       }
 
       listEl.innerHTML = history.map(item => `
         <div class="history-item">
           <div>
-            <strong>${item.emoji} ${item.dishName}</strong> – ${item.shopName}
-            <div style="font-size:0.78rem; color:var(--muted);">Chốt lúc ${item.time} • 🌱 -1 hộp xốp/nilon</div>
+            <strong>${item.dishName}</strong> — ${item.shopName}
+            <div style="font-size:0.77rem; color:var(--muted);">Chốt lúc ${item.time} • Giảm 1 hộp xốp / túi nilon</div>
           </div>
-          <div style="font-weight:800; color:var(--primary-dark); white-space:nowrap;">~${item.avgPrice}.000đ</div>
+          <div style="font-weight:600; color:var(--rose-dark); white-space:nowrap;">~${item.avgPrice}.000đ</div>
         </div>
       `).join("");
     }
@@ -2360,7 +2438,6 @@
       toastTimer = setTimeout(() => t.classList.remove("show"), 2800);
     }
 
-    // Khởi tạo dữ liệu lần đầu
     updateStep1Summary();
     renderGroupMembers();
   </script>
